@@ -1,5 +1,14 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-14 — Comercial: vendedores por região e remoção de 2 seções
+
+- **Objetivo:** no site comercial, listar os vendedores por região (Acre primeiro; ao expandir, as demais regiões) e retirar as seções "O que o seu cliente vê. E o que você controla." e "Do Pix ao site no ar, em três passos".
+- **Arquivos alterados:** `comercial/index.html` (commit cdac624): seções removidas, `drawDest()` agrupa por região, novo CSS `v34-regioes`. Espelho `apps/comercial/` atualizado à mão.
+- **Banco de dados:** ALTERADO. Migration `ps_publico_destaques_por_regiao`: a função `ps_publico()` agora devolve `uf` e `regiao` em cada item de `destaques` (vazio vira AC).
+- **Validações executadas:** teste no navegador simulado (desktop e celular) com dados fictícios, sem erros de console. Não testado com dados reais em produção.
+- **Pendências e riscos:** o segredo `HONDA_SYNC_TOKEN` não está configurado nos repositórios dos sites, então a GitHub Action não espelha nem registra o log. Enquanto isso o hub é atualizado à mão. O espelho do comercial estava parado no commit ec7ca63 até esta entrada.
+- **Deploy:** Vercel pela `main`; não verificado.
+
 ## 2026-11-14 — Log automático de todo push nos sites
 
 - **Objetivo:** todo push em qualquer site passa a ser registrado sozinho no hub.
