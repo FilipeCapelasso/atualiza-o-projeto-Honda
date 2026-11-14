@@ -1,5 +1,14 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-14 — Vitrine: ajustes visuais seguros (do prompt de melhoria visual)
+
+- **Objetivo:** aplicar só o que do prompt de melhoria visual é seguro e real no código atual.
+- **Arquivos alterados:** `vitrine/vitrine.html`: prazo do plano com mais de 1 ano passa a aparecer em anos/meses/dias (função `plcDur`, só exibição); dica dos vídeos vira "Toque para assistir" em telas de toque; CTAs do topo com altura mínima de 48px. Espelho `apps/vitrine/` atualizado à mão.
+- **Banco de dados:** não alterado.
+- **Validações executadas:** navegador simulado sem erros de console; conta de anos/meses/dias conferida em script (2026-11-14 até 2100-01-01 = 73 anos, 1 mês, 18 dias).
+- **Pendências e riscos:** não feitos: 3D, conversão de imagens para AVIF/srcset, skeletons, agrupar cliente duplicado. Motivos na conversa com o dono (precisam de decisão ou infraestrutura que o projeto não tem).
+- **Deploy:** Vercel pela `main`; não verificado.
+
 ## 2026-11-14 — Motoformosa: logo para fundo escuro, sem caixa branca
 
 - **Objetivo:** logo da concessionária no mesmo padrão visual da Star Motos (sem caixa branca, grande, sobre o fundo escuro do topo).
