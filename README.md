@@ -14,7 +14,7 @@ Central de contexto do **Sistema do Vendedor Honda**. Serve para que qualquer co
 6. [`supabase/DATABASE_RULES.md`](supabase/DATABASE_RULES.md): mapa do banco
 7. [`Projeto_Honda_Repositorio_Mestre_Treinamento.md`](Projeto_Honda_Repositorio_Mestre_Treinamento.md): regras de trabalho originais
 
-## Os 5 repositórios
+## Os 6 repositórios
 
 | Repositório | O que é | Arquivo principal |
 |---|---|---|
@@ -22,11 +22,12 @@ Central de contexto do **Sistema do Vendedor Honda**. Serve para que qualquer co
 | [VITRINE](https://github.com/FilipeCapelasso/VITRINE) | Site de cada vendedor (`/:slug`) e seu painel (`/:slug/admin`) + roteador do domínio | `vitrine.html` |
 | [SITE-CNH](https://github.com/FilipeCapelasso/SITE-CNH) | Pré-contrato de consórcio CNH (`/:slug/cnh`) | `index.html` |
 | [SITE-CDC](https://github.com/FilipeCapelasso/SITE-CDC) | Ficha cadastral de financiamento CDC (`/:slug/cdc`) | `index.html` |
+| [Termo-Honda-Grupo-Star](https://github.com/FilipeCapelasso/Termo-Honda-Grupo-Star) | Página estática de Política de Privacidade e Termo de Ciência (aberta pelo aviso de cookies da vitrine) | `index.html` |
 | **este (hub)** | Documentação + espelho somente leitura dos sites | — |
 
 ## Pasta `apps/` = ESPELHO SOMENTE LEITURA
 
-`apps/` contém cópias dos arquivos dos 4 sites, atualizadas **automaticamente** por GitHub Action a cada push na `main` de cada site (ver [`docs/SYNC.md`](docs/SYNC.md)). **Nunca edite `apps/` aqui.** Edite sempre no repositório real do site; o espelho se atualiza sozinho. Cada pasta tem um arquivo `.origem` com o commit de origem.
+`apps/` contém cópias dos arquivos dos 5 sites, atualizadas **automaticamente** por GitHub Action a cada push na `main` de cada site (ver [`docs/SYNC.md`](docs/SYNC.md)). **Nunca edite `apps/` aqui.** Edite sempre no repositório real do site; o espelho se atualiza sozinho. Cada pasta tem um arquivo `.origem` com o commit de origem.
 
 ## Regra de ouro
 

@@ -8,12 +8,13 @@ Cada repositório de site tem `.github/workflows/sync-honda.yml`. A cada push na
 | VITRINE | `apps/vitrine/` | `vitrine.html`, `vercel.json`, `sw.js`, `api/og.js` |
 | SITE-CNH | `apps/site-cnh/` | `index.html`, `vercel.json` |
 | SITE-CDC | `apps/site-cdc/` | `index.html`, `vercel.json` |
+| Termo-Honda-Grupo-Star | `apps/termo-star/` | `index.html` |
 
 ## Configuração única (já feita?)
 
-A Action precisa de um segredo `HONDA_SYNC_TOKEN` em **cada um dos 4 repositórios de site**: um token do GitHub com permissão de escrita (Contents: Read and write) **somente** neste repositório hub. Enquanto o segredo não existir, a Action só avisa que o espelho foi ignorado e não falha.
+A Action precisa de um segredo `HONDA_SYNC_TOKEN` em **cada um dos 5 repositórios de site**: um token do GitHub com permissão de escrita (Contents: Read and write) **somente** neste repositório hub. Enquanto o segredo não existir, a Action só avisa que o espelho foi ignorado e não falha.
 
-Passos: GitHub → Settings → Developer settings → Fine-grained tokens → repositório `atualiza-o-projeto-Honda` → permissão *Contents: Read and write* → copiar o token → em cada repo de site, Settings → Secrets and variables → Actions → New secret `HONDA_SYNC_TOKEN`.
+Passos: GitHub → Settings → Developer settings → Fine-grained tokens → repositório `atualiza-o-projeto-Honda` → permissão *Contents: Read and write* → copiar o token → em cada repo de site (inclusive o Termo-Honda-Grupo-Star), Settings → Secrets and variables → Actions → New secret `HONDA_SYNC_TOKEN`.
 
 ## Regras
 

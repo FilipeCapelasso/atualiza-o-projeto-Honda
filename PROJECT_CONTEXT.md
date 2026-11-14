@@ -19,6 +19,7 @@ Navegador / robô de prévia (WhatsApp, Instagram...)
    /:slug/admin         → vitrine.html             (painel do vendedor)
    /:slug/cdc           → site do repo SITE-CDC    (via sitecdc.vercel.app)
    /:slug/cnh           → site do repo SITE-CNH    (via sitecnh.vercel.app)
+   (link do aviso de cookies) → repo Termo-Honda-Grupo-Star (termosgrupostar.vercel.app, página estática)
    /:slug (robôs)       → api/og.js                (prévia do link por vendedor)
             │
         Supabase (projeto "vendashonda")  ← todos os sites falam direto com ele pelo navegador
@@ -34,6 +35,8 @@ Navegador / robô de prévia (WhatsApp, Instagram...)
 - **comercial**: `index.html` (~670 KB), `vercel.json` (cabeçalhos de segurança + CSP), ícones/imagens.
 - **VITRINE**: `vitrine.html` (~630 KB), `index_VITRINE_v39-antes-cores.html` (backup antigo, ~470 KB, não é servido), `sw.js` (cache de fotos do Supabase Storage no aparelho), `api/og.js` (função serverless de prévia de link), `vercel.json` (roteamento + CSP), imagens.
 - **SITE-CNH** / **SITE-CDC**: `index.html` + `vercel.json` (só `/:slug` → `/index.html` e `?v=slug` → `/slug`).
+
+- **Termo-Honda-Grupo-Star**: só `index.html` (~44 KB), página estática de Política de Privacidade e Termo de Ciência do Grupo Star; sem Supabase, sem formulário, sem `vercel.json`. Domínio `termosgrupostar.vercel.app` *(inferido pela CSP e pelo link da vitrine)*.
 
 ## Banco (resumo)
 

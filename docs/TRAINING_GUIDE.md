@@ -4,14 +4,14 @@ Use quando outra conta (ou outra sessão) for continuar o projeto. A memória da
 
 ## Início da sessão (5 minutos)
 
-1. Atualize os 5 repositórios (`git pull`) e veja o último commit de cada um.
+1. Atualize os 6 repositórios (`git pull`) e veja o último commit de cada um.
 2. Leia `README.md`, `PROJECT_CONTEXT.md`, o **topo** de `docs/CHANGELOG.md` e `docs/KNOWN_ISSUES.md`.
 3. Compare o commit do último registro no changelog com o `git log` do site que vai mexer. Se houver commits novos sem registro, leia-os antes de editar.
 4. Para tarefas que tocam o banco, leia `supabase/DATABASE_RULES.md` e consulte o estado real no Supabase (não confie só no documento).
 
 ## Durante a tarefa
 
-- Edite **sempre no repositório real do site** (`comercial`, `VITRINE`, `SITE-CNH` ou `SITE-CDC`). Nunca em `apps/` (é espelho).
+- Edite **sempre no repositório real do site** (`comercial`, `VITRINE`, `SITE-CNH`, `SITE-CDC` ou `Termo-Honda-Grupo-Star`). Nunca em `apps/` (é espelho).
 - Atenção: o arquivo da vitrine é `vitrine.html`, não `index.html`.
 - Mudança no banco = migration (`apply_migration`), nunca SQL solto. Sem alterações destrutivas sem autorização explícita do responsável.
 - Preserve o isolamento entre vendedores; evite mudança global quando o pedido for individual.
@@ -27,5 +27,5 @@ Use quando outra conta (ou outra sessão) for continuar o projeto. A memória da
 
 ## Frases úteis para o usuário colar na outra conta
 
-- Começar: *"Leia o hub atualiza-o-projeto-Honda (README, PROJECT_CONTEXT, topo do CHANGELOG e KNOWN_ISSUES), confira os últimos commits dos 4 sites e continue de onde parou."*
+- Começar: *"Leia o hub atualiza-o-projeto-Honda (README, PROJECT_CONTEXT, topo do CHANGELOG e KNOWN_ISSUES), confira os últimos commits dos 5 sites e continue de onde parou."*
 - Terminar: *"Registre no CHANGELOG do hub o que fizemos e atualize as pendências."*

@@ -10,6 +10,7 @@ Verificado em 2026-11-14 contra os repositórios (branch `main`) e o Supabase.
 | VITRINE | **`vitrine.html`** (não é `index.html`) | ~630 KB | `10b1f7e` (2026-11-14) |
 | SITE-CNH | `index.html` | ~63 KB | `5b91a09` (2026-11-09) |
 | SITE-CDC | `index.html` | ~60 KB | `0b2469b` (2026-11-07) |
+| Termo-Honda-Grupo-Star | `index.html` | ~44 KB | `bc7ccfa` (2026-10-24) |
 
 Duplicatas/variantes: `VITRINE/index_VITRINE_v39-antes-cores.html` é uma versão antiga (backup "antes das cores"); não é referenciada pelo `vercel.json`.
 

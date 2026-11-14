@@ -4,7 +4,7 @@ Atualizado em 2026-11-14. Repositórios **públicos**: não detalhar aqui falhas
 
 ## Pendências de documentação / versionamento
 
-- [ ] Criar o segredo `HONDA_SYNC_TOKEN` nos 4 repositórios de site (ver `SYNC.md`); sem isso o espelho `apps/` não se atualiza sozinho.
+- [ ] Criar o segredo `HONDA_SYNC_TOKEN` nos 5 repositórios de site (ver `SYNC.md`); sem isso o espelho `apps/` não se atualiza sozinho.
 - [ ] Versionar o código das 4 Edge Functions (`BOTTELEGRAM`, `cores-oficial`, `aviso-whatsapp`, `fotos-honda`) em `supabase/functions/`, sem segredos.
 - [ ] Exportar o SQL das migrations para `supabase/migrations/` **depois de revisar se há dados sensíveis dentro** (algumas têm nomes que sugerem tokens/senhas).
 - [ ] Documentar regras de negócio confirmadas (planos, preços da plataforma, regras de região A/B, prazos) com validação do responsável.

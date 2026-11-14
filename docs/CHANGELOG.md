@@ -1,5 +1,15 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-14 — Inclusão do site Termo-Honda-Grupo-Star
+
+- **Objetivo:** incluir o 5º site no hub.
+- **Arquivos alterados:** hub (`README.md`, `PROJECT_CONTEXT.md`, `docs/*`, `apps/termo-star/`); no repo do termo: `CLAUDE.md` e `.github/workflows/sync-honda.yml`.
+- **Sites/módulos afetados:** nenhum arquivo do site foi alterado.
+- **Banco de dados:** não alterado (o site não usa banco).
+- **Validações executadas:** YAML do workflow validado; conferido que o site não tem formulário nem chamadas externas.
+- **Pendências e riscos:** mesmo segredo `HONDA_SYNC_TOKEN` necessário no repo do termo.
+- **Deploy:** não verificado.
+
 Formato definido em `Projeto_Honda_Repositorio_Mestre_Treinamento.md` (seção 8). Não preencher campos com suposição: usar "não verificado".
 
 ## 2026-11-14 — Hub de contexto e espelho dos sites
