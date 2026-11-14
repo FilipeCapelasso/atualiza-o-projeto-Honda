@@ -8,6 +8,7 @@ Central de contexto do **Sistema do Vendedor Honda**. Serve para que qualquer co
 
 1. [`PROJECT_CONTEXT.md`](PROJECT_CONTEXT.md): visão geral e como as peças se conectam
 2. [`docs/TRAINING_GUIDE.md`](docs/TRAINING_GUIDE.md): passo a passo para uma nova sessão Claude
+3. [`docs/log/`](docs/log/README.md): log automático de cada push, por site
 3. [`docs/CHANGELOG.md`](docs/CHANGELOG.md): o que mudou e quando (leia o topo antes de editar)
 4. [`docs/KNOWN_ISSUES.md`](docs/KNOWN_ISSUES.md): pendências e riscos
 5. [`docs/INVENTORY.md`](docs/INVENTORY.md): inventário de sites, arquivos e integrações
@@ -27,7 +28,7 @@ Central de contexto do **Sistema do Vendedor Honda**. Serve para que qualquer co
 
 ## Pasta `apps/` = ESPELHO SOMENTE LEITURA
 
-`apps/` contém cópias dos arquivos dos 5 sites, atualizadas **automaticamente** por GitHub Action a cada push na `main` de cada site (ver [`docs/SYNC.md`](docs/SYNC.md)). **Nunca edite `apps/` aqui.** Edite sempre no repositório real do site; o espelho se atualiza sozinho. Cada pasta tem um arquivo `.origem` com o commit de origem.
+`apps/` contém cópias dos arquivos dos 5 sites, atualizadas **automaticamente** por GitHub Action a cada push na `main` de cada site (ver [`docs/SYNC.md`](docs/SYNC.md)). **Nunca edite `apps/` aqui.** Edite sempre no repositório real do site; o espelho se atualiza sozinho. Cada pasta tem um arquivo `.origem` com o commit de origem. Além disso, cada push gera uma linha em `docs/log/<site>.md` (log automático).
 
 ## Regra de ouro
 

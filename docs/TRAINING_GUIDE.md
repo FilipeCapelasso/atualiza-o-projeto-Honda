@@ -4,9 +4,10 @@ Use quando outra conta (ou outra sessão) for continuar o projeto. A memória da
 
 ## Início da sessão (5 minutos)
 
+0. Regra fixa das contas: ver "Regra para colar nas configurações" no fim deste arquivo.
 1. Atualize os 6 repositórios (`git pull`) e veja o último commit de cada um.
 2. Leia `README.md`, `PROJECT_CONTEXT.md`, o **topo** de `docs/CHANGELOG.md` e `docs/KNOWN_ISSUES.md`.
-3. Compare o commit do último registro no changelog com o `git log` do site que vai mexer. Se houver commits novos sem registro, leia-os antes de editar.
+3. Veja `docs/log/<site>.md` (automático) e compare o commit do último registro no changelog com o `git log` do site que vai mexer. Se houver commits novos sem registro, leia-os antes de editar.
 4. Para tarefas que tocam o banco, leia `supabase/DATABASE_RULES.md` e consulte o estado real no Supabase (não confie só no documento).
 
 ## Durante a tarefa
@@ -29,3 +30,7 @@ Use quando outra conta (ou outra sessão) for continuar o projeto. A memória da
 
 - Começar: *"Leia o hub atualiza-o-projeto-Honda (README, PROJECT_CONTEXT, topo do CHANGELOG e KNOWN_ISSUES), confira os últimos commits dos 5 sites e continue de onde parou."*
 - Terminar: *"Registre no CHANGELOG do hub o que fizemos e atualize as pendências."*
+
+## Regra para colar nas configurações das contas Claude
+
+> Antes de qualquer modificação ou melhoria no Projeto Honda: (1) confira o Supabase de verdade (projeto vendashonda: tabelas, funções e migrations atuais); (2) leia o hub https://github.com/FilipeCapelasso/atualiza-o-projeto-Honda (README, PROJECT_CONTEXT, topo do docs/CHANGELOG, docs/KNOWN_ISSUES e docs/log/); (3) abra os repositórios reais dos sites (comercial, VITRINE, SITE-CNH, SITE-CDC, Termo-Honda-Grupo-Star), faça git pull e confirme o commit mais recente: se hub e repositório divergirem, vale o repositório real e o Supabase; (4) só então faça o pedido, mexendo apenas no arquivo necessário e sem partir de cópia antiga; (5) no fim, registre no docs/CHANGELOG do hub o que mudou, por quê, se o banco foi alterado e o que ficou pendente.
