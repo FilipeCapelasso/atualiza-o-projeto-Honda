@@ -1,5 +1,14 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-14 — Motoformosa: logo para fundo escuro, sem caixa branca
+
+- **Objetivo:** logo da concessionária no mesmo padrão visual da Star Motos (sem caixa branca, grande, sobre o fundo escuro do topo).
+- **Arquivos alterados:** `vitrine/logo-motoformosa.png` (versão branca + vermelha, transparente), `vitrine/vitrine.html` (logos hospedadas como `/logo-*.png` ganham a classe `hlg-lim`: sem caixa, maiores, nome maior; outras logos continuam na caixa branca). Espelho `apps/vitrine/` atualizado à mão.
+- **Banco de dados:** não alterado (a URL da logo continua a mesma).
+- **Validações executadas:** navegador simulado, desktop e celular, sem erros de console. Não testado em produção.
+- **Pendências e riscos:** a logo é cacheada pelo navegador; pode precisar de Ctrl+F5. Novas logos curadas devem seguir o padrão `/logo-<loja>.png` em versão para fundo escuro.
+- **Deploy:** Vercel pela `main`; não verificado.
+
 ## 2026-11-14 — Logo automática por concessionária (Motoformosa)
 
 - **Objetivo:** a logo da concessionária passa a ser colocada pelo sistema; o vendedor não envia mais logo. Logo da Motoformosa tratada (fundo removido, alta resolução) e aplicada a todos os vendedores dessa loja.
