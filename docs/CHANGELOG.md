@@ -1,5 +1,14 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-15 — Site comercial: indicação que "grudava" e botões de contato
+
+- **Causa:** o código do parceiro (`hn_ref`) ficava salvo para sempre no navegador. Quem abriu uma vez o link de um parceiro (por exemplo, em teste) via "Você foi indicado por ..." em todas as visitas seguintes, e o pedido também carregava essa indicação.
+- **Correção:** a indicação agora é salva com data (`hn_ref2`) e vale 30 dias. O valor antigo `hn_ref` é descartado. Efeito colateral: quem tinha entrado por um link de parceiro antes desta mudança perde a indicação ao voltar sem o link.
+- **Novo:** botões WhatsApp (68 97400-5458) e Instagram (@_capelasso_) no rodapé do site comercial.
+- **Arquivos alterados:** `comercial/index.html`. Espelho `apps/comercial/` atualizado à mão (commit 2833272).
+- **Banco de dados:** não alterado.
+- **Validações:** navegador simulado (computador e celular): indicação antiga some, indicação nova funciona, indicação com mais de 30 dias expira. Deploy não verificado.
+
 ## 2026-11-15 — Ordem dos vendedores exibidos no site comercial
 
 - **O que mudou:** nova seção "Vendedores no site comercial" em Configurações do admin geral, com lista para arrastar (ou usar setas e "levar ao topo") e botão "Salvar ordem". Mostra quais ficam visíveis de início (8 primeiros do Acre).
