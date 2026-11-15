@@ -1,5 +1,14 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-15 — Ao concluir qualquer cadastro, o cliente vai sozinho ao WhatsApp do vendedor
+
+- **O que mudou:** ao terminar o preenchimento, o site salva os dados (espera até 2,5 s) e leva o cliente ao WhatsApp do vendedor na mesma aba, sem botão, no celular e no computador, com a mensagem pronta contendo todos os dados informados. Vale para: ficha CDC (`SITE-CDC`), pré-contrato CNH (`SITE-CNH`), formulário de financiamento da vitrine e conversa (chat) da vitrine, que já fazia isso. Se o navegador não abrir sozinho, aparece um botão de reserva. Se o banco falhar, os dados ficam na fila de reenvio e o cliente também vai ao WhatsApp com a mensagem completa.
+- **Vitrine, financiamento:** retirada a pergunta "cor da moto" (formulário e chat quando a modalidade é financiamento; no chat, quem escolhe a modalidade depois da moto também não vê a cor se escolher financiamento). O nome passou a ser pedido uma vez só, como "nome e sobrenome" (o chat não pergunta mais "nome completo" depois).
+- **Arquivos alterados:** `VITRINE/vitrine.html`, `SITE-CDC/index.html`, `SITE-CNH/index.html`. Espelhos `apps/vitrine`, `apps/site-cdc` e `apps/site-cnh` atualizados à mão.
+- **Banco de dados:** não alterado.
+- **Validações:** navegador simulado (celular): formulário e chat de financiamento da vitrine, CDC e CNH levam ao link do WhatsApp com a mensagem; sem erros de JavaScript. Não testado com o banco real nem no aparelho (abertura do app do WhatsApp). Deploy não verificado.
+- **Pendente:** os botões soltos de WhatsApp (ex.: repasse de consórcio) continuam sendo botões, pois não têm formulário. Termo e site comercial não foram alterados.
+
 ## 2026-11-15 — Ficha CDC mais rápida: 6 perguntas
 
 - **O que mudou:** a ficha de financiamento (`/:slug/cdc`) passou a pedir só: nome e sobrenome, CPF, data de nascimento, telefone do titular, se o titular tem CNH (Sim/Não) e se tem valor de entrada (Sim/Não; se Sim, abre o campo "Quanto"). Emojis nos rótulos. Textos agora dizem "6 informações".
