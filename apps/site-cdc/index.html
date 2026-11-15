@@ -85,7 +85,15 @@ details.fc summary div{flex:1;min-width:0}details.fc summary b{display:block}
 .lg .btn{margin-top:14px;background:linear-gradient(135deg,#dc1414,#b00000);color:#fff;border:0}
 @media(max-width:640px){.box{padding:22px 16px;border-radius:22px;margin-top:-80px}.gr>*{grid-column:span 12}.s2,.s3{grid-column:span 6!important}.hero{padding:44px 16px 130px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}html{scroll-behavior:auto}}
-/*v2-um-dominio*/</style>
+/*v2-um-dominio*/.cnh .cq{font:600 15px Inter,sans-serif;color:var(--tx);margin:6px 0 10px}.cb{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cb button{height:58px;border-radius:14px;border:1px solid var(--bd);background:#fff;font:700 16px Inter,sans-serif;color:var(--tx);cursor:pointer;transition:all .2s}
+.cb button:hover{border-color:var(--r)}.cb button:focus-visible{outline:2px solid var(--r);outline-offset:3px}
+.cb button.on{background:linear-gradient(135deg,#dc1414,#b00000);border-color:#b00000;color:#fff;box-shadow:0 12px 24px -14px #c80000}
+.fl.cnh.er .cb button{border-color:#e11;animation:shake .4s}
+.s12{grid-column:span 12}
+.ent-v{margin-top:12px}.ent-v[hidden]{display:none}.ent-v .fl{margin:0}
+.fl.cnh.ent.er .cb button{border-color:#e11;animation:shake .4s}
+</style>
 <style id="privcss">
 .ckbn{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:99999;max-width:760px;margin:0 auto;background:#14141a;color:#f3f3f5;border-radius:16px;padding:16px 18px;box-shadow:0 10px 40px rgba(0,0,0,.45);font:400 13px/1.5 Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;display:none}
 .ckbn b{display:block;font-size:14px;margin-bottom:4px}.ckbn p{margin:0 0 6px;color:#d7d7dd}.ckbn a{color:#fff;text-decoration:underline}
@@ -210,6 +218,7 @@ const FIELDS=[
  ['Contato de referência',[['ref_nome','Nome',6],['ref_telefone','Telefone',6,'tel']]],
  ['Dados do trabalho',[['ocupacao','Ocupação',6,'ocup'],['renda','Renda mensal',6,'rs']]],
  ['Sobre a moto',[['entrada','Valor da entrada',4,'rs'],['moto','Moto escolhida',4,'moto'],['habilitacao','Possui habilitação?',4,'hab'],['cor','Cor da moto',6,'cor']]]];
+const FORM=[['nome','📝 Nome e sobrenome',12],['cpf','👤 CPF',6,'cpf'],['nascimento','📆 Data de nascimento',6,'dt'],['telefone','☎️ Telefone do titular',12,'tel']];
 const ALL=FIELDS.flatMap(s=>s[1].map(f=>f[0])),LBL=Object.fromEntries(FIELDS.flatMap(s=>s[1].map(f=>[f[0],f[1]])));
 const REQ=['nome','nascimento','telefone','cpf','moto','habilitacao'];
 const OPC={ocup:['CLT','Autônomo','Servidor público','Empresário / MEI','Aposentado / Pensionista','Estudante','Outro'],hab:['Sim','Não','Em andamento']};
@@ -230,6 +239,11 @@ async function route(){
 }
 /* ============ FICHA (CLIENTE) ============ */
 
+function entSet(v){const i=$('#f_entrada'),w=$('#ent_v');if(!i)return;[['ent_s','Sim'],['ent_n','Não']].forEach(([id,x])=>{const b=$('#'+id);b.classList.toggle('on',x===v);b.setAttribute('aria-pressed',x===v)});
+  i.parentElement.parentElement.parentElement.classList.remove('er');i.parentElement.classList.remove('er');
+  if(v==='Sim'){w.hidden=false;if(i.value==='Sem entrada')i.value='';i.focus()}else{w.hidden=true;i.value='Sem entrada'}
+  i.dispatchEvent(new Event('change',{bubbles:true}));prog()}
+function cnhSet(v){const h=$('#f_habilitacao');if(!h)return;h.value=v;[['cnh_s','Sim'],['cnh_n','Não']].forEach(([id,x])=>{const b=$('#'+id);b.classList.toggle('on',x===v);b.setAttribute('aria-pressed',x===v)});h.parentElement.classList.remove('er');h.dispatchEvent(new Event('input',{bubbles:true}));prog()}
 function corAtualiza(){
   const sel=document.getElementById('f_cor');if(!sel)return;
   const mid=(document.getElementById('f_moto')||{}).value,m=M.find(x=>String(x.id)===String(mid)),cs=(m&&Array.isArray(m.cores)?m.cores:[]).filter(Boolean);
@@ -251,9 +265,11 @@ function ficha(){
   document.title='Ficha cadastral | '+V.nome;
   $('#app').innerHTML=`<header class="hero"><span class="glow"></span><div class="spd"><i></i><i></i><i></i><i></i></div>
   <div class="who">${av()}<h1>${esc(V.nome)}<svg class="vf" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#1d9bf0"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></h1>
-  <h2>Conquiste sua liberdade sobre duas rodas!</h2><p>Preencha seus dados e acelere em direção à sua nova moto.</p></div></header>
+  <h2>Conquiste sua liberdade sobre duas rodas!</h2><p>Preencha 6 dados rápidos e acelere em direção à sua nova moto.</p></div></header>
   <main class="box" id="bx"><form onsubmit="send();return false" novalidate>
-  ${FIELDS.map((s,i)=>`<section class="sec" style="--i:${i}"><div class="st">${s[0]}</div><div class="gr">${s[1].map(fld).join('')}</div></section>`).join('')}
+  <section class="sec" style="--i:0"><div class="st">Só 6 informações, leva menos de 1 minuto</div><div class="gr">${FORM.map(f=>fld([f[0],f[1],f[2],f[3]])).join('')}
+  <div class="fl cnh s12" data-k="habilitacao"><div class="cq" id="cnh_q">🪪 O titular do CPF possui CNH? *</div><div class="cb" role="group" aria-labelledby="cnh_q"><button type="button" id="cnh_s" aria-pressed="false" onclick="cnhSet('Sim')">Sim</button><button type="button" id="cnh_n" aria-pressed="false" onclick="cnhSet('Não')">Não</button></div><input type="hidden" id="f_habilitacao"><input type="hidden" id="f_moto"></div>
+  <div class="fl cnh ent s12" data-k="entrada"><div class="cq" id="ent_q">💰 Tem algum valor de entrada? *</div><div class="cb" role="group" aria-labelledby="ent_q"><button type="button" id="ent_s" aria-pressed="false" onclick="entSet('Sim')">Sim</button><button type="button" id="ent_n" aria-pressed="false" onclick="entSet('Não')">Não</button></div><div class="ent-v" id="ent_v" hidden><div class="fl s12" data-k="entrada_v"><input id="f_entrada" placeholder=" " inputmode="numeric" autocomplete="off" oninput="msk(this,'rs')"><label>Quanto você tem de entrada? *</label></div></div></div></div></section>
   <input class="hp" id="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
   <label class="ok"><input type="checkbox" id="ok"><span>Li e concordo com a <a href="${LGPD_URL}" onclick="return polAbrir(event)" target="_blank" rel="noopener">Política de Privacidade</a>. Autorizo o uso dos meus dados somente para análise de crédito e contato do vendedor.</span></label>
   <button class="btn go" id="go" type="submit">Enviar para o vendedor(a)</button><p class="ao">Ao preencher ou enviar, você concorda com nossa <a href="${LGPD_URL}" onclick="return polAbrir(event)" target="_blank" rel="noopener">Política de Privacidade</a>. O que você digita já fica disponível ao vendedor, para ele poder te ajudar, mesmo que você não conclua o envio.</p>${V.whatsapp?`<a class="btn wa" style="margin-top:10px" target="_blank" rel="noopener" href="${wa('Olá! Vim pelo site e prefiro falar direto pelo WhatsApp.')}">Prefiro falar pelo WhatsApp</a>`:''}</form>
@@ -275,6 +291,7 @@ function msk(e,t){let v=e.value.replace(/\D/g,'');
   e.value=v;e.parentElement.classList.remove('er');prog()}
 async function cep(c){try{const r=await(await fetch('https://viacep.com.br/ws/'+c.replace('-','')+'/json/')).json();if(r.erro)return toast('CEP não encontrado');
   [['rua',r.logradouro],['bairro',r.bairro],['cidade',r.localidade],['estado',r.uf]].forEach(([k,v])=>{if(v)$('#f_'+k).value=v});prog();$('#f_numero').focus()}catch(e){}}
+const dtOk=v=>{const m=/^(\d{2})\/(\d{2})\/(\d{4})$/.exec(v);if(!m)return false;const d=+m[1],o=+m[2],a=+m[3],t=new Date(a,o-1,d);return a>=1900&&a<=new Date().getFullYear()&&t.getFullYear()===a&&t.getMonth()===o-1&&t.getDate()===d};
 const cpfOk=c=>{c=c.replace(/\D/g,'');if(c.length!==11||/^(\d)\1+$/.test(c))return false;for(let t=9;t<11;t++){let s=0;for(let i=0;i<t;i++)s+=c[i]*(t+1-i);if((s*10%11)%10!=c[t])return false}return true};
 function cadRasc(e){const id=e.target&&e.target.id||'';if(id.indexOf('f_')!==0)return;
   try{const gg=k=>(document.getElementById('f_'+k)||{value:''}).value.trim(),d={};ALL.forEach(k=>{const v=gg(k);if(v)d[k]=v});
@@ -285,9 +302,9 @@ async function send(){
   const g=k=>($('#f_'+k)?.value||'').trim();
   if($('#hp').value)return fim({});
   document.querySelectorAll('.er').forEach(e=>e.classList.remove('er'));
-  const chk=[['nome',g('nome').length>=5&&/\s/.test(g('nome')),'Informe o nome completo'],['nascimento',g('nascimento').length===10,'Informe a data de nascimento completa'],
+  const chk=[['nome',g('nome').length>=5&&/\S+\s+\S+/.test(g('nome')),'Informe nome e sobrenome'],['nascimento',dtOk(g('nascimento')),'Informe a data de nascimento completa'],
    ['telefone',g('telefone').replace(/\D/g,'').length>=10,'Telefone inválido'],['cpf',cpfOk(g('cpf')),'CPF inválido'],['email',!g('email')||/^\S+@\S+\.\S+$/.test(g('email')),'E-mail inválido'],
-   ['moto',!!g('moto'),'Escolha a moto'],['cor',!!g('cor'),'Informe a cor da moto'],['habilitacao',!!g('habilitacao'),'Informe se possui habilitação']];
+   ['habilitacao',!!g('habilitacao'),'Informe se o titular possui CNH'],['entrada',$('#ent_s').classList.contains('on')||$('#ent_n').classList.contains('on'),'Informe se tem valor de entrada'],['entrada_v',g('entrada')==='Sem entrada'||+g('entrada').replace(/\D/g,'')>0,'Informe o valor da entrada']];
   const bad=chk.find(c=>!c[1]);
   if(bad){const el=document.querySelector(`[data-k=${bad[0]}]`);el.classList.add('er');el.scrollIntoView({behavior:'smooth',block:'center'});return toast(bad[2])}
   if(!$('#ok').checked)return toast('Aceite a Política de Privacidade para enviar');

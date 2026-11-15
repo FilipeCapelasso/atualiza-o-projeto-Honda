@@ -1,5 +1,13 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-15 — Ficha CDC mais rápida: 6 perguntas
+
+- **O que mudou:** a ficha de financiamento (`/:slug/cdc`) passou a pedir só: nome e sobrenome, CPF, data de nascimento, telefone do titular, se o titular tem CNH (Sim/Não) e se tem valor de entrada (Sim/Não; se Sim, abre o campo "Quanto"). Emojis nos rótulos. Textos agora dizem "6 informações".
+- **Entrada:** guardada na coluna `entrada` (texto) das fichas e leads: o valor (ex.: "R$ 3.500,00") ou "Sem entrada". A pergunta é obrigatória.
+- **Arquivos alterados:** `SITE-CDC/index.html`. Espelho `apps/site-cdc/` atualizado à mão (commit 433c16f), pois a Action ainda não tinha espelhado.
+- **Banco de dados:** não alterado.
+- **Validações:** navegador simulado (celular e computador), caminhos Sim e Não gravam a ficha com a entrada certa, sem erros de JavaScript. Teste com o banco real não feito. Deploy não verificado.
+
 ## 2026-11-15 — Site comercial: indicação que "grudava" e botões de contato
 
 - **Causa:** o código do parceiro (`hn_ref`) ficava salvo para sempre no navegador. Quem abriu uma vez o link de um parceiro (por exemplo, em teste) via "Você foi indicado por ..." em todas as visitas seguintes, e o pedido também carregava essa indicação.
