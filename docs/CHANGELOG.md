@@ -1,5 +1,11 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-14 — Mapa 3D: concessionárias ligadas aos vendedores, automático
+
+- **Banco de dados:** ALTERADO (aprovado pelo dono) — migration `mapa_concessionarias_vinculo_automatico`: colunas `honda_concessionarias.conc_id` e `loja_id`; endereços, telefones e coordenadas (nível da rua, Nominatim) de Cometa Motocenter (Manaus) e Moto Formosa Matriz (Formosa-GO); gatilho `tg_hconc_auto` em `concessionarias` e `lojas` cria o registro no mapa sozinho (sem derrubar o cadastro se falhar); `mestre_mapa` localiza o vendedor pela cidade da concessionária dele e conta vendedores por concessionária. Nenhum arquivo de site alterado.
+- **Validações executadas:** `mestre_mapa`: 38 de 38 vendedores com cidade (Victor em Manaus, Daniel em Formosa); concessionárias com 23, 7, 6, 1 e 1 vendedores; gatilho testado com concessionária fictícia (criou 1 registro; teste desfeito).
+- **Pendências:** as 5 concessionárias continuam "não verificadas" na fonte oficial da Honda.
+
 ## 2026-11-14 — Mapa 3D: visual mais realista e pino de concessionária
 
 - **Objetivo:** concessionária como pino com casa (vermelho = verificada, preto = não verificada); visual mais realista.
