@@ -1,5 +1,13 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-15 — Dashboard: meta em tema escuro, datas do gráfico e visão por loja
+
+- **Causa:** cartões da "Meta de vendedores" ficavam brancos (regra antiga `.meta-g div`); as datas do gráfico apareciam como texto ISO completo (o banco devolve data com hora); vendedores com concessionária própria (Victor e Daniel) caíam em "Sem loja definida" porque a visão por loja só olhava as lojas cadastradas.
+- **Arquivos alterados:** `comercial/index.html` (CSS dos cartões da meta; `lxDia` usa só os 10 primeiros caracteres; `lojasV30` agrupa quem não tem loja pelo nome da concessionária e só deixa "Sem loja definida" para quem não tem nenhuma; grade de números em 4 colunas, 8 em telas muito largas). Espelho `apps/comercial/` atualizado à mão (commit 08f381c).
+- **Banco de dados:** não alterado.
+- **Validações executadas:** navegador simulado a 1366 px, sem erros de JavaScript e sem fundos claros. O agrupamento por concessionária não foi visto com dados reais (a simulação não tem vendedor com concessionária).
+- **Deploy:** Vercel pela `main`; não verificado.
+
 ## 2026-11-15 — Gerência geral: largura total, realce da linha e celular
 
 - **Causa:** o painel ficava preso à esquerda em telas largas (container com largura máxima) e a linha da tabela de vendedores ficava branca ao passar o mouse (regra antiga `tr.rw:hover td` com fundo claro).
