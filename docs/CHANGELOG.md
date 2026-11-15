@@ -1,5 +1,13 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-15 — Gerência geral: largura total, realce da linha e celular
+
+- **Causa:** o painel ficava preso à esquerda em telas largas (container com largura máxima) e a linha da tabela de vendedores ficava branca ao passar o mouse (regra antiga `tr.rw:hover td` com fundo claro).
+- **Arquivos alterados:** `comercial/index.html` (container do admin com 100% da largura e menu lateral proporcional; realce dourado escuro na linha; ações rápidas em linha com rolagem e alvos de toque de 44 px no celular). Espelho `apps/comercial/` atualizado à mão (commit c93fe65).
+- **Banco de dados:** não alterado.
+- **Validações executadas:** navegador simulado a 2400 px e 390 px, sem erros de JavaScript e sem fundos claros.
+- **Deploy:** Vercel pela `main`; não verificado.
+
 ## 2026-11-15 — Gerência geral: tema escuro premium, menu lateral e gráficos
 
 - **Objetivo:** redesenhar todo o painel do dono (escuro, vermelho Honda e dourado), com menu lateral no computador, barra inferior no celular e painel de receita com gráficos reais.
