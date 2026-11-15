@@ -1,5 +1,13 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-15 — Gerência geral: tema claro como padrão e botão de tema
+
+- **Causa:** pedido do dono para usar o tema branco e deixar o escuro de lado.
+- **Arquivos alterados:** `comercial/index.html` (visual claro com a mesma estrutura de menu lateral e gráficos; o escuro virou opcional pela classe `dk`; botão "Tema escuro/claro" no topo, escolha salva no navegador em `hn_tema`; as telas de Catálogo/Ofertas/Pedidos seguem o tema ao recarregar). Espelho `apps/comercial/` atualizado à mão (commit 43fe10c).
+- **Banco de dados:** não alterado.
+- **Validações executadas:** navegador simulado a 1366 px e 390 px nos dois temas, sem erros de JavaScript.
+- **Pendente:** conferir no painel real as abas Catálogo, Ofertas e Pedidos de clientes no tema claro; deploy não verificado.
+
 ## 2026-11-15 — Dashboard: meta em tema escuro, datas do gráfico e visão por loja
 
 - **Causa:** cartões da "Meta de vendedores" ficavam brancos (regra antiga `.meta-g div`); as datas do gráfico apareciam como texto ISO completo (o banco devolve data com hora); vendedores com concessionária própria (Victor e Daniel) caíam em "Sem loja definida" porque a visão por loja só olhava as lojas cadastradas.
