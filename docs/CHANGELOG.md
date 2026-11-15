@@ -1,5 +1,13 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-15 — Ordem dos vendedores exibidos no site comercial
+
+- **O que mudou:** nova seção "Vendedores no site comercial" em Configurações do admin geral, com lista para arrastar (ou usar setas e "levar ao topo") e botão "Salvar ordem". Mostra quais ficam visíveis de início (8 primeiros do Acre).
+- **Banco de dados (alterado):** coluna `ps_destaques.ordem` (int, nula = ordem antiga por data); `ps_publico()` agora ordena os destaques por `ordem` (nulos por último) e depois `updated_at`; `ps_admin_destaques()` devolve `ordem` e `upd`; nova função `mestre_destaques_ordem(uuid[])` (só o dono; anon sem acesso). Migration `destaques_ordem_site_comercial`.
+- **Arquivos alterados:** `comercial/index.html`. Espelho `apps/comercial/` atualizado à mão (commit 2a16b7c).
+- **Regra do site:** o Acre aparece antes; a ordem vale dentro de cada estado. Quem ainda não tem ordem salva continua pela data, depois de quem tem.
+- **Validações:** navegador simulado (claro e escuro, computador e celular); salvar ordem não testado com o banco real. Deploy não verificado.
+
 ## 2026-11-15 — Gerência geral: tema claro como padrão e botão de tema
 
 - **Causa:** pedido do dono para usar o tema branco e deixar o escuro de lado.
