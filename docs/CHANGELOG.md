@@ -1,5 +1,12 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-14 — Aba Parceiros: frase do acordo ao lado do título
+
+- **Objetivo:** mostrar "Não pagam nada · +5 dias por indicado que compra · 10 indicados = R$ 50 · 20 = R$ 150" junto do título, para tirar print e mostrar aos parceiros.
+- **Arquivos alterados:** `comercial/index.html` (só o cabeçalho da aba Parceiros). Espelho `apps/comercial/` atualizado à mão.
+- **Banco de dados:** não alterado.
+- **Deploy:** Vercel pela `main`; não verificado.
+
 ## 2026-11-14 — Parceiro: link bonito `/comercial/<nome>`
 
 - **Objetivo:** o link `.../comercial/?ref=nome` dava 404. Agora o link do parceiro é `https://www.sitevendedor.com/comercial/<endereço-do-parceiro>`.
