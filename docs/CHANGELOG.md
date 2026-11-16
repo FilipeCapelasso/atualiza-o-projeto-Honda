@@ -1,5 +1,11 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-16 — Vitrine: preço Black Friday só no carrossel e no card BF (fora do catálogo)
+
+- **O que mudou:** os preços promocionais (só à vista, só Acre) apareciam também nos cards do catálogo e no detalhe da moto. Agora aparecem somente no carrossel do topo e no card "Aproveitar oferta"; catálogo e detalhe mostram só consórcio/preço normal. `ofM(m,bf)` só devolve oferta BF quando chamado pelo carrossel/card BF. Auditoria geral (advisors, erros, testes de borda) sem outros bugs.
+- **Arquivo:** `VITRINE/vitrine.html` (commit 90be3b9); espelho `apps/vitrine` atualizado à mão. **Banco de dados:** não alterado.
+- **Pendente:** confirmar no celular real; KUROMI fora da promoção (não está no catálogo).
+
 ## 2026-11-16 — Vitrine: deslizar o dedo troca a moto do carrossel do topo
 
 - **O que mudou:** no celular, passar o dedo para o lado na foto ou na descrição do card do topo muda a moto (esquerda = próxima, direita = anterior, volta ao começo/fim). Funciona para o carrossel normal e para o da Black Friday. Rolar a página para cima/baixo continua normal; a troca automática pausa enquanto o dedo está na tela. Os pontinhos continuam funcionando.
