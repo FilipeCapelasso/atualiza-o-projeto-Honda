@@ -1,5 +1,11 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-16 — Supervisor: todas as lojas e concessionárias, local editável e sincronizado
+
+- **O que mudou:** (1) "Criar supervisor" agora tem um único campo "Onde atua" com as lojas do Acre **e todas as concessionárias salvas**, agrupadas por estado (Cometa/AM, Mônaco/AP, Motoformosa/GO, Honda Freeway/PR), mais "Nova concessionária (digitar)" com estado. (2) Cada supervisor ganhou o seletor "📍 Atua em" na aba Supervisores, e **os vendedores dele acompanham** automaticamente (estado, loja/concessionária, logo e tabela de preços). (3) Na lista de vendedores, trocar loja/concessionária agora ajusta o estado junto (antes mudava só o nome).
+- **Banco de dados:** alterado — funções `mestre_vendedor_local`, `mestre_supervisor_sincronizar`, `_sup_herdar` e gatilho `tg_sup_regiao` em `vendedores` (migrations `supervisor_sincroniza_regiao`, `mestre_vendedor_local`). Testado com reversão: supervisor → Mônaco/AP, Star/AC e Motoformosa/GO; o vendedor filho seguiu cada mudança (31 motos reaplicadas em GO). **Arquivo:** `comercial/index.html` (commit c796969); espelho atualizado.
+- **Pendente:** melhoria visual geral do admin geral e dos supervisores (aguardando definição de escopo).
+
 ## 2026-11-16 — Vitrine: botões Com/Sem emplacamento retirados por enquanto
 
 - **O que mudou:** a mudança dos botões fora do Acre foi desfeita (revert do commit ecdc5ff): a vitrine voltou ao estado anterior, em que os botões só aparecem se a moto tiver a tabela "sem emplacamento" (`planos_alt`) preenchida. Hoje nenhuma tem, então não aparece botão em nenhuma região, e a linha "Com emplacamento · Simular com um plano →" voltou.
