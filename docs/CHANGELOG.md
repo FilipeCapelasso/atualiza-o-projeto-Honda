@@ -1,5 +1,11 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-16 — Ícone universal: asa da Honda em todos os sites
+
+- **O que mudou:** o ícone da aba do navegador (favicon) e o ícone de atalho do celular (apple-touch-icon) dos sites VITRINE (todos os vendedores), SITE-CDC, SITE-CNH e Termo-Honda-Grupo-Star eram o logo do Grupo Star. Agora são só a asa da Honda, sem o texto "HONDA", com fundo transparente (favicon 64x64 e atalho 180x180). O comercial já usava a Honda, mas com o texto e fundo branco no atalho; foi padronizado igual. Vale para qualquer concessionária.
+- **Arquivos:** `VITRINE/vitrine.html`, `SITE-CDC/index.html`, `SITE-CNH/index.html`, `comercial/index.html`, `Termo-Honda-Grupo-Star/index.html`; espelhos `apps/*` atualizados à mão. **Banco de dados:** não alterado.
+- **Pendente:** navegadores guardam o ícone antigo no cache; pode demorar (ou precisar remover e readicionar o atalho na tela inicial) para trocar. Logos de loja/concessionária dentro das páginas e o nome "Star Motos" em textos não foram alterados. No iPhone, ícone de atalho transparente aparece com fundo preto.
+
 ## 2026-11-16 — Admin geral: trocar o e-mail de login do vendedor
 
 - **O que mudou:** na tela do vendedor (Admin geral), em "Acesso ao painel", novo campo "novo e-mail de login" + botão "Trocar e-mail" (com confirmação). A senha continua a mesma. Bloqueia e-mail inválido ou já usado por outra conta, outro vendedor ou outro cadastro de cobrança.
