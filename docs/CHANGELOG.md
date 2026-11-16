@@ -1,5 +1,12 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-15 — Correção de receita duplicada (Rodrigo Bastos) e webhook do WhatsApp
+
+- **O que mudou:** apagada a receita manual duplicada id 7 (R$ 25, 31/10) do vendedor `bastoshonda`; ele pagou uma vez só, ficou a id 10 (27/10). Criada a Edge Function `wa-webhook` (verificação da Meta + status de entrega dos avisos) e a chave `wa_verify_token` em `config_privada`.
+- **Por quê:** a diferença de R$ 50 entre faturamento do mês e do ano vinha dos dois lançamentos de outubro; o usuário confirmou que foi um pagamento só. O webhook é pedido pela etapa de produção do WhatsApp da Meta.
+- **Banco de dados:** alterado (1 linha apagada em `receitas`; 1 linha em `config_privada`; função `wa-webhook` publicada). Nenhum site alterado.
+- **Pendente:** aviso automático por WhatsApp (3 avisos) parado: a conta da Meta está restrita até a verificação da empresa (CNPJ/MEI); o usuário vai decidir. Segredos `WA_TOKEN`/`WA_PHONE_ID` ainda não configurados; 30 avisos antigos na fila `aviso_wa_fila` (status `aguardando_config`) devem ser descartados antes de ligar.
+
 ## 2026-11-15 — Ao concluir qualquer cadastro, o cliente vai sozinho ao WhatsApp do vendedor
 
 - **O que mudou:** ao terminar o preenchimento, o site salva os dados (espera até 2,5 s) e leva o cliente ao WhatsApp do vendedor na mesma aba, sem botão, no celular e no computador, com a mensagem pronta contendo todos os dados informados. Vale para: ficha CDC (`SITE-CDC`), pré-contrato CNH (`SITE-CNH`), formulário de financiamento da vitrine e conversa (chat) da vitrine, que já fazia isso. Se o navegador não abrir sozinho, aparece um botão de reserva. Se o banco falhar, os dados ficam na fila de reenvio e o cliente também vai ao WhatsApp com a mensagem completa.
