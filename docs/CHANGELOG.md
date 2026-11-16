@@ -1,5 +1,11 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-16 — Vitrine: botões Com/Sem emplacamento em todas as regiões (menos Acre)
+
+- **O que mudou:** nos estados fora do Acre, os 2 botões "Com emplacamento" / "Sem emplacamento" agora aparecem sempre em cima da tabela, tanto em "Planos de consórcio" (página da moto) quanto em "Tabela de consórcio" (simulação). A linha "Com emplacamento · Simular com um plano →" saiu, e entrou o botão "Simular consórcio" abaixo da tabela. No Acre não há botões (só Com emplacamento). A parcela escolhida e a mensagem do WhatsApp/chat passam a seguir a tabela selecionada.
+- **Banco de dados:** não alterado (colunas `planos_alt` e `emplacamento_alt` já existiam). **Arquivo:** `vitrine/vitrine.html`; espelho atualizado.
+- **Pendente:** `planos_alt` está vazio em todas as motos, então "Sem emplacamento" mostra "valores sendo atualizados" (nada é inventado). O site da Honda segue com 403 (desde 11:10 UTC) e `cnh_aplicar`/`regiao_b_aplicar` ainda não gravam a 2ª tabela. Precisa dos valores (planilha/foto da tabela) ou do bloqueio liberado.
+
 ## 2026-11-16 — Criar supervisor com região e concessionária + auditoria de pagamento/geração de vendedores
 
 - **O que mudou:** no admin geral (aba Supervisores), "Criar supervisor" agora pede o **estado**: Acre mostra a loja do grupo; outros estados mostram as **concessionárias já salvas** (nome + logo) ou "Outra (digitar o nome)". O supervisor já nasce com UF, nome, id e logo da concessionária, e os vendedores dele herdam isso.
