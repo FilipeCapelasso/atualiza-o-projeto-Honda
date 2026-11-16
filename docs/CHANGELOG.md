@@ -1,5 +1,12 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-16 — Criar supervisor com região e concessionária + auditoria de pagamento/geração de vendedores
+
+- **O que mudou:** no admin geral (aba Supervisores), "Criar supervisor" agora pede o **estado**: Acre mostra a loja do grupo; outros estados mostram as **concessionárias já salvas** (nome + logo) ou "Outra (digitar o nome)". O supervisor já nasce com UF, nome, id e logo da concessionária, e os vendedores dele herdam isso.
+- **Auditoria (testes com reversão):** Pix de 2 vagas gerado no Mercado Pago (R$ 40,00, R$ 20 por vaga); após "pago" saem 2 vagas, cria 2 vendedores (3º é recusado: sem vaga), vendedores herdam AM/Cometa Motocenter/logo, excluir devolve a vaga; usuário sem papel de supervisor recebe "Acesso restrito a supervisores."; `anon` sem EXECUTE em todas as funções `sup_*`/`mestre_sup*`/`_sup_*`.
+- **Banco de dados:** alterado — função `mestre_supervisor_criar` (migration `mestre_supervisor_criar_regiao`; agora aceita `uf`, `loja`, `concessionaria_id`, `concessionaria`). **Arquivo:** `comercial/index.html` (commit 6a184e1); espelho atualizado.
+- **Pendente:** vaga é pagamento único (sem renovação); tabelas Com/Sem emplacamento seguem vazias (API da Honda bloqueada); nota antiga na imagem do post (canvas) da vitrine.
+
 ## 2026-11-16 — Supervisor André Zanes em Manaus (Cometa Motocenter) e herança para os vendedores dele
 
 - **O que mudou:** o vendedor/supervisor `andrezanes` (André zanes) passou de AC para **AM**, concessionária **Cometa Motocenter** (mesmo id e logo do vendedor Victor Nascimento), sem loja do Acre; as motos dele foram reaplicadas pela tabela da região. Todo vendedor criado por supervisor agora herda UF, nome, id e logo da concessionária do supervisor.
