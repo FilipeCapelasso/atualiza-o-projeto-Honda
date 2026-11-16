@@ -1,5 +1,11 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-16 — Supervisor André Zanes em Manaus (Cometa Motocenter) e herança para os vendedores dele
+
+- **O que mudou:** o vendedor/supervisor `andrezanes` (André zanes) passou de AC para **AM**, concessionária **Cometa Motocenter** (mesmo id e logo do vendedor Victor Nascimento), sem loja do Acre; as motos dele foram reaplicadas pela tabela da região. Todo vendedor criado por supervisor agora herda UF, nome, id e logo da concessionária do supervisor.
+- **Banco de dados:** alterado — dados de `vendedores` (andrezanes) e função `sup_criar_vendedor` (migration `sup_criar_vendedor_herda_concessionaria`). Testado com reversão: filho criado saiu AM / Cometa Motocenter / logo / 31 motos. **Sites:** sem alteração de arquivo.
+- **Pendente:** se mudar a concessionária do supervisor depois, os vendedores já criados não mudam sozinhos.
+
 ## 2026-11-16 — Supervisores: dados de acesso e envio por WhatsApp
 
 - **O que mudou:** no admin geral (aba Supervisores), cada supervisor ganhou "🔑 Dados e enviar": mostra login, senha (guardada no cofre), site, painel de vendedor, painel de supervisor e WhatsApp; botão "Enviar dados no WhatsApp" (abre a conversa com o número do supervisor com a mensagem pronta), "Copiar tudo" e "Gerar nova senha". Também: criar supervisor agora recusa endereço/e-mail já em uso com mensagem clara e sugestão de endereço.
