@@ -1,5 +1,12 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-16 — Promoção Black Friday (só Acre) no carrossel do topo + botão no admin geral
+
+- **O que mudou:** reaproveitado o sistema de ofertas que já existia (aba Ofertas do admin geral e carrossel do topo da vitrine). Entraram 8 motos da tabela promocional Black Friday com "De R$ / Por R$" (preço de Rio Branco/Cruzeiro do Sul), foto e nome da moto, brindes (emplacamento total, capacete GOW, frete grátis, revisões e trocas de óleo) no detalhe da moto e o aviso "Consulte sua região, poderá haver alteração de valor conforme a região!" no carrossel e no detalhe. A diferença de preço entre regiões não é mostrada. Só aparece para vendedores com UF = AC (Star Motos, Acre Motos e Juruá); os demais estados não veem nada. Admin geral > Ofertas ganhou o card "Promoção Black Friday · só Acre" com botão Ligar/Desligar (desligado, tudo some dos sites na próxima abertura; dá para ligar de novo). Limite de 6 ofertas passou a contar só as ofertas comuns (a campanha tem 8).
+- **Banco de dados:** alterado (migration `promocao_black_friday_acre`): `ofertas.campanha` e `ofertas.so_acre`; 8 linhas em `ofertas`; chaves `promo_bf_ativa`, `promo_bf_aviso`, `promo_bf_brindes` em `plataforma_config`; funções `config_publica`, `_oferta_salvar` e `mestre_ofertas` atualizadas; novas `mestre_promo_bf` e `mestre_promo_bf_ligar`.
+- **Arquivos:** `VITRINE/vitrine.html`, `comercial/index.html` (painel embutido da aba Ofertas); espelhos atualizados à mão.
+- **Pendente:** BIZ 125 KUROMI (R$ 21.990 por R$ 19.990) ficou de fora porque não existe no catálogo mestre; precisa ser cadastrada (com foto) para entrar. Os preços das outras regiões (interior/Boca do Acre) não foram guardados. Testado só em navegador simulado; deploy não verificado.
+
 ## 2026-11-15 — Financiamento: "Possui habilitação?" é a última pergunta e envia na hora
 
 - **O que mudou:** na vitrine (formulário de financiamento) e na ficha CDC, a pergunta de habilitação fica por último e começa sem resposta marcada. Ao o cliente responder Sim ou Não, o site salva e leva ao WhatsApp do vendedor na hora (sem botão). Vitrine: campo vem em "Selecione", sem enviar se não responder. CDC: a pergunta passou para depois da entrada, e o aceite da Política de Privacidade subiu para antes dela (precisa estar marcado para o envio automático; se não estiver, aparece aviso e basta marcar e tocar de novo em Sim/Não). Chat da vitrine: a última pergunta de financiamento agora é "Você possui habilitação?" com Sim/Não.
