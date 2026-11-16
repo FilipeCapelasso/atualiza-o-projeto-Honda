@@ -1,5 +1,11 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-16 — Card Black Friday: botão X sempre visível no celular
+
+- **O que mudou:** no celular o card da promoção usava a altura total da tela (com a barra de endereço do navegador), e o topo com o X ficava escondido. Agora a altura usa a área realmente visível (`dvh`), então o cabeçalho com o X fica sempre à vista, mesmo rolando o card. Tocar fora do card ou apertar Esc também fecha.
+- **Arquivo:** `VITRINE/vitrine.html`; espelho `apps/vitrine` atualizado à mão. **Banco de dados:** não alterado.
+- **Pendente:** testado em navegador simulado; confirmar no celular.
+
 ## 2026-11-16 — Black Friday: preços à vista, card próprio e preço por região
 
 - **O que mudou:** os preços da promoção Black Friday são só à vista (marcados "à vista"; a linha "ou consórcio" some nesses cards). "Aproveitar oferta" no carrossel agora abre um card próprio (não o detalhe da moto) com foto, cores (tocar na cor troca a foto quando há foto daquela cor), valor promocional à vista (De/Por), brindes, preço à vista de cada uma das 3 regiões/endereços do Acre (Rio Branco e Cruzeiro do Sul; Interior do Acre e Boca do Acre com endereço de Rio Branco; Boca do Acre com endereço de Boca do Acre), aviso de região e o botão "Tenho interesse", que abre o WhatsApp do vendedor com a moto, a cor escolhida e o valor, e grava um lead (tipo `contato`). No detalhe normal da moto, o bloco da promoção ganhou o botão "Ver cores e preços por região".
