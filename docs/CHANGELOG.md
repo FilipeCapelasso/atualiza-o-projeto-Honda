@@ -1,5 +1,12 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-16 — Admin geral: trocar o e-mail de login do vendedor
+
+- **O que mudou:** na tela do vendedor (Admin geral), em "Acesso ao painel", novo campo "novo e-mail de login" + botão "Trocar e-mail" (com confirmação). A senha continua a mesma. Bloqueia e-mail inválido ou já usado por outra conta, outro vendedor ou outro cadastro de cobrança.
+- **Banco de dados:** alterado — função `mestre_vendedor_email(p_id, p_email)` (SECURITY DEFINER, só o admin geral; executável só por `authenticated`). Atualiza `auth.users.email`, `auth.identities` (email), `customers.email` do vendedor e `vendedores.email` quando preenchido (hoje 39 de 40 estão nulos; o login real fica em `auth.users`). Testada com rollback.
+- **Arquivo:** `comercial/index.html`; espelho `apps/comercial` atualizado à mão.
+- **Pendente:** o vendedor com sessão aberta pode precisar entrar de novo; `equipe_vendedores`/`painel_donos` (e-mails de outras pessoas) não são alterados.
+
 ## 2026-11-16 — Comercial: faixa "Você foi indicado por ..." só no link do parceiro
 
 - **O que mudou:** a faixa aparecia em qualquer visita ao link padrão porque a indicação fica guardada 30 dias no navegador (`hn_ref2`). Agora a faixa só aparece quando o endereço aberto traz o parceiro (`/comercial/<slug>` ou `?ref=<slug>`), com o nome do parceiro. No link padrão não aparece. A indicação guardada continua valendo para creditar o parceiro na compra.
