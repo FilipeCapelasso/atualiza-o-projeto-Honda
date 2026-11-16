@@ -1,5 +1,11 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-16 — Supervisores: dados de acesso e envio por WhatsApp
+
+- **O que mudou:** no admin geral (aba Supervisores), cada supervisor ganhou "🔑 Dados e enviar": mostra login, senha (guardada no cofre), site, painel de vendedor, painel de supervisor e WhatsApp; botão "Enviar dados no WhatsApp" (abre a conversa com o número do supervisor com a mensagem pronta), "Copiar tudo" e "Gerar nova senha". Também: criar supervisor agora recusa endereço/e-mail já em uso com mensagem clara e sugestão de endereço.
+- **Banco de dados:** alterado — função `mestre_supervisor_criar` (validações; migration `mestre_supervisor_criar_valida`). **Arquivo:** `comercial/index.html`; espelho atualizado.
+- **Pendente:** o envio é pelo WhatsApp do próprio admin (abre o link wa.me), não automático; o supervisor também pode ver os dados dele só pelo login (senha não é exibida a ele).
+
 ## 2026-11-16 — Supervisores (vagas de vendedores por Pix)
 
 - **O que mudou:** novo papel de supervisor. No admin geral (COMERCIAL), aba **Supervisores**: define o valor por vendedor (pago uma vez por vaga), cria supervisor (ou transforma um vendedor existente), libera vagas manuais, desativa ou remove a função. O supervisor é um vendedor completo (site e painel próprios) e ganha `/nome/supervisor` (novo `supervisor.html` na VITRINE, rota e CSP no `vercel.json`): compra vagas por Pix (Mercado Pago, mesmo token do comercial), cria vendedores até o limite de vagas, edita nome e WhatsApp, suspende, gera nova senha e apaga (apagar devolve a vaga). Vendedores novos herdam a região/concessionária do supervisor. E-mail já cadastrado é recusado (não redefine senha de ninguém).
