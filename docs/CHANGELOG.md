@@ -1,5 +1,12 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-16 — Black Friday: preços à vista, card próprio e preço por região
+
+- **O que mudou:** os preços da promoção Black Friday são só à vista (marcados "à vista"; a linha "ou consórcio" some nesses cards). "Aproveitar oferta" no carrossel agora abre um card próprio (não o detalhe da moto) com foto, cores (tocar na cor troca a foto quando há foto daquela cor), valor promocional à vista (De/Por), brindes, preço à vista de cada uma das 3 regiões/endereços do Acre (Rio Branco e Cruzeiro do Sul; Interior do Acre e Boca do Acre com endereço de Rio Branco; Boca do Acre com endereço de Boca do Acre), aviso de região e o botão "Tenho interesse", que abre o WhatsApp do vendedor com a moto, a cor escolhida e o valor, e grava um lead (tipo `contato`). No detalhe normal da moto, o bloco da promoção ganhou o botão "Ver cores e preços por região".
+- **Banco de dados:** alterado (migration `promocao_black_friday_regioes`): coluna `ofertas.precos_regiao` (3 valores por moto), chave `promo_bf_regioes` em `plataforma_config`, `config_publica` devolve os dois.
+- **Arquivo:** `VITRINE/vitrine.html`; espelho `apps/vitrine` atualizado à mão.
+- **Pendente:** BIZ 125 KUROMI continua fora (não existe no catálogo mestre). Os preços por região não têm tela de edição no admin geral (só pelo banco). Testado só em navegador simulado.
+
 ## 2026-11-16 — Promoção Black Friday (só Acre) no carrossel do topo + botão no admin geral
 
 - **O que mudou:** reaproveitado o sistema de ofertas que já existia (aba Ofertas do admin geral e carrossel do topo da vitrine). Entraram 8 motos da tabela promocional Black Friday com "De R$ / Por R$" (preço de Rio Branco/Cruzeiro do Sul), foto e nome da moto, brindes (emplacamento total, capacete GOW, frete grátis, revisões e trocas de óleo) no detalhe da moto e o aviso "Consulte sua região, poderá haver alteração de valor conforme a região!" no carrossel e no detalhe. A diferença de preço entre regiões não é mostrada. Só aparece para vendedores com UF = AC (Star Motos, Acre Motos e Juruá); os demais estados não veem nada. Admin geral > Ofertas ganhou o card "Promoção Black Friday · só Acre" com botão Ligar/Desligar (desligado, tudo some dos sites na próxima abertura; dá para ligar de novo). Limite de 6 ofertas passou a contar só as ofertas comuns (a campanha tem 8).
