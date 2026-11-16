@@ -1,5 +1,12 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-16 — Supervisores (vagas de vendedores por Pix)
+
+- **O que mudou:** novo papel de supervisor. No admin geral (COMERCIAL), aba **Supervisores**: define o valor por vendedor (pago uma vez por vaga), cria supervisor (ou transforma um vendedor existente), libera vagas manuais, desativa ou remove a função. O supervisor é um vendedor completo (site e painel próprios) e ganha `/nome/supervisor` (novo `supervisor.html` na VITRINE, rota e CSP no `vercel.json`): compra vagas por Pix (Mercado Pago, mesmo token do comercial), cria vendedores até o limite de vagas, edita nome e WhatsApp, suspende, gera nova senha e apaga (apagar devolve a vaga). Vendedores novos herdam a região/concessionária do supervisor. E-mail já cadastrado é recusado (não redefine senha de ninguém).
+- **Banco de dados:** alterado — tabelas `supervisores`, `sup_vendedores`, `sup_pacotes`, `sup_config` (RLS ligado, sem acesso direto); funções `sup_*` (painel, comprar, verificar, criar/editar/excluir vendedor, senha) e `mestre_supervisor*`/`mestre_sup_preco` (só dono); `mp_webhook` agora também confirma pacotes de supervisor (fluxo dos pedidos intacto). Migration `supervisores_base`. Testado em transação com reversão.
+- **Arquivos:** `VITRINE/supervisor.html`, `VITRINE/vercel.json`, `comercial/index.html`; espelhos atualizados.
+- **Pendente:** definir o valor por vendedor (sem ele a compra fica bloqueada); vaga é paga uma única vez (sem renovação mensal); a rota usa o mesmo domínio dos vendedores (não `sitevendedor.com` separado); testar um Pix real de ponta a ponta.
+
 ## 2026-11-16 — Vitrine: aviso após a tabela do consórcio
 
 - **O que mudou:** depois da tabela de parcelas (detalhe da moto e "Simular consórcio") aparece "Os valores podem sofrer alterações sem aviso prévio e estão sujeitos à atualização no site. Para confirmar o valor exato, entre em contato com um de nossos consultores." e, abaixo, "com Seguro de Vida em Grupo". Substitui as notas antigas.
