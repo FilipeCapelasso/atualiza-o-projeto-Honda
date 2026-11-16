@@ -1,5 +1,11 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-16 — Admin geral: aba Supervisores redesenhada
+
+- **O que mudou:** a aba Supervisores seguiu o padrão visual do Dashboard (claro, escuro e celular): cabeçalho com atalho "Criar supervisor", 4 números-resumo (supervisores, vagas livres, vendedores criados, vagas vendidas), valor por vaga em cartão próprio, formulário de criação recolhível, busca (aparece com mais de 4 supervisores) e cartões com avatar, situação, local ("📍 Atua em"), barra de vagas em uso, link e ações. O ícone do menu que estava quebrado (quadrado cinza) foi corrigido.
+- **Banco de dados:** não alterado. **Arquivo:** `comercial/index.html` (commit 3d9011b); espelho atualizado.
+- **Pendente:** painel `/nome/supervisor` e demais abas do admin geral seguem como estavam (escopo escolhido: admin geral + Supervisores).
+
 ## 2026-11-16 — Supervisor: todas as lojas e concessionárias, local editável e sincronizado
 
 - **O que mudou:** (1) "Criar supervisor" agora tem um único campo "Onde atua" com as lojas do Acre **e todas as concessionárias salvas**, agrupadas por estado (Cometa/AM, Mônaco/AP, Motoformosa/GO, Honda Freeway/PR), mais "Nova concessionária (digitar)" com estado. (2) Cada supervisor ganhou o seletor "📍 Atua em" na aba Supervisores, e **os vendedores dele acompanham** automaticamente (estado, loja/concessionária, logo e tabela de preços). (3) Na lista de vendedores, trocar loja/concessionária agora ajusta o estado junto (antes mudava só o nome).
