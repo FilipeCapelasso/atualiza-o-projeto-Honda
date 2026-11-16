@@ -1,5 +1,11 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-16 — Atualização dos dados da Honda: só 2x por dia (08h e 13h, horário do Acre)
+
+- **O que mudou:** toda a rotina que lê o site da Honda (valores do consórcio, regiões, expansão, cores/lançamentos e fotos) agora roda só às **08:00** e **13:00** do Acre (13:00 e 18:00 UTC, que é o horário do agendador). Antes rodava 4x por dia (11, 15, 19 UTC e 21:30 UTC). Os agendamentos extras das 21:30 UTC foram **desativados, não apagados** (podem ser reativados).
+- **Banco de dados:** alterado — agendamentos (`cron.job`): `site_sync_iniciar/planos/aplicar/retry/publicar`, `regiao_b_iniciar/aplicar`, `expansao_manter`, `catalogo_lancamento`, `catalogo_fotos_honda` em 13,18 UTC; os `_2` (ids 50–53, 57, 58, 60, 64) com `active=false`. **Sites:** sem alteração.
+- **Pendente:** a Honda segue respondendo 403 à leitura; a 2ª tabela (sem emplacamento) ainda não é gravada.
+
 ## 2026-11-16 — Vitrine: botões Com/Sem emplacamento em todas as regiões (menos Acre)
 
 - **O que mudou:** nos estados fora do Acre, os 2 botões "Com emplacamento" / "Sem emplacamento" agora aparecem sempre em cima da tabela, tanto em "Planos de consórcio" (página da moto) quanto em "Tabela de consórcio" (simulação). A linha "Com emplacamento · Simular com um plano →" saiu, e entrou o botão "Simular consórcio" abaixo da tabela. No Acre não há botões (só Com emplacamento). A parcela escolhida e a mensagem do WhatsApp/chat passam a seguir a tabela selecionada.
