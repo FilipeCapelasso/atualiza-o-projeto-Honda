@@ -1,5 +1,11 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-16 — Vitrine: revertida a mudança "preço BF fora do catálogo" (a pedido)
+
+- **O que mudou:** cancelado o commit 90be3b9 (preço Black Friday só no carrossel/card BF). A vitrine voltou exatamente ao estado anterior (397cf89, conteúdo idêntico).
+- **Arquivo:** `VITRINE/vitrine.html`; espelho `apps/vitrine` atualizado à mão. **Banco de dados:** não alterado.
+- **Pendente:** nada.
+
 ## 2026-11-16 — Vitrine: preço Black Friday só no carrossel e no card BF (fora do catálogo)
 
 - **O que mudou:** os preços promocionais (só à vista, só Acre) apareciam também nos cards do catálogo e no detalhe da moto. Agora aparecem somente no carrossel do topo e no card "Aproveitar oferta"; catálogo e detalhe mostram só consórcio/preço normal. `ofM(m,bf)` só devolve oferta BF quando chamado pelo carrossel/card BF. Auditoria geral (advisors, erros, testes de borda) sem outros bugs.
