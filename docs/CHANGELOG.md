@@ -1,5 +1,11 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-16 — Preço à vista por vendedor: campo rápido em "Minhas motos" + sincronização da promoção
+
+- **O que mudou:** (1) no admin do vendedor, cada moto em "Minhas motos" ganhou o campo "À vista R$" com botão Salvar (aceita 16490, 16.490 ou 16490,50; vazio remove). Grava em `motos.preco`, que a vitrine já exibe como "À vista" no catálogo e no detalhe. O campo dentro de "Editar" continua existindo. (2) Sincronizados os preços da promoção Black Friday (`ofertas.preco_por`) em `motos.preco` das 8 motos de cada um dos 36 vendedores do Acre (288 motos), só onde não havia preço à vista (nenhum tinha). O vendedor pode alterar ou apagar depois.
+- **Arquivo:** `VITRINE/vitrine.html`; espelho `apps/vitrine` atualizado à mão. **Banco de dados:** alterado — migration `sincroniza_preco_avista_promocao_acre` (UPDATE de dados em `motos.preco`, sem mudança de estrutura).
+- **Pendente:** a sincronização foi pontual (não acompanha mudanças futuras da promoção nem vendedores novos do Acre); outros estados não receberam preço. Confirmar no celular real.
+
 ## 2026-11-16 — Vitrine: revertida a mudança "preço BF fora do catálogo" (a pedido)
 
 - **O que mudou:** cancelado o commit 90be3b9 (preço Black Friday só no carrossel/card BF). A vitrine voltou exatamente ao estado anterior (397cf89, conteúdo idêntico).
