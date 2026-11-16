@@ -1,5 +1,11 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-16 — Vitrine: botões Com/Sem emplacamento retirados por enquanto
+
+- **O que mudou:** a mudança dos botões fora do Acre foi desfeita (revert do commit ecdc5ff): a vitrine voltou ao estado anterior, em que os botões só aparecem se a moto tiver a tabela "sem emplacamento" (`planos_alt`) preenchida. Hoje nenhuma tem, então não aparece botão em nenhuma região, e a linha "Com emplacamento · Simular com um plano →" voltou.
+- **Banco de dados:** não alterado. **Arquivo:** `vitrine/vitrine.html`; espelho atualizado.
+- **Pendente:** quando houver a tabela "sem emplacamento" (dados enviados ou site da Honda liberado), religar os botões nas regiões fora do Acre (com botão "Simular consórcio" abaixo da tabela) e gravar `planos_alt`.
+
 ## 2026-11-16 — Atualização dos dados da Honda: só 2x por dia (08h e 13h, horário do Acre)
 
 - **O que mudou:** toda a rotina que lê o site da Honda (valores do consórcio, regiões, expansão, cores/lançamentos e fotos) agora roda só às **08:00** e **13:00** do Acre (13:00 e 18:00 UTC, que é o horário do agendador). Antes rodava 4x por dia (11, 15, 19 UTC e 21:30 UTC). Os agendamentos extras das 21:30 UTC foram **desativados, não apagados** (podem ser reativados).
