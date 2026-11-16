@@ -1,5 +1,11 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-16 — Vitrine: aviso após a tabela do consórcio
+
+- **O que mudou:** depois da tabela de parcelas (detalhe da moto e "Simular consórcio") aparece "Os valores podem sofrer alterações sem aviso prévio e estão sujeitos à atualização no site. Para confirmar o valor exato, entre em contato com um de nossos consultores." e, abaixo, "com Seguro de Vida em Grupo". Substitui as notas antigas.
+- **Arquivo:** `VITRINE/vitrine.html`; espelho atualizado. **Banco de dados:** não alterado.
+- **Pendente:** a imagem de postagem gerada pela vitrine (canvas) ainda usa a nota antiga.
+
 ## 2026-11-16 — Dados por site (vitrine básica, CDC completo) + Com/Sem emplacamento no consórcio
 
 - **O que mudou:** (1) VITRINE: o consórcio no chat agora pede só nome e sobrenome + WhatsApp (a moto, cor e parcela vêm do que o cliente escolheu) e mostra o link do questionário completo (SITE-CNH); financiamento na vitrine continua com dados básicos. (2) SITE-CDC: formulário completo do financiamento restaurado (24 campos em 5 seções, validação, consentimento, envio por WhatsApp). (3) VITRINE: na tabela de consórcio (detalhe e "Simular consórcio") aparecem os botões "Com emplacamento" (#voudeHonda+) e "Sem emplacamento" (#voudeHonda) quando a moto tem a tabela alternativa; sem ela, nada muda.
