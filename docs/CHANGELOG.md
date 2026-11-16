@@ -1,5 +1,13 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-15 — Financiamento: "Possui habilitação?" é a última pergunta e envia na hora
+
+- **O que mudou:** na vitrine (formulário de financiamento) e na ficha CDC, a pergunta de habilitação fica por último e começa sem resposta marcada. Ao o cliente responder Sim ou Não, o site salva e leva ao WhatsApp do vendedor na hora (sem botão). Vitrine: campo vem em "Selecione", sem enviar se não responder. CDC: a pergunta passou para depois da entrada, e o aceite da Política de Privacidade subiu para antes dela (precisa estar marcado para o envio automático; se não estiver, aparece aviso e basta marcar e tocar de novo em Sim/Não). Chat da vitrine: a última pergunta de financiamento agora é "Você possui habilitação?" com Sim/Não.
+- **Arquivos:** `VITRINE/vitrine.html`, `SITE-CDC/index.html`; espelhos atualizados à mão.
+- **Banco de dados:** não alterado.
+- **Validações:** navegador simulado (celular): vitrine e CDC enviam ao responder, sem resposta bloqueiam com aviso; sem erros de JavaScript. Sem teste no aparelho nem com o banco real.
+- **Pendente:** SITE-CNH não foi alterado (a pergunta de habilitação é só do financiamento).
+
 ## 2026-11-15 — Correção de receita duplicada (Rodrigo Bastos) e webhook do WhatsApp
 
 - **O que mudou:** apagada a receita manual duplicada id 7 (R$ 25, 31/10) do vendedor `bastoshonda`; ele pagou uma vez só, ficou a id 10 (27/10). Criada a Edge Function `wa-webhook` (verificação da Meta + status de entrega dos avisos) e a chave `wa_verify_token` em `config_privada`.
