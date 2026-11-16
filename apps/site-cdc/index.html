@@ -265,19 +265,17 @@ function ficha(){
   document.title='Ficha cadastral | '+V.nome;
   $('#app').innerHTML=`<header class="hero"><span class="glow"></span><div class="spd"><i></i><i></i><i></i><i></i></div>
   <div class="who">${av()}<h1>${esc(V.nome)}<svg class="vf" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#1d9bf0"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></h1>
-  <h2>Conquiste sua liberdade sobre duas rodas!</h2><p>Preencha 6 dados rápidos e acelere em direção à sua nova moto.</p></div></header>
+  <h2>Conquiste sua liberdade sobre duas rodas!</h2><p>Preencha seus dados completos e acelere em direção à sua nova moto.</p></div></header>
   <main class="box" id="bx"><form onsubmit="send();return false" novalidate>
-  <section class="sec" style="--i:0"><div class="st">Só 6 informações, leva menos de 1 minuto</div><div class="gr">${FORM.map(f=>fld([f[0],f[1],f[2],f[3]])).join('')}
-  <div class="fl cnh ent s12" data-k="entrada"><div class="cq" id="ent_q">💰 Tem algum valor de entrada? *</div><div class="cb" role="group" aria-labelledby="ent_q"><button type="button" id="ent_s" aria-pressed="false" onclick="entSet('Sim')">Sim</button><button type="button" id="ent_n" aria-pressed="false" onclick="entSet('Não')">Não</button></div><div class="ent-v" id="ent_v" hidden><div class="fl s12" data-k="entrada_v"><input id="f_entrada" placeholder=" " inputmode="numeric" autocomplete="off" oninput="msk(this,'rs')"><label>Quanto você tem de entrada? *</label></div></div></div>
-  <div class="s12" style="grid-column:1/-1"><label class="ok" style="margin:10px 0 0"><input type="checkbox" id="ok"><span>Li e concordo com a <a href="${LGPD_URL}" onclick="return polAbrir(event)" target="_blank" rel="noopener">Política de Privacidade</a>. Autorizo o uso dos meus dados somente para análise de crédito e contato do vendedor.</span></label></div>
-  <div class="fl cnh s12" data-k="habilitacao"><div class="cq" id="cnh_q">🪪 O titular do CPF possui CNH? *</div><div class="cb" role="group" aria-labelledby="cnh_q"><button type="button" id="cnh_s" aria-pressed="false" onclick="cnhSet('Sim')">Sim</button><button type="button" id="cnh_n" aria-pressed="false" onclick="cnhSet('Não')">Não</button></div><input type="hidden" id="f_habilitacao"><input type="hidden" id="f_moto"></div></div></section>
+  ${FIELDS.map((s,i)=>`<section class="sec" style="--i:${i}"><div class="st">${s[0]}</div><div class="gr">${s[1].map(fld).join('')}</div></section>`).join('')}
+  <section class="sec" style="--i:9"><div class="gr"><div class="s12" style="grid-column:1/-1"><label class="ok" style="margin:10px 0 0"><input type="checkbox" id="ok"><span>Li e concordo com a <a href="${LGPD_URL}" onclick="return polAbrir(event)" target="_blank" rel="noopener">Política de Privacidade</a>. Autorizo o uso dos meus dados somente para análise de crédito e contato do vendedor.</span></label></div></div></section>
   <input class="hp" id="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
   <button class="btn go" id="go" type="submit">Enviar para o vendedor(a)</button><p class="ao">Ao preencher ou enviar, você concorda com nossa <a href="${LGPD_URL}" onclick="return polAbrir(event)" target="_blank" rel="noopener">Política de Privacidade</a>. O que você digita já fica disponível ao vendedor, para ele poder te ajudar, mesmo que você não conclua o envio.</p>${V.whatsapp?`<a class="btn wa" style="margin-top:10px" target="_blank" rel="noopener" href="${wa('Olá! Vim pelo site e prefiro falar direto pelo WhatsApp.')}">Prefiro falar pelo WhatsApp</a>`:''}</form>
   <button class="btn cp" onclick="cpl()">Copiar link da ficha</button><a class="pv" href="${LGPD_URL}" onclick="return polAbrir(event)" target="_blank" rel="noopener">Política de Privacidade</a></main>
   <footer class="foot2"><b>${esc(V.nome)}</b><br>${tel()}${V.instagram?' · @'+esc(V.instagram):''}<br><a href="#admin">Área do vendedor</a></footer>
   <a class="bubble" aria-label="Dúvidas? Fale agora pelo WhatsApp" title="Dúvidas? Fale agora" target="_blank" rel="noopener" href="${wa('Olá! Estou preenchendo a ficha cadastral do seu site.')}">${av()}Dúvidas? Fale agora!</a>`;
   const q=new URLSearchParams(location.search).get('moto');
-  if(q){const m=M.find(x=>x.id===q)||M.find(x=>(x.nome||'').toLowerCase().includes(q.toLowerCase()));if(m)$('#f_moto').value=m.id}
+  if(q){const m=M.find(x=>x.id===q)||M.find(x=>(x.nome||'').toLowerCase().includes(q.toLowerCase()));if(m){$('#f_moto').value=m.id;corAtualiza()}}
 }
 const cpl=()=>navigator.clipboard.writeText(location.origin+location.pathname+location.search).then(()=>toast('Link da ficha copiado!'),()=>toast('Não foi possível copiar'));
 function prog(){const ks=ALL.map(k=>$('#f_'+k)).filter(Boolean),n=ks.filter(x=>x.value.trim()).length;$('#pg').style.width=(n/ks.length*100)+'%'}
@@ -304,7 +302,7 @@ async function send(){
   document.querySelectorAll('.er').forEach(e=>e.classList.remove('er'));
   const chk=[['nome',g('nome').length>=5&&/\S+\s+\S+/.test(g('nome')),'Informe nome e sobrenome'],['nascimento',dtOk(g('nascimento')),'Informe a data de nascimento completa'],
    ['telefone',g('telefone').replace(/\D/g,'').length>=10,'Telefone inválido'],['cpf',cpfOk(g('cpf')),'CPF inválido'],['email',!g('email')||/^\S+@\S+\.\S+$/.test(g('email')),'E-mail inválido'],
-   ['habilitacao',!!g('habilitacao'),'Informe se o titular possui CNH'],['entrada',$('#ent_s').classList.contains('on')||$('#ent_n').classList.contains('on'),'Informe se tem valor de entrada'],['entrada_v',g('entrada')==='Sem entrada'||+g('entrada').replace(/\D/g,'')>0,'Informe o valor da entrada']];
+   ['moto',!!g('moto'),'Escolha a moto'],['cor',!!g('cor'),'Informe a cor da moto'],['habilitacao',!!g('habilitacao'),'Informe se possui habilitação']];
   const bad=chk.find(c=>!c[1]);
   if(bad){const el=document.querySelector(`[data-k=${bad[0]}]`);el.classList.add('er');el.scrollIntoView({behavior:'smooth',block:'center'});return toast(bad[2])}
   if(!$('#ok').checked)return toast('Aceite a Política de Privacidade para enviar');
@@ -318,7 +316,7 @@ async function send(){
   }
   fim(row);
 }
-const waMsg=(titulo,r)=>{const L=[`Olá! Acabei de preencher ${titulo} pelo site. Seguem meus dados:`];if(r.moto_nome)L.push('Moto: '+r.moto_nome);ALL.forEach(k=>{if(k==='moto')return;const v=r[k];if(v)L.push((LBL[k]||k).replace(/\?$/,'')+': '+v)});return L.join('\n')};
+const waMsg=(titulo,r)=>{const L=[`Olá! Acabei de preencher ${titulo} pelo site. Seguem meus dados:`];if(r.moto_nome)L.push('Moto: '+r.moto_nome);ALL.forEach(k=>{if(k==='moto')return;const v=r[k];if(v)L.push((k.startsWith('ref_')?'Contato de referência - ':'')+(LBL[k]||k).replace(/\?$/,'')+': '+v)});return L.join('\n')};
 const waUrl=t=>{const n=String(V.whatsapp||'').replace(/\D/g,'');return n.length>=12?`https://wa.me/${n}?text=${encodeURIComponent(t)}`:''};
 /* ao concluir, leva o cliente ao WhatsApp do vendedor sozinho (sem botão); o botão fica só como reserva */
 const waGo=t=>{const u=waUrl(t);if(!u)return false;setTimeout(()=>{location.href=u},900);return true};

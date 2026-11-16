@@ -1,5 +1,12 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-16 — Dados por site (vitrine básica, CDC completo) + Com/Sem emplacamento no consórcio
+
+- **O que mudou:** (1) VITRINE: o consórcio no chat agora pede só nome e sobrenome + WhatsApp (a moto, cor e parcela vêm do que o cliente escolheu) e mostra o link do questionário completo (SITE-CNH); financiamento na vitrine continua com dados básicos. (2) SITE-CDC: formulário completo do financiamento restaurado (24 campos em 5 seções, validação, consentimento, envio por WhatsApp). (3) VITRINE: na tabela de consórcio (detalhe e "Simular consórcio") aparecem os botões "Com emplacamento" (#voudeHonda+) e "Sem emplacamento" (#voudeHonda) quando a moto tem a tabela alternativa; sem ela, nada muda.
+- **Banco de dados:** alterado — colunas `planos_alt` (jsonb, padrão `[]`) e `emplacamento_alt` (text) em `motos` e `catalogo_mestre` (migration `motos_planos_alt_emplacamento`).
+- **Arquivos:** `VITRINE/vitrine.html` (c1472e7), `SITE-CDC/index.html` (134485f); espelhos atualizados.
+- **Pendente:** as colunas ainda estão vazias, então os botões não aparecem. A sincronização com o site da Honda (`cnh_aplicar`) ainda não grava a segunda tabela, e o site da Honda responde 403 (bloqueio) desde 2026-11-16 11:10 UTC, então as tabelas não estão atualizando. Falta carregar os valores "sem emplacamento" (sync ou digitação) e propagar do catálogo mestre para os vendedores.
+
 ## 2026-11-16 — Ícone universal: asa da Honda em todos os sites
 
 - **O que mudou:** o ícone da aba do navegador (favicon) e o ícone de atalho do celular (apple-touch-icon) dos sites VITRINE (todos os vendedores), SITE-CDC, SITE-CNH e Termo-Honda-Grupo-Star eram o logo do Grupo Star. Agora são só a asa da Honda, sem o texto "HONDA", com fundo transparente (favicon 64x64 e atalho 180x180). O comercial já usava a Honda, mas com o texto e fundo branco no atalho; foi padronizado igual. Vale para qualquer concessionária.
