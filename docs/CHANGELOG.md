@@ -1,5 +1,13 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-17 — Vitrine: nome do vendedor saindo da tela no celular (Richardson e outros)
+
+- **Erro:** no celular, quando o vendedor tem **subtítulo** ou **selo** personalizado no topo (ex.: Richardson), esse texto caía na 1ª coluna da grade do topo e a esticava até quase a tela toda; o nome e a bio ficavam numa coluna de 0 px, empurrados para fora (só aparecia um "R" na borda).
+- **Correção:** `.hero .hin.hin>.hsub,.hero .hin.hin>.hbd{grid-column:1/-1}` (bloco `<style id="vfp">`). Vale para todos os vendedores; os sem subtítulo/selo não mudam. Reproduzido e conferido no Chrome (400 px) com os dados reais do Richardson.
+- **Banco de dados:** não alterado (lido: `vendedores` e `vendedor_custom` do `richardson`).
+- **Arquivo:** `vitrine/vitrine.html` (commit b7bb992). Espelho atualizado.
+- **Pendente:** o subtítulo aparece no fim do topo (depois dos números) no celular; se quiser, dá para subir para logo abaixo do título. A barra inferior escura já estava no commit anterior (se ainda viu o botão "Ver motos" branco, era cache: recarregar).
+
 ## 2026-11-17 — Vitrine: tema preto redesenhado e motos sem fundo branco
 
 - **Pedido:** quando o vendedor escolhe fundo preto, melhorar o design do site inteiro; motos com fundo branco (exemplo CRF 300F) quebravam a qualidade.
