@@ -1,5 +1,15 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-17 — Vitrine: tema preto redesenhado e motos sem fundo branco
+
+- **Pedido:** quando o vendedor escolhe fundo preto, melhorar o design do site inteiro; motos com fundo branco (exemplo CRF 300F) quebravam a qualidade.
+- **Fotos:** só 3 imagens do catálogo tinham fundo branco opaco (CRF 300F, FourTrax/quadriciclo e Biz 125 EX Azul). Recortadas e salvas como WebP com transparência em `vitrine/fx/` (`crf-300f`, `quadriciclo`, `biz-125-ex-azul`). `IMGA()` troca a foto pelo recorte quando o arquivo original é um desses (`FX_FOTO` → `fxU`); os dados no banco e o painel do vendedor continuam com a foto original (nada foi alterado no Supabase). Vale para todos os temas e para todos os vendedores que usam essas fotos.
+- **Tema preto (`body.fpr`):** novo bloco `<style id="vfp">` no fim do `vitrine.html`: barra do topo escura translúcida, painel do card em destaque do hero escuro (era branco), cards com palco escuro sob a moto, modal de detalhes/consórcio/financiamento escuros (campos, planos, cores, links, caixa da foto) e barra inferior do celular (WhatsApp/Simular/Ver motos) escura. Tudo escopado em `html body.fpr`, então tema claro não muda.
+- **Banco de dados:** não alterado.
+- **Testado no Chrome (1280 e 400 px):** preto e claro, cards, hero, modal de detalhes, consórcio e financiamento; sem erros de JS. Não testado em celular real nem com outras fotos de vendedores reais.
+- **Arquivos:** `vitrine/vitrine.html` + `vitrine/fx/*.webp` (commit d6dcfc2). Espelho atualizado (inclui `apps/vitrine/fx/`).
+- **Pendente:** 1) a foto original da Biz 125 EX Azul tem só 534×350 px: o recorte ficou limpo mas pequeno (ideal subir uma foto maior); 2) fotos novas enviadas com fundo branco continuam brancas (recorte é manual; dá para fazer um recorte automático no envio, se quiser); 3) imagem de compartilhamento (`api/og.js`) e miniaturas do admin ainda usam a foto original; 4) as imagens `/fx/` têm cache de 1 ano: para trocar um recorte, mudar o nome do arquivo; 5) o Pix Automático (Asaas) segue aguardando resposta.
+
 ## 2026-11-17 — Mensal automático no cartão (Mercado Pago) para vendedor e supervisor
 
 - **O que é:** o vendedor (R$ 25/mês, o plano único) ou o supervisor (vagas × valor por vaga) assina uma vez no Mercado Pago e o cartão é cobrado todo mês sozinho. Cada cobrança aprovada soma 31 dias e 20 horas ao que ainda falta (mesma regra do Pix), por isso não perde nenhum dia. O Pix de renovação e a compra de vagas por Pix continuam funcionando como antes.
