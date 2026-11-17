@@ -3,9 +3,9 @@
 ## 2026-11-17 — Sorteio: escondido dos vendedores (reservado ao admin geral)
 
 - **Pedido do responsável:** a aba Sorteio não deve aparecer para os vendedores; deve ficar só para o admin geral, e a função "não deveria funcionar assim" (jeito ainda a definir).
-- **Feito:** aba removida do menu do painel do vendedor (e link direto  volta para o Início); o código da tela fica no , sem acesso. Os dois avisos agendados (, ) foram **removidos do cron** para nenhum vendedor receber aviso de sorteio. Tabelas  e  e a função  continuam no banco, vazias.
-- **Banco de dados:** alterado (só  dos dois agendamentos).
-- **Arquivo:**  (commit ce34233). Espelho atualizado.
+- **Feito:** aba removida do menu do painel do vendedor (e o link direto `?t=sorteio` volta para o Início); o código da tela fica no `vitrine.html`, sem acesso. Os dois avisos agendados (`lf_aviso_dia`, `lf_aviso_resultado`) foram **removidos do cron** para nenhum vendedor receber aviso de sorteio. Tabelas `cotas_consorcio` e `lf_resultados` e a função `lf_aviso` continuam no banco, vazias.
+- **Banco de dados:** alterado (só `cron.unschedule` dos dois agendamentos).
+- **Arquivo:** `vitrine/vitrine.html` (commit ce34233). Espelho atualizado.
 - **Pendente:** definir com o responsável como a função deve funcionar no painel do admin geral (painel mestre, no repositório comercial) e refazer lá.
 
 ## 2026-11-17 — Painel do vendedor: nova aba "Sorteio" (cotas sorteadas pela Loteria Federal)
