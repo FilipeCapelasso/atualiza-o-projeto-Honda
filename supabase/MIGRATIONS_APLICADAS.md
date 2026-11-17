@@ -106,3 +106,8 @@ Total: 92 migrations.
 ```
 20261117145036 sorteio_loteria_cotas
 20261117154717 vsite_fonte_alternativa_catalogo
+20261117175359 honda_api_nacional
+20261117175439 honda_api_nacional_fix_resumo
+20261117180024 honda_api_nacional_crons
+20261117180042 honda_api_nacional_fix_passo
+20261117180145 honda_api_nacional_consulta_interna

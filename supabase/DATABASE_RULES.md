@@ -9,7 +9,7 @@ Totais: 79 tabelas · 4 views · ~330 funções no schema `public` · 74 trigger
 - **RLS ligado em todas as tabelas.** Muitas não têm policy de propósito: o acesso é só por funções RPC (`SECURITY DEFINER`) ou pelo servidor. Não "consertar" criando policy aberta.
 - **Multi-vendedor:** tabelas de negócio têm `vendedor_id` (default `tenant_id()`), ligado a `vendedores(id)`. O `slug` do vendedor vem do cabeçalho `x-vendedor` nas leituras públicas.
 - Leitura pública do site do vendedor passa pela view `vendedor_publico` e por RPCs `*_publica`/`ps_publico`/`config_publica`.
-- Funções com prefixo: `mestre_*` (painel do dono), `meu_*` (vendedor logado), `ps_*` (plataforma/checkout), `assin_*` (assinaturas), `app_*` (app), `patrao_*` (apresentação), `site_sync_*`/`regiao_b_*` (atualização do catálogo).
+- Funções com prefixo: `mestre_*` (painel do dono), `meu_*` (vendedor logado), `ps_*` (plataforma/checkout), `assin_*` (assinaturas), `app_*` (app), `patrao_*` (apresentação), `site_sync_*`/`regiao_b_*` (atualização do catálogo), `honda_*`/`mestre_honda_*` (tabelas nacionais do Consórcio Honda, ver `docs/HONDA_API.md`).
 - Alterações de estrutura: **sempre por migration** (`apply_migration`), nunca DDL solto. Lista em [`MIGRATIONS_APLICADAS.md`](MIGRATIONS_APLICADAS.md).
 
 ## Tabelas por domínio
@@ -36,6 +36,8 @@ Relações principais: `vendedores` → (`motos`, `leads`, `fichas`, `contratos`
 | Pendências do catálogo | a cada 5 min | `ps_catalogo_pendentes` |
 | Atualização do catálogo (iniciar → planos → aplicar → publicar → retry) | 4×/dia (+ rodada extra à noite) | `site_sync_*` |
 | Atualização do catálogo, fonte alternativa vendedor.site (iniciar → aplicar); só age se o site oficial não atualizou nas últimas 6 h | 3×/dia (11:20, 16:20, 21:20 UTC; aplicar 3 min depois) | `vsite_iniciar`, `vsite_aplicar` |
+| Tabelas Honda nacionais (27 UFs): confere a fonte e cria execução se não houve coleta boa em 7 h | toda hora (min 7) | `honda_agendar` |
+| Tabelas Honda: avança a fila e chama o coletor `honda-sync` | a cada 2 min | `honda_passo` |
 | Região B (preços fora do Acre) | 4×/dia | `regiao_b_iniciar`, `regiao_b_aplicar` |
 | Expansão por estado | 4×/dia | `expansao_manter` |
 | Fotos e cores oficiais | 4×/dia | chamam as Edge Functions `fotos-honda` e `cores-oficial` |
