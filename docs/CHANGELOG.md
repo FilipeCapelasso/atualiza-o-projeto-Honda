@@ -1,5 +1,11 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-16 — Vitrine: chat não repete a modalidade quando o cliente vem do "Simular consórcio"
+
+- **O que mudou:** no detalhe da moto, a tabela de consórcio tem o botão "Simular e preencher meus dados". Ele abria o chat e, depois do nome e do WhatsApp, o chat perguntava "Qual modalidade de pagamento você prefere?", mesmo o cliente já tendo escolhido consórcio. Agora o botão abre o chat já com Consórcio escolhido (`chatOpen(null, id, 'consorcio')`, que usa o `pagPre` que o chat já tinha) e a pergunta de modalidade é pulada: nome → WhatsApp → cor → parcela do consórcio. Os outros caminhos (botão geral "Fale comigo", "Quero financiamento" etc.) continuam como estavam.
+- **Banco de dados:** não alterado. **Arquivo:** `vitrine/vitrine.html` (83e4ab3), espelho atualizado.
+- **Pendente:** nada.
+
 ## 2026-11-16 — Revisão geral: pagamentos, painel do supervisor, gavetas por loja e limpeza
 
 - **Pagamentos (correções):** (1) os pacotes de vagas do supervisor **não eram reverificados** pela rotina automática (só pelo painel aberto); `ps_reverificar` agora confere planos e pacotes a cada minuto nas primeiras 3 h e a cada 10 min até 25 h, e expira pacotes com mais de 25 h. (2) O Mercado Pago **nunca avisava** o sistema (o link de aviso tinha 279 caracteres, acima do limite de 250, e ia vazio). Criada a função `mp-webhook` (endereço curto, só repassa o id para `mp_webhook`, que consulta o próprio Mercado Pago antes de mudar algo); chave `mp_notify_url` em `plataforma_config`, usada por `ps_criar_pedido` e `sup_comprar`. Testado: aviso registrado e Pix novo saindo com o endereço. (3) Ao pagar vagas, o dono recebe aviso no Telegram (`_sup_checar`). Conferência: 32 pedidos de plano aprovados, nenhum preso; Pix do André Zanes (13 vagas, R$ 260) segue pendente no Mercado Pago.
