@@ -104,3 +104,4 @@ Total: 92 migrations.
 20261117102651 app_limpar_notificacoes
 20261117123831 assinatura_mensal_recorrente
 ```
+20261117145036 sorteio_loteria_cotas
