@@ -32,7 +32,7 @@ async function mandaNotif(id) {
   const { count } = await db.from("app_notificacoes").select("id", { count: "exact", head: true }).eq("vendedor_id", n.vendedor_id).eq("lida", false);
   const k = await chaves(), ct = await contato();
   const d = n.dados || {};
-  const texto = JSON.stringify({ id: n.id, t: n.titulo, b: n.corpo, tp: n.tipo, slug: d.slug, cid: d.cid ?? null, wa: d.wa ?? null, n: count ?? 0, em: n.criado });
+  const texto = JSON.stringify({ id: n.id, t: n.titulo, b: n.corpo, tp: n.tipo, slug: d.slug, cid: d.cid ?? null, wa: d.wa ?? null, img: d.img ?? null, n: count ?? 0, em: n.criado });
   const topico = d.cid ? String(d.cid).replace(/[^A-Za-z0-9]/g, "").slice(0, 32) : undefined;
   const out = [];
   await Promise.all(subs.map(async (s) => {

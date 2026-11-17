@@ -1,5 +1,15 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-16 — App do vendedor: ícone Honda, modo app focado e aviso animado dentro do painel
+
+- **Ícone:** asa da Honda (tirada do logo vetorial que já está no `comercial`, sem o texto HONDA, que fica ilegível em ícone pequeno). Fundo transparente nos ícones do app, da notificação e do computador. No Android a tela inicial coloca o ícone num fundo branco (`app-honda-maskable-512.png`); no iPhone o fundo é branco porque o iOS pinta de preto o que é transparente. Selo da barra de status com a silhueta da asa. Arquivos renomeados para `app-honda-*.png` (as imagens ficam 1 ano em cache, então nome novo garante que todos vejam o ícone novo).
+- **Modo app:** aberto pelo ícone instalado (ou com `?app=1`), o painel mostra só **Clientes, Notificações, Personalizar e Configuração** e abre direto em Clientes. Pelo navegador o painel continua completo, agora com a aba Notificações também. Atalhos no ícone: Clientes e Notificações.
+- **Aba Notificações (nova):** histórico dos avisos agrupado por dia (Hoje, Ontem...), filtros Todas/Não lidas/Começou/Finalizou/Parou, foto da moto, botão WhatsApp do cliente, marcar como lidas, contador no menu, testar aviso e **quais avisos receber** (começou, finalizou, cliente preguiçoso; som e vibração por aparelho).
+- **Aviso animado dentro do painel:** cartão que desce do topo com efeito de mola, ícone animado (sino balançando, ✅ surgindo, 😴 flutuando) e ondas, foto da moto entrando de lado, barra de tempo (pausa ao passar o mouse), som curto e vibração. Funciona **com o painel aberto no navegador**, mesmo sem ter ativado as notificações do sistema: chega pelo Supabase Realtime (`app_notificacoes`) e pelo service worker, sem repetir o mesmo aviso. Com o painel na tela, o Android/computador não mostra também a notificação do sistema (no iPhone mostra sempre, exigência da Apple). Respeita "reduzir movimento".
+- **Notificação do sistema:** agora com a **foto da moto** (imagem grande no Android/computador).
+- **Banco de dados:** alterado. Migration `avisos_foto_moto_e_pref_preguicoso` (`app_push_enviar` acha a foto da moto citada no aviso; `app_prefs_ler/salvar` aceitam `preguicoso`). Função `web-push` v3 (manda a foto). **Arquivos:** `vitrine/vitrine.html`, `sw.js`, `app.webmanifest`, `app-honda-*.png` (e0b3779); espelho atualizado.
+- **Testado no Chrome:** menu com 4 itens no modo app, aba Notificações, aviso animado, sem duplicar, push com o painel na tela vira cartão animado (sem notificação do sistema), instalação sem erros no endereço real. **Falta:** teste no celular real.
+
 ## 2026-11-16 — App do vendedor instalável + avisos na hora (Web Push, sem Firebase e sem Expo)
 
 - **O que é:** o painel `/nome/admin` agora instala como app no Android (Chrome → "Instalar app"), no iPhone (Safari → Compartilhar → "Adicionar à Tela de Início", iOS 16.4+) e no computador. O ícone se chama **Meu Painel**. Os avisos chegam com o app fechado, pelo serviço de avisos do próprio navegador (Google/Apple). Não precisa de console do Firebase, expo.dev nem chave nenhuma.
