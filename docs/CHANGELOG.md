@@ -1,5 +1,13 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-17 — Sorteio: escondido dos vendedores (reservado ao admin geral)
+
+- **Pedido do responsável:** a aba Sorteio não deve aparecer para os vendedores; deve ficar só para o admin geral, e a função "não deveria funcionar assim" (jeito ainda a definir).
+- **Feito:** aba removida do menu do painel do vendedor (e link direto  volta para o Início); o código da tela fica no , sem acesso. Os dois avisos agendados (, ) foram **removidos do cron** para nenhum vendedor receber aviso de sorteio. Tabelas  e  e a função  continuam no banco, vazias.
+- **Banco de dados:** alterado (só  dos dois agendamentos).
+- **Arquivo:**  (commit ce34233). Espelho atualizado.
+- **Pendente:** definir com o responsável como a função deve funcionar no painel do admin geral (painel mestre, no repositório comercial) e refazer lá.
+
 ## 2026-11-17 — Painel do vendedor: nova aba "Sorteio" (cotas sorteadas pela Loteria Federal)
 
 - **Pesquisa (resumo):** no consórcio, uma das formas de contemplação é o sorteio mensal na assembleia do grupo, baseado na Loteria Federal (extrações às quartas e sábados). Cada cliente tem uma cota; usa-se os últimos 2, 3 ou 4 algarismos do 1º prêmio (dezena/centena/milhar, conforme o tamanho do grupo). Se a cota sorteada não existe, já foi contemplada, está cancelada ou em atraso, busca-se a próxima acima e abaixo, alternando. Só concorre quem está em dia. Quando o número passa do tamanho do grupo cada administradora trata de um jeito. **Regra exata do Consórcio Nacional Honda por grupo: não confirmada** (o regulamento Honda encontrado é de uma promoção de capitalização, não do consórcio). A ferramenta avisa isso na tela.
