@@ -35,6 +35,7 @@ Relações principais: `vendedores` → (`motos`, `leads`, `fichas`, `contratos`
 | Assinaturas | todo minuto | `ps_expirar`, `ps_reverificar` |
 | Pendências do catálogo | a cada 5 min | `ps_catalogo_pendentes` |
 | Atualização do catálogo (iniciar → planos → aplicar → publicar → retry) | 4×/dia (+ rodada extra à noite) | `site_sync_*` |
+| Atualização do catálogo, fonte alternativa vendedor.site (iniciar → aplicar); só age se o site oficial não atualizou nas últimas 6 h | 3×/dia (11:20, 16:20, 21:20 UTC; aplicar 3 min depois) | `vsite_iniciar`, `vsite_aplicar` |
 | Região B (preços fora do Acre) | 4×/dia | `regiao_b_iniciar`, `regiao_b_aplicar` |
 | Expansão por estado | 4×/dia | `expansao_manter` |
 | Fotos e cores oficiais | 4×/dia | chamam as Edge Functions `fotos-honda` e `cores-oficial` |

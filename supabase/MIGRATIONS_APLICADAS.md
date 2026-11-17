@@ -105,3 +105,4 @@ Total: 92 migrations.
 20261117123831 assinatura_mensal_recorrente
 ```
 20261117145036 sorteio_loteria_cotas
+20261117154717 vsite_fonte_alternativa_catalogo
