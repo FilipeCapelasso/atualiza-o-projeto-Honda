@@ -97,4 +97,7 @@ Total: 92 migrations.
 20261114163414 mestre_criar_vendedor_estado_concessionaria
 20261114191825 concessionarias_reconhecimento
 20261114191850 concessionarias_contagem_fix
+20261117003719 web_push_vendedor
+20261117003802 avisos_primeiro_dado_final_preguicoso
+20261117004115 web_push_servicos_google
 ```
