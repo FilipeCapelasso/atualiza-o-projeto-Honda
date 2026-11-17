@@ -1,5 +1,14 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-17 — Painel web do vendedor: aba Notificações removida (continua no app)
+
+- **Pedido:** tirar "Notificações" só do painel do vendedor no site (navegador); manter no app.
+- **Feito:** `navLista()` agora devolve o menu sem a aba no modo site; no modo app (`NAV_APP`) a aba continua. O link direto `?t=avisos` no site volta para o Início. O aviso flutuante no canto da tela (quando chega cliente novo) não foi mexido.
+- **Banco de dados:** não alterado.
+- **Testado no Chrome real (1280 px):** site: menu sem Notificações e `?t=avisos` cai no Início; app (`?app=1`): menu com Notificações e a tela abre; sem erros de JS.
+- **Arquivo:** `vitrine/vitrine.html` (commit 157f815). O espelho `apps/vitrine/` ainda mostrava ce34233 na hora do registro; a Action atualiza sozinha.
+- **Pendente:** nenhum.
+
 ## 2026-11-17 — Catálogo: nova fonte alternativa (página do vendedor.site) 3x ao dia, enquanto o site oficial bloqueia
 
 - **Situação encontrada:** a atualização automática lê o site oficial (`consorcionacionalhonda.com.br`, API por estado) e vinha falhando com **HTTP 403 "Access denied"** desde 16/11 (última leitura boa: 15/11 21:40 UTC; 4 erros seguidos no `site_sync_log`). O bloqueio vem do próprio site oficial contra o banco; não foi contornado. Busca na web: não há outra fonte pública confiável com a tabela de preços por região (só notícias antigas e sites de FIPE, que não trazem as tabelas do consórcio).
