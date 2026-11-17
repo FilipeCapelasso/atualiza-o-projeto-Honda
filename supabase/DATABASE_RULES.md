@@ -36,6 +36,7 @@ Relações principais: `vendedores` → (`motos`, `leads`, `fichas`, `contratos`
 | Pendências do catálogo | a cada 5 min | `ps_catalogo_pendentes` |
 | Atualização do catálogo (iniciar → planos → aplicar → publicar → retry) | 4×/dia (+ rodada extra à noite) | `site_sync_*` |
 | Atualização do catálogo, fonte alternativa vendedor.site (iniciar → aplicar); só age se o site oficial não atualizou nas últimas 6 h | 3×/dia (11:20, 16:20, 21:20 UTC; aplicar 3 min depois) | `vsite_iniciar`, `vsite_aplicar` |
+| Cometa Motocenter Manaus: tabela própria `COMETA-AM` lida do site da loja (iniciar → buscar → aplicar); só vendedores da Cometa a recebem | 2×/dia (11:00 e 19:00 UTC = 06:00 e 14:00 Rio Branco; buscar +1 min, aplicar +4 min) | `cometa_iniciar`, `cometa_buscar`, `cometa_aplicar` |
 | Tabelas Honda nacionais (27 UFs): confere a fonte e cria execução se não houve coleta boa em 7 h | toda hora (min 7) | `honda_agendar` |
 | Tabelas Honda: avança a fila e chama o coletor `honda-sync` | a cada 2 min | `honda_passo` |
 | Região B (preços fora do Acre) | 4×/dia | `regiao_b_iniciar`, `regiao_b_aplicar` |

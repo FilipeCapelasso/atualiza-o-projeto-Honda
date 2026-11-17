@@ -111,3 +111,6 @@ Total: 92 migrations.
 20261117180024 honda_api_nacional_crons
 20261117180042 honda_api_nacional_fix_passo
 20261117180145 honda_api_nacional_consulta_interna
+20261117225437 fonte_cometa_manaus_tabela_propria
+20261117225618 cometa_aplicar_prazos_proprios
+20261117225646 catalogo_planos_regiao_permite_cometa
