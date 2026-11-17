@@ -1,5 +1,16 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-17 — App do vendedor: ícone v2, ficha do cliente, botão Apagar nas notificações
+
+- **Ícone:** os arquivos viraram `app-honda2-*.png` (o Android guardava o antigo por 1 ano). O ícone "adaptável" (`maskable`) agora também é só a asa vermelha da Honda com fundo transparente. O "V" que o vendedor via na tela inicial era a instalação antiga: precisa desinstalar e instalar de novo. iPhone continua com fundo branco (a Apple não aceita transparência).
+- **Notificações:** botão **🗑 Apagar tudo** (zera a lista e fecha os avisos que estão na central do celular) e **✕** em cada aviso. "Ver cliente" abre a ficha do cliente do aviso. **Testar aviso** agora dispara em 5 segundos (dá tempo de sair do app e ver o banner).
+- **Banner flutuante:** o envio já é urgente (`Urgency: high`, `requireInteraction`, vibração, `silent:false`), mas quem mostra o banner no topo é o Android por app/canal. Em Configuração → App e avisos há o passo a passo (Xiaomi: Notificações flutuantes; outros: categoria Urgente). Não dá para forçar pelo site.
+- **Clientes:** cartão compacto (nome, moto, fase, situação, modalidade, WhatsApp/Ligar/Mensagem). Tocando abre a **ficha do cliente** (folha que sobe): atalhos WhatsApp/Ligar/Mensagem, fase e situação, calculadora, barra de campos preenchidos e dados em grupos (Contato, Dados pessoais, Endereço, Trabalho e renda, Banco, Proposta) com toque para copiar cada campo; copiar tudo e excluir no rodapé.
+- **Banco de dados:** alterado. Migration `app_limpar_notificacoes` (função `app_limpar_notificacoes(p_ids bigint[] default null)`, security definer, só apaga as notificações do próprio vendedor logado; execute só para `authenticated`).
+- **Testado no Chrome (celular 400px):** ficha abre, troca de fase com a ficha aberta, fecha; apagar um aviso e apagar tudo. Não testado em celular real.
+- **Arquivos:** `vitrine/vitrine.html`, `sw.js`, `app.webmanifest`, `app-honda2-*.png` (commit 511517e). Espelho atualizado.
+- **Pendente:** conferir no celular real o ícone transparente (o launcher da Xiaomi pode desenhar o próprio fundo) e o banner; WhatsApp automático para o vendedor segue dependendo de escolher o provedor.
+
 ## 2026-11-16 — App do vendedor: ícone Honda, modo app focado e aviso animado dentro do painel
 
 - **Ícone:** asa da Honda (tirada do logo vetorial que já está no `comercial`, sem o texto HONDA, que fica ilegível em ícone pequeno). Fundo transparente nos ícones do app, da notificação e do computador. No Android a tela inicial coloca o ícone num fundo branco (`app-honda-maskable-512.png`); no iPhone o fundo é branco porque o iOS pinta de preto o que é transparente. Selo da barra de status com a silhueta da asa. Arquivos renomeados para `app-honda-*.png` (as imagens ficam 1 ano em cache, então nome novo garante que todos vejam o ícone novo).
