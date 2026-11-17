@@ -102,4 +102,5 @@ Total: 92 migrations.
 20261117004115 web_push_servicos_google
 20261117012514 avisos_foto_moto_e_pref_preguicoso
 20261117102651 app_limpar_notificacoes
+20261117123831 assinatura_mensal_recorrente
 ```
