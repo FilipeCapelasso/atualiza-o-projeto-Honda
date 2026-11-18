@@ -1,5 +1,13 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-18 — Vitrine: logo e nome Honda brancos quando o topo é vermelho
+
+- **Pedido:** com o topo em vermelho (`estilo_topo = cor`, classe `html.tp-cor`), o símbolo e o nome "Honda" devem ficar brancos e o fundo escuro que servia de contraste deve sumir.
+- **Mudança (só `vitrine.html`, novo bloco `<style id="v52">`):** em `html.tp-cor` o bloco `.hn` perde fundo, borda, sombra e os pseudo-elementos escuros (`::before`/`::after`, inclusive a versão do celular) e o símbolo/nome ficam brancos (`path` com fill branco; logo enviada em imagem é convertida para branco). Sem `tp-cor` nada muda.
+- **Teste:** Chrome real, computador e celular (400px): fundo `none`, borda 0, sombra `none`, fill branco, sem erros de JS; topo normal continua igual.
+- **Banco:** não alterado.
+- **Pendente:** se o vendedor usa uma logo Honda própria colorida (`logo_honda`), ela vira branca no topo vermelho (silhueta); avisar se preferir manter a cor.
+
 ## 2026-11-17 — Ajuste de 1 centavo na CG 160 FAN (tabela principal) e 3 motos da Cometa criadas no catálogo
 
 - **Pedido (autorizado pelo responsável):** aplicar o centavo da CG 160 FAN e criar as motos que só a Cometa tem.
