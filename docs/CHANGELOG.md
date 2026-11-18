@@ -8,6 +8,7 @@
 - **Conferido:** 41 vendedores ativos, 40 com foto; antes 37 apareciam, agora 40 (entraram marcos, dilorran e andrezanes); nenhum card sem foto.
 - **Site comercial:** sem mudança de código (`drawDest` já usa `destaques` de `ps_publico`).
 - **Banco alterado:** sim (2 funções, sem mudança de tabelas).
+- **Ajuste posterior (mesmo dia, só `vitrine.html`):** o Compartilhar de "Detalhes da moto" (barra de baixo, com "Tirar dúvida") não foi removido: no celular já aparecia, mas o CSS antigo `.dt-bar{display:none}` o escondia em telas largas (acima de 860px). Agora a barra aparece também nelas, no fim dos detalhes; no celular nada mudou (continua fixa embaixo). O botão da aba "Consórcio" foi mantido.
 - **Pendente:** testar o novo botão no celular com a moto aberta em "Tabela de consórcio"; se algum vendedor com foto não deve aparecer, desativar em Vendedores > Destaque (cria a linha com `ativo=false`).
 
 ## 2026-11-18 — Vitrine: logo e nome Honda brancos quando o topo é vermelho
