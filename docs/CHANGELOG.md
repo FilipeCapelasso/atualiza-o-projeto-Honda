@@ -1,5 +1,15 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-18 — Botão Compartilhar na tabela de consórcio (vitrine) e vendedores com foto aparecem sozinhos no site comercial
+
+- **Pedido:** 1) na tela "Tabela de consórcio" da moto, ao lado de "Simular e preencher meus dados" e "QUERO UM REPASSE DE CONSÓRCIO", um terceiro botão **Compartilhar** com a mesma ação do Compartilhar dos detalhes (gera a imagem pronta com moto, planos de consórcio e foto/contato do vendedor); 2) todo vendedor com foto de perfil deve aparecer automaticamente na área "Vendedores" do site comercial.
+- **VITRINE (só `vitrine.html`, commit 2df0731):** botão `📤 Compartilhar` (`onclick="shareM()"`, classe `btn red2`) na aba `con`; reaproveita o gerador de cartão já existente (v29), sem código novo de desenho.
+- **Banco (migration `destaques_automaticos_vendedor_com_foto`):** `ps_publico()` agora lista, em `destaques`, os vendedores não suspensos que têm `vendedores.foto_url` e **não têm linha** em `ps_destaques` (link = `url_vitrine/slug`; ordem: os com `ordem` manual primeiro, os automáticos depois por data de cadastro). Quem tem linha em `ps_destaques` continua mandando: `ativo=false` esconde, nome/foto/site personalizados valem. `ps_admin_destaques()` passou a mostrar como ativo quem aparece automaticamente, para o painel não contradizer o site.
+- **Conferido:** 41 vendedores ativos, 40 com foto; antes 37 apareciam, agora 40 (entraram marcos, dilorran e andrezanes); nenhum card sem foto.
+- **Site comercial:** sem mudança de código (`drawDest` já usa `destaques` de `ps_publico`).
+- **Banco alterado:** sim (2 funções, sem mudança de tabelas).
+- **Pendente:** testar o novo botão no celular com a moto aberta em "Tabela de consórcio"; se algum vendedor com foto não deve aparecer, desativar em Vendedores > Destaque (cria a linha com `ativo=false`).
+
 ## 2026-11-18 — Vitrine: logo e nome Honda brancos quando o topo é vermelho
 
 - **Pedido:** com o topo em vermelho (`estilo_topo = cor`, classe `html.tp-cor`), o símbolo e o nome "Honda" devem ficar brancos e o fundo escuro que servia de contraste deve sumir.
