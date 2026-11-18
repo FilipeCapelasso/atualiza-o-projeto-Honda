@@ -1,5 +1,13 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-18 — Site comercial: "Dúvidas frequentes" depois dos vendedores
+
+- **Pedido:** colocar "Dúvidas frequentes" depois da exibição dos vendedores.
+- **Mudança (só `index.html` do comercial):** a seção `#faq` foi movida para depois de `#vendedores` e antes do bloco final "Pronto para ter o seu site de vendas?". Ordem agora: topo, 3 sistemas, planos, vendedores, dúvidas, bloco final. Os links do menu continuam funcionando.
+- **Teste:** Chrome real, 1366px, sem erros de JS.
+- **Banco:** não alterado.
+- **Pendente:** nenhum.
+
 ## 2026-11-18 — Site comercial: removidas as seções "Feito para vendedores Honda…" e "Por que vale mais do que custa"
 
 - **Pedido:** tirar essas duas partes da página (para encurtar e levar o vendedor mais rápido ao que importa).
