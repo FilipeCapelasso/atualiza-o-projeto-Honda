@@ -1,5 +1,13 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-18 — Site comercial: topo resumido, com 3 passos explicando o que o vendedor recebe
+
+- **Pedido:** os vendedores quase não leem o topo e vão direto para os planos/contrato; o topo precisava ser mais curto e explicar rápido o que recebem e como recebem.
+- **Mudança (só `index.html` do comercial):** título "O seu site de vendas, com o seu nome." (o JS do destaque dourado continua funcionando); texto de apoio em 1 frase; 3 passos curtos (1 Pague no Pix, com o preço mensal vindo do banco em `#chipP`; 2 Ativa na hora; 3 Receba o seu link: 3 sites e um painel); botões "Conhecer o plano" e "Ver um site de verdade" sobem para antes do bloco "Veja como fica o seu"; a faixa de fatos antiga foi removida (agora dita nos passos). Estilo novo em `<style id="n-passos">`.
+- **Teste:** Chrome real, 1366px e 400px, sem erros de JS.
+- **Banco:** não alterado.
+- **Pendente:** conferir no celular real; se quiser, o mesmo resumo pode aparecer na barra fixa de contratar.
+
 ## 2026-11-18 — Botão Compartilhar na tabela de consórcio (vitrine) e vendedores com foto aparecem sozinhos no site comercial
 
 - **Pedido:** 1) na tela "Tabela de consórcio" da moto, ao lado de "Simular e preencher meus dados" e "QUERO UM REPASSE DE CONSÓRCIO", um terceiro botão **Compartilhar** com a mesma ação do Compartilhar dos detalhes (gera a imagem pronta com moto, planos de consórcio e foto/contato do vendedor); 2) todo vendedor com foto de perfil deve aparecer automaticamente na área "Vendedores" do site comercial.
