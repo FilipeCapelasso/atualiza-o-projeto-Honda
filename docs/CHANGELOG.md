@@ -1,5 +1,13 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-17 — Ajuste de 1 centavo na CG 160 FAN (tabela principal) e 3 motos da Cometa criadas no catálogo
+
+- **Pedido (autorizado pelo responsável):** aplicar o centavo da CG 160 FAN e criar as motos que só a Cometa tem.
+- **Banco, tabela principal:** CG 160 FAN 24x com seguro 1.204,78 → **1.204,79** (confere com a tabela AC/AM/RO/RR de 05/11/26 e com a Cometa); sem seguro (1.196,50) e demais prazos intactos; feito por `_mestre_aplicar` (acompanhou os vendedores do Acre; região B e Cometa protegidas pelo gatilho) e registrado em `catalogo_planos_hist`.
+- **Banco, motos novas (inativas):** `CBR 650R` (Street, Advance, 72x R$ 1.040,77, crédito 58.113), `CB 1000R` (Street, Advance, 72x R$ 984,45, crédito 57.715), `CRF 250F` (Off Road, #voudeHonda, 24x a 80x, crédito 24.774; contemplações iguais às da CRF 300F). Valores vindos só da Cometa e marcados `estimado`: o crédito da Cometa pode ser diferente do "valor do bem" oficial usado nas outras motos (ex.: CB 500 Hornet: Cometa 43.470, catálogo 45.748). Criadas com `ativo=false` e `sync_site=false` porque **não têm foto**; nenhum vendedor recebeu essas motos. Ordem 31 a 33.
+- **Banco, schema:** migration `cometa_mapa_por_id_do_catalogo`: `cometa_mapa.catalogo_id` (moto sem `fonte_slug` também pode ser lida da Cometa) e `cometa_aplicar` passou a escolher a moto por ele. Primeira leitura depois do ajuste: 30 motos, 30 sem mudança, 3 tabelas semeadas (`COMETA-AM`), 0 para revisar, 0 fora do catálogo.
+- **Pendente:** 1) adicionar fotos (e descrição) nas 3 motos no admin geral e ativá-las; 2) conferir o crédito dessas 3 motos com a Honda; 3) o site oficial da Honda continua fora do ar (volta como fonte principal das outras regiões).
+
 ## 2026-11-17 — Cometa Motocenter Manaus: tabela própria, lida do site da loja 2x ao dia (separada do Acre)
 
 - **Pedido:** a loja de Manaus (Cometa Motocenter) deve ficar sempre igual ao site da própria loja (`manaus.cometahondamotocenter.com.br/consorcios`), **sem ligação com o vendedor.site**, que é só do Acre. O site oficial da Honda segue como fonte principal de todas as regiões, quando voltar.
