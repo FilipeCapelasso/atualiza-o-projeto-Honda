@@ -1,5 +1,13 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-18 — Site comercial: removidas as seções "Feito para vendedores Honda…" e "Por que vale mais do que custa"
+
+- **Pedido:** tirar essas duas partes da página (para encurtar e levar o vendedor mais rápido ao que importa).
+- **Mudança (só `index.html` do comercial):** removidas as seções `#brasil` (com o mapa de estados "Aberto em todo o Brasil") e `#beneficios`, e o link "Para quem é" do menu. O JS que preenchia os estados agora sai sem erro quando o bloco não existe (mantém só o endereço do exemplo no topo). CSS dessas seções ficou sem uso (inofensivo).
+- **Teste:** Chrome real, 1366px e 400px, sem erros de JS.
+- **Banco:** não alterado.
+- **Pendente:** se quiser, limpar o CSS sem uso dessas seções.
+
 ## 2026-11-18 — Site comercial: topo resumido, com 3 passos explicando o que o vendedor recebe
 
 - **Pedido:** os vendedores quase não leem o topo e vão direto para os planos/contrato; o topo precisava ser mais curto e explicar rápido o que recebem e como recebem.
