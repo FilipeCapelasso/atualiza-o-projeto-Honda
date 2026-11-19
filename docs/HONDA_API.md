@@ -181,3 +181,39 @@ Lido na API oficial em 19/11/2026:
 No catálogo do sistema, POP e CRF 300F estão com `plano_fonte = #voudeHonda`, de acordo com a fonte. A CRF 250F já está com tabela marcada `"estimado": true`.
 
 A faixa de percentual do `#voudeHonda+` é **por modelo**, e POP 110i e CRF 300F não estão em nenhuma faixa publicada. Dá para calcular por semelhança (a CRF 300F tem exatamente os mesmos prazos da faixa de 300 cc; a POP, os da faixa de 125 cc), mas isso é **suposição**, não dado oficial: precisa de confirmação da administradora antes de ir para a tela do cliente.
+
+## Segunda fonte implementada em 19/11/2026
+
+Duas camadas, testadas de verdade. A fonte principal continua sendo o site do Consórcio Nacional Honda.
+
+### 1. Segundo host oficial no coletor (failover automático)
+
+`honda_fila_pegar()` passou a mandar ao coletor uma **lista** de hosts (`bases`), montada de `plataforma_config.honda_base` e **`honda_base_alt`** (novo, = `https://www.hondaservicosfinanceiros.com.br`). O coletor tenta na ordem e usa o primeiro que responder; o host que funcionou vira o primeiro da fila nas UFs seguintes da mesma execução. O campo `base` continua sendo enviado, para compatibilidade.
+
+Fica registrado em `honda_sync_logs.conexao`: `base_usada` e `hosts_que_falharam`.
+
+**Teste real (execução 42, 19/11 08:54 Rio Branco):** `honda_base` apontado de propósito para `acqdev.consorcionacionalhonda.com.br` (host Honda que não serve a API).
+
+| O que aconteceu | Resultado |
+|---|---|
+| Host principal | `acqdev…: HTTP 404` → registrado em `hosts_que_falharam` |
+| Failover | `base_usada = https://www.hondaservicosfinanceiros.com.br`, HTTP 200 |
+| Coleta do AC | 28 motos, 28 detalhes ok, 0 erros, **0 alterações** (tabela idêntica à do host principal) |
+| Depois | `honda_base` restaurado |
+
+Cobre: queda de um host, DNS, certificado, regra de WAF daquele host, bloqueio do nosso IP em um deles. **Não cobre** queda geral da Honda (os dois hosts estão na mesma infraestrutura) — nesse caso vale a camada 2.
+
+### 2. Histórico datado das tabelas (`honda_tabela_versoes`)
+
+Antes, só a última coleta boa existia, sobrescrita a cada leitura. Agora cada **versão distinta** da tabela é guardada com data, com dedupe por `hash_tabela`: hoje são 2 linhas (região A e região B), 249 parcelas cada. Uma linha nova só aparece quando a Honda muda algum valor.
+
+- `honda_tabela_versionar()` — idempotente. Chamada pelo coletor ao fim de cada execução e pelo cron `honda_tabela_versionar` (`52 12,20 * * *`). Testada: 1ª vez 2 novas; 2ª vez 0 novas e 2 revistas.
+- `mestre_honda_versoes(p_id)` — leitura do dono: sem `p_id` lista as versões; com `p_id` devolve a tabela daquela versão.
+- Tabela com RLS e sem acesso de `anon`/`authenticated`.
+
+Para que serve: a tabela de cada região passa a ter cópia própria datada, então é possível comparar com a de antes, ver desde quando um valor vale e recuperar uma versão anterior sem depender da fonte estar no ar.
+
+### Ainda em aberto (não implementado)
+
+- **Terceiro caminho de rede** (endpoint na Vercel buscando a mesma API oficial), que é o que protege contra bloqueio do IP do Supabase nos dois hosts ao mesmo tempo. Precisa de um teste de alcance antes.
+- **Conferência pela fórmula** a cada coleta (avisar quando a parcela lida sair mais de 2 centavos da calculada).

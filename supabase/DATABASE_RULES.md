@@ -2,7 +2,7 @@
 
 Projeto Supabase **`vendashonda`**, região us-east-2, Postgres 17. Levantamento em **2026-11-14** via MCP do Supabase (somente leitura). Nenhum dado de cliente foi copiado para cá.
 
-Totais (conferido em 2026-11-19): 104 tabelas · 4 views · 432 funções no schema `public` (352 `SECURITY DEFINER`) · 77 triggers · 82 policies RLS · 37 agendamentos pg_cron (27 ativos) · 141 migrations · 8 Edge Functions · buckets de Storage públicos `produtos` e `midia`.
+Totais (conferido em 2026-11-19): 105 tabelas · 4 views · 432 funções no schema `public` (352 `SECURITY DEFINER`) · 77 triggers · 82 policies RLS · 38 agendamentos pg_cron (28 ativos) · 142 migrations · 8 Edge Functions · buckets de Storage públicos `produtos` e `midia`.
 
 ## Princípios (confirmados no esquema)
 

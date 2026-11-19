@@ -1,5 +1,26 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-19 — Segunda fonte das tabelas do consórcio: segundo host oficial + histórico datado
+
+Pedido: não ficar dependendo só do site do Consórcio Nacional Honda, caso ele caia. A fonte principal **continua a mesma**; isto é o que entra quando ela falha.
+
+**1. Segundo host oficial, com failover automático.** `honda_fila_pegar()` agora manda ao coletor a lista de hosts (`bases`), de `plataforma_config.honda_base` + **`honda_base_alt`** (novo: `https://www.hondaservicosfinanceiros.com.br`, que serve o mesmo JSON). O coletor tenta na ordem, usa o primeiro que responder e mantém esse host à frente nas UFs seguintes. Fica gravado em `honda_sync_logs.conexao` qual host foi usado e quais falharam.
+
+**Testado de verdade** (execução 42): apontei `honda_base` de propósito para `acqdev.consorcionacionalhonda.com.br` (404). O coletor registrou a falha, caiu no segundo host (HTTP 200) e coletou o Acre: 28 motos, 28 detalhes, 0 erros e **0 alterações** — ou seja, a tabela do segundo host é igual à do principal. `honda_base` foi restaurado em seguida.
+
+**2. Histórico datado das tabelas.** Antes só existia a última coleta boa, sobrescrita. Agora cada versão distinta da tabela fica guardada com data em `honda_tabela_versoes` (dedupe por `hash_tabela`): 2 linhas hoje, região A (AC, AM, RO, RR) e região B (os outros 23), 249 parcelas cada. Linha nova só quando a Honda muda valor.
+- `honda_tabela_versionar()` (idempotente): chamada pelo coletor ao fim da execução e pelo cron novo `honda_tabela_versionar` (`52 12,20 * * *`). Testada: 2 novas na 1ª vez, 0 novas e 2 revistas na 2ª.
+- `mestre_honda_versoes(p_id)`: leitura só do dono (lista as versões, ou a tabela de uma versão).
+- RLS ligada, sem acesso de `anon`/`authenticated`.
+
+**Banco alterado:** sim (migração `honda_segunda_fonte_historico_e_failover`). **Edge Function:** `honda-sync` v3. **Site:** nada alterado — nenhuma tela de vendedor ou de cliente mudou.
+
+**Importante, apurado na busca:** **não existe** segunda fonte oficial que publique a tabela regional. Todo endereço Honda que tem a tabela está atrás da mesma infraestrutura (Imperva); `honda.com.br` publica só o Preço Público Sugerido nacional, que não é o crédito do consórcio. Testes um por um em `docs/HONDA_API.md`.
+
+**Planos por modelo (confirmado com o responsável):** POP 110i e CRF 300F são `#voudeHonda` (sem "+"), e é assim mesmo. Os outros 16 modelos da linha são `#voudeHonda+` com seguro; a alta cilindrada é `Advance`.
+
+**Pendente:** terceiro caminho de rede (endpoint na Vercel) contra bloqueio de IP nos dois hosts; conferência automática pela fórmula (alerta acima de 2 centavos).
+
 ## 2026-11-19 — Revisão completa do projeto (6 repositórios + Supabase) e atualização dos documentos
 
 - **Escopo:** leitura dos 6 repositórios (comercial, VITRINE, SITE-CNH, SITE-CDC, Termo, hub), conferência de todas as chamadas `rpc()`/`from()` dos sites contra o banco (as 102 funções chamadas existem), análise do Supabase (tabelas, policies, grants, funções, triggers, storage, cron, Edge Functions, linter de segurança e de performance).
