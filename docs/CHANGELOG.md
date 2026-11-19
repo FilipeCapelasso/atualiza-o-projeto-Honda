@@ -1,5 +1,24 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-19 — Painel do vendedor: aba "Cota da Vez" (Loteria Federal + Lance Fixo) e "Acessos" como item próprio
+
+**Regra (validada no Regulamento do CNH, versão 07/2025, cláusulas 9.1 a 9.4 e lance fixo):** 1º prêmio da extração de quarta/sábado anterior à assembleia ÷ **número máximo de cotas do grupo**; fração × esse número = cota sorteada (= resto exato da divisão); resultado 0 = maior cota do grupo; cota não apta → +1, −1, +2, −2… Lance Fixo: vence a cota com lance fixo registrado mais próxima da cota contemplada no sorteio, alternando acima/abaixo. A aba antiga "Sorteio" (de 17/11, escondida) usava os últimos algarismos do prêmio, o que não é a regra da Honda: foi substituída. Exemplo real (concurso 6118, 062545): grupo 720 → 625; 936 → 769; 1.200 → 145; 2.000 → 545. Sem resultado de assembleia real para conferir ainda.
+
+**Banco (migração `cota_da_vez_loteria_federal`):**
+- `loteria_federal` (concurso, data, 5 prêmios, fonte): única para todos, vendedores só leem.
+- `consorcio_grupos` (vendedor, grupo, total de cotas, próxima assembleia), RLS `pode_gerir`.
+- `cotas_consorcio` + `lance_fixo`, `origem`, `origem_id`.
+- Funções `cota_sorteada(premio, max)` e `cota_fila_pos(ref, cota)`; `lf_buscar()`/`lf_aplicar()` (sem acesso público).
+- Crons `lf_buscar`/`lf_aplicar` 23:30/23:32 UTC e `_2` 01:30/01:32 UTC (20h30 e 22h30 Brasília). Fonte: `loteriascaixa-api.herokuapp.com/api/federal/latest` (gratuita); a API da Caixa (403) e a `api.guidi.dev.br` (Cloudflare) bloqueiam o servidor. Valida concurso, data e 5 prêmios; grava só concurso novo; avisa no app (tipo `sorteio`, `fonte: cota`) só vendedores com cliente ativo até 15 cotas da sorteada; se a leitura falhar, avisa o dono (1×/20 h). Concurso 6118 já gravado.
+- Teste em transação desfeita: cota 627 num grupo de 720 → aviso "posição 4 da fila" ao vendedor certo.
+
+**Painel (`vitrine.html`):**
+- Nova aba **Cota da Vez** (menu web e app; link `?t=cota`): resultado oficial + simulação manual + últimas extrações; **Oportunidades de Lance Fixo** (clientes até 5/10/15/30 cotas, em ordem de fila, selos "É a cota sorteada", "Nª da fila", "Lance Fixo ✓", botão de WhatsApp com mensagem que não promete contemplação); **Meus grupos** (cota sorteada, fila, "Ver a conta" passo a passo); **Cotas dos clientes** (cadastro com nome puxado dos clientes, Lance Fixo, contemplada/cancelada, busca). Notificação da Cota da Vez abre a aba.
+- **Acessos**: saiu de dentro de Clientes (troca de abas removida) e virou item próprio logo abaixo de Clientes (web e app; link `?t=acessos`).
+- Testado no Chrome (1280 e 400 px, modo app): sem erros; filas conferidas (627 = 4ª no grupo de 720; 772 = 6ª no de 936).
+
+**Banco alterado:** sim. **Pendente:** conferir o cálculo com um resultado real de assembleia quando houver; a API gratuita é de terceiros (se cair, o dono é avisado e o vendedor digita o prêmio).
+
 ## 2026-11-19 — Site oficial Honda voltou: tabelas por região ligadas, 2 leituras por dia, revisão de segurança e isolamento
 
 **Tabelas de consórcio**
