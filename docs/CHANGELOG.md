@@ -1,5 +1,19 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-19 — E-mail obrigatório também no Financiamento do site do vendedor
+
+Continuação do pedido de e-mail obrigatório. A tela "Financiamento" do site do vendedor (nome, telefone, CPF, nascimento) não pedia e-mail; o dono mandou a tela e pediu para pedir também ali.
+
+**`vitrine/vitrine.html`:**
+- **Formulário de Financiamento:** novo campo **E-mail** (depois do telefone), validado; bloqueia o envio se vazio ou inválido. Vai na mensagem do WhatsApp, no rascunho automático e no lead.
+- **Chat, caminho Financiamento:** nova pergunta de e-mail (`f_email`) antes de "Você possui habilitação?". O caminho Consórcio do chat já perguntava (`c_email`, obrigatório). O e-mail entra na mensagem e no lead de reserva do chat.
+- **Painel do vendedor:** a ficha do lead mostra o e-mail.
+- Consórcio pela tabela (botões "Simular e preencher meus dados") usa o chat, então já pedia e-mail. À vista e cartão continuam sem pedir, como antes.
+
+**Banco (migration `leads_email`):** nova coluna `public.leads.email` (text), porque a tabela não tinha. As fichas CDC (`fichas.email`) e CNH (`contratos.email`) já tinham.
+
+**Resumo dos 4 pontos de coleta:** CNH (já exigia) · CDC (passou a exigir, commit 13b2010 → ver entrada anterior) · Financiamento do site (novo) · Chat de financiamento (novo).
+
 ## 2026-11-19 — E-mail do cliente obrigatório nas fichas CDC e CNH
 
 **Pedido do dono:** pedir o e-mail do cliente, obrigatório, ao preencher a ficha de financiamento (CDC) e o pré-contrato de consórcio (CNH).
