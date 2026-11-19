@@ -1,5 +1,14 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-19 — CORREÇÃO: fichas CDC e pré-contratos CNH eram descartados pelo campo anti-robô
+
+- **Sintoma (Dilorran e outros):** cliente preenchia o pré-contrato, via "Pré-contrato enviado!" com o botão "Avisar no WhatsApp", mas nada chegava em "Pré-contratos recebidos". Nenhum contrato nem ficha entrou no banco desde 17/11 (de nenhum vendedor).
+- **Causa (reproduzida no Chrome contra o banco real):** o campo escondido anti-robô (`#hp`, fora da tela com `left:-9999px`) é preenchido pelo **preenchimento automático do celular**. Com ele preenchido, o formulário fazia `return fim({})`: mostrava a tela de sucesso e **não gravava nada** (nem o lead de reserva). Banco, RLS e API estavam certos (envio direto pela API = HTTP 201).
+- **Correção (SITE-CNH 91adf51 e SITE-CDC 38e210d, só `index.html`):** campo com `display:none` (o autopreenchimento não preenche; robôs ainda sim) e nome próprio; só descarta se o campo vier preenchido **e** o envio acontecer em menos de 8 s do carregamento (impossível para uma pessoa com ~20 campos); fora isso grava normalmente e marca `obs`: "Atenção: o campo anti-robô veio preenchido... Confira os dados."
+- **Teste real (dados de teste apagados depois):** CNH e CDC, com e sem o campo preenchido: os 4 envios gravaram no vendedor certo (dilorran), com e-mail, lead e abertura do WhatsApp; a marcação apareceu nos 2 casos com o campo preenchido. Versão publicada conferida em www.sitevendedor.com.
+- **Fichas completas que ficaram só como rascunho:** Victor Gabriel Tavares Amanajás e Victor Amanajás (site do Dilorran, 19/11) e Bruno Marcel (site do Bruno, 15/11). Parecem testes dos vendedores; os dados estão em `rascunhos` e aparecem como rascunho em Clientes.
+- **Banco:** não alterado. **Pendente:** pedir aos vendedores que testem de novo; a vitrine e o comercial não usam esse campo.
+
 ## 2026-11-19 — Cartão à vista: juros sobre o preço com desconto e tabela de parcelas
 
 - **Conferência com a regra do dono (imagem do WhatsApp):** débito/crédito 1x sem juros; parcelado no crédito até 3x 5%, até 5x 10%, até 10x 20%. As faixas do commit 0ba7e09 batiam.
