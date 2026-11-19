@@ -119,3 +119,4 @@ Total: 92 migrations.
 20261119060650 honda_regioes_aplicar_coleta_oficial
 20261119061034 seguranca_isolamento_revisao_1119
 cota_da_vez_loteria_federal (19/11/2026)
+cota_da_vez_automacao_por_assembleia (19/11/2026)

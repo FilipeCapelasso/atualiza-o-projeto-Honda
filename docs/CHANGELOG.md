@@ -1,5 +1,15 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-19 — Cota da Vez: menu, horário de Rio Branco e mais automação
+
+- **Menu:** "Cota da Vez" agora fica logo abaixo de "Motos" (no modo app, que não tem Motos, continua depois de Acessos).
+- **Texto em horário de Rio Branco:** "o sistema confere a cada 15 minutos, das 18h às 20h45 (horário de Rio Branco - Acre)".
+- **Busca mais rápida:** `lf_buscar`/`lf_aplicar` agora a cada 15 min das 23:00 às 01:45 UTC (20h–22h45 Brasília = 18h–20h45 Rio Branco); a busca para sozinha quando o resultado do dia já entrou (no máximo 12 consultas por dia). Saíram os 4 horários fixos anteriores.
+- **Extração certa por grupo:** cada grupo usa a última extração anterior à sua assembleia (regulamento 9.1). A data da assembleia avança sozinha mês a mês depois que passa (`cv_assembleia_efetiva`), marcada como "(estimada)". O cartão do grupo mostra "Vale para a assembleia de dd/mm" ou "Prévia: ainda sai outra extração antes". Grupo sem data usa a última extração e pede a data. Chips: "Automático por assembleia" ou uma extração escolhida.
+- **Aviso no app** só para grupos em que a extração vale (sem data de assembleia, ou até 4 dias antes dela). Testado em transação desfeita: assembleia 19/10 → avançou para 19/11 e avisou; assembleia 30/11 → não avisou.
+- **Banco alterado:** sim (migração `cota_da_vez_automacao_por_assembleia`). Arquivo: `vitrine/vitrine.html`. Testado no Chrome (1280 px e app 400 px), sem erros.
+- **Pendente:** conferir com uma assembleia real.
+
 ## 2026-11-19 — Painel do vendedor: aba "Cota da Vez" (Loteria Federal + Lance Fixo) e "Acessos" como item próprio
 
 **Regra (validada no Regulamento do CNH, versão 07/2025, cláusulas 9.1 a 9.4 e lance fixo):** 1º prêmio da extração de quarta/sábado anterior à assembleia ÷ **número máximo de cotas do grupo**; fração × esse número = cota sorteada (= resto exato da divisão); resultado 0 = maior cota do grupo; cota não apta → +1, −1, +2, −2… Lance Fixo: vence a cota com lance fixo registrado mais próxima da cota contemplada no sorteio, alternando acima/abaixo. A aba antiga "Sorteio" (de 17/11, escondida) usava os últimos algarismos do prêmio, o que não é a regra da Honda: foi substituída. Exemplo real (concurso 6118, 062545): grupo 720 → 625; 936 → 769; 1.200 → 145; 2.000 → 545. Sem resultado de assembleia real para conferir ainda.
