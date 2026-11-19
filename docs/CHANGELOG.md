@@ -1,5 +1,25 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-19 — Site oficial Honda voltou: tabelas por região ligadas, 2 leituras por dia, revisão de segurança e isolamento
+
+**Tabelas de consórcio**
+- **Situação:** o coletor nacional (`honda-sync`) voltou a ler as 27 UFs. Há exatamente 2 tabelas oficiais: região A (AC, AM, RO, RR) e região B (os outros 23 estados). Comparação com o sistema: tudo igual, exceto CG 160 FAN 24x da região A (oficial 1204,78 x sistema 1204,79, do ajuste manual de 18/11); a leitura das 07:00 corrige.
+- **Nova função `honda_regioes_aplicar()`:** aplica a região B a partir da coleta oficial (antes vinha de leituras diretas que davam 403), grava só o que mudou (histórico em `catalogo_planos_hist` com "região B:"), reaplica nos vendedores da região B e confere que cada estado tem a tabela da sua região; se algum estado divergir, avisa o dono e pausa a contratação nele. Roda sozinha ao fim da coleta (`_honda_checar_fim`) e às 07:45/15:45 (pula se já aplicou). `regiao_b_iniciar/aplicar` desligados.
+- **Região A** (Acre/AM/RO/RR + Motores e Máquinas) continua em `site_sync_*`/`cnh_aplicar`; testado em simulação: 28 motos + 4 M&M lidos, só o centavo da FAN muda.
+- **Horários:** todas as leituras do site oficial agora às **07:00 e 15:00 (Rio Branco)**: região A 07:00/15:00, cores 07:20, coletor 27 UFs 07:25, regiões 07:45, fotos 07:50, expansão 07:55 (idem 15h). Cometa (06:00/14:00) e vendedor.site sem mudança de horário.
+- **Pergunta "dá para ler só quando mudar?":** não. O site não envia `ETag`/`Last-Modified` nem avisa mudanças; ler é o único jeito de saber. A leitura não grava nada se nada mudou.
+- **Bug corrigido (vendedor.site):** a fonte reserva do Acre pulava sempre que *qualquer* fonte gravava "ok" (inclusive a Cometa), então o Acre não era atualizado por ela. Agora só pula se o **site oficial** atualizou nas últimas 26 h.
+
+**Segurança e isolamento** (migração `seguranca_isolamento_revisao_1119`)
+- Cometa agora é identificada por `concessionaria_id = 'cometa'` (campo que só o dono muda), e não pelo nome digitável: um vendedor do AM não consegue mais entrar/sair da tabela da Cometa trocando o nome da loja.
+- Rotinas agendadas e gatilhos não podem mais ser chamados pela internet: `aviso_preguicosos`, `ps_limpa_senhas`, `tg_conc_contagem`, `tg_hconc_auto`, `tg_sup_regiao`, `tg_vendedor_concessionaria`.
+- Retiradas permissões sem uso de `anon`/`authenticated`: TRUNCATE/TRIGGER/REFERENCES em todas as tabelas; escrita em `municipios`; tudo em `aviso_wa_fila`, `concessionarias`, `honda_concessionarias`, `parceiro_indicacoes`, `parceiro_premios` (tinham RLS sem regra, então já não davam acesso). Regras abertas sem uso em `clientes` removidas. `search_path` fixo em 5 funções.
+- **Testes reais (transação desfeita):** visitante do site do Victor vê só as 31 motos dele e 0 de outro vendedor; não lê fichas nem leads. Vendedor logado (Victor) vê 0 motos/pedidos/fichas da Layanne, não altera nada dela e não consegue tirar a própria suspensão nem trocar UF/loja. Gatilhos continuam funcionando.
+- **Sites:** SITE-CDC e SITE-CNH (fichas com CPF/renda) ganharam os cabeçalhos de segurança que a vitrine já usava (HSTS, nosniff, Referrer-Policy, Permissions-Policy, COOP) + bloqueio de abrir dentro de outra página (`X-Frame-Options: DENY`). Nenhum segredo encontrado nos repositórios. Painel da vitrine escapa os textos dos clientes (`esc`).
+- **Design:** CDC conferido no celular em produção (sem defeitos visíveis). Sem mudanças visuais nesta rodada.
+
+**Banco alterado:** sim (2 migrações, crons). **Pendente:** conferir no Admin geral › Regiões a 1ª rodada das 07:45; avisos restantes do linter são funções públicas por desenho (checkout, webhooks, `mestre_*` que conferem o dono por dentro), `pg_net` no schema public e a view `vendedor_publico` (filtra pelo vendedor da página).
+
 ## 2026-11-18 — Site comercial: "Dúvidas frequentes" depois dos vendedores
 
 - **Pedido:** colocar "Dúvidas frequentes" depois da exibição dos vendedores.

@@ -28,20 +28,20 @@ Totais: 79 tabelas · 4 views · ~330 funções no schema `public` · 74 trigger
 
 Relações principais: `vendedores` → (`motos`, `leads`, `fichas`, `contratos`, `pedidos_chat`, `rascunhos`, `visitas`, `simulacoes`, `vendedor_custom`, `vendedor_plano`, `receitas`, …); `motos.catalogo_id` → `catalogo_mestre`; `customers` → `orders` → `payments`; `customers` → `subscriptions` → `plans`; `vendedores.uf` → `ufs`; `vendedores.concessionaria_id` → `concessionarias`.
 
-## Agendamentos (pg_cron, 25)
+## Agendamentos (pg_cron, 26)
 
 | Grupo | Frequência (UTC no cron) | Função |
 |---|---|---|
 | Assinaturas | todo minuto | `ps_expirar`, `ps_reverificar` |
 | Pendências do catálogo | a cada 5 min | `ps_catalogo_pendentes` |
-| Atualização do catálogo (iniciar → planos → aplicar → publicar → retry) | 4×/dia (+ rodada extra à noite) | `site_sync_*` |
-| Atualização do catálogo, fonte alternativa vendedor.site (iniciar → aplicar); só age se o site oficial não atualizou nas últimas 6 h | 3×/dia (11:20, 16:20, 21:20 UTC; aplicar 3 min depois) | `vsite_iniciar`, `vsite_aplicar` |
+| Região A (AC, AM, RO, RR) + Motores e Máquinas, lidos do site oficial (iniciar → planos → aplicar → retry → publicar) | 2×/dia: 12:00 e 20:00 UTC = 07:00 e 15:00 Rio Branco (+5, +10, +13, +15 min) | `site_sync_*` |
+| Fonte reserva vendedor.site (só Acre/região A): só age se o site oficial NÃO atualizou nas últimas 26 h | 3×/dia (11:20, 16:20, 21:20 UTC; aplicar 3 min depois) | `vsite_iniciar`, `vsite_aplicar` |
 | Cometa Motocenter Manaus: tabela própria `COMETA-AM` lida do site da loja (iniciar → buscar → aplicar); só vendedores da Cometa a recebem | 2×/dia (11:00 e 19:00 UTC = 06:00 e 14:00 Rio Branco; buscar +1 min, aplicar +4 min) | `cometa_iniciar`, `cometa_buscar`, `cometa_aplicar` |
-| Tabelas Honda nacionais (27 UFs): confere a fonte e cria execução se não houve coleta boa em 7 h | toda hora (min 7) | `honda_agendar` |
+| Tabelas Honda nacionais (27 UFs): coleta pelo coletor `honda-sync` | 2×/dia: 12:25 e 20:25 UTC = 07:25 e 15:25 Rio Branco | `honda_agendar` |
 | Tabelas Honda: avança a fila e chama o coletor `honda-sync` | a cada 2 min | `honda_passo` |
-| Região B (preços fora do Acre) | 4×/dia | `regiao_b_iniciar`, `regiao_b_aplicar` |
-| Expansão por estado | 4×/dia | `expansao_manter` |
-| Fotos e cores oficiais | 4×/dia | chamam as Edge Functions `fotos-honda` e `cores-oficial` |
+| Região B (23 estados) a partir da coleta oficial + conferência de que cada estado tem a tabela da sua região; roda sozinha ao fim da coleta e de novo às 12:45/20:45 UTC (pula se já aplicou) | 2×/dia | `honda_regioes_aplicar` (`regiao_b_*` desligados) |
+| Expansão por estado | 2×/dia (12:55 e 20:55 UTC) | `expansao_manter` |
+| Fotos e cores oficiais | 2×/dia (cores 12:20/20:20, fotos 12:50/20:50 UTC) | chamam as Edge Functions `fotos-honda` e `cores-oficial` |
 | CDI | dias úteis, 21h UTC | `sync_cdi` |
 | Limpeza | diária | `pb_limpeza`, `ps_limpa_senhas` (horária), apaga `visitas` com mais de 90 dias |
 

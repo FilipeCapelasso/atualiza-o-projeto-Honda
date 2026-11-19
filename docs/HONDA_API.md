@@ -50,7 +50,8 @@ Tipos: `parcela`, `parcela_sem_seguro`, `credito`, `contemplacoes`, `prazo_novo`
 
 | Cron | Quando | O que faz |
 |---|---|---|
-| `honda_agendar` | `7 * * * *` (toda hora) | Se não há execução em andamento e nenhuma coleta boa nas últimas 7 h, cria uma execução (27 UFs: AC primeiro, depois AM/RO/RR, SP e o resto) e chama o coletor. Com o site fora, isso vira 1 consulta por hora; com o site no ar, ~3 coletas completas por dia. |
+| `honda_agendar` | `25 12,20 * * *` (07:25 e 15:25 Rio Branco, desde 19/11) | Se não há execução em andamento e nenhuma coleta boa nas últimas 7 h, cria uma execução (27 UFs: AC primeiro, depois AM/RO/RR, SP e o resto) e chama o coletor. |
+| `honda_regioes_aplicar` | ao fim da coleta + `45 12,20 * * *` | Aplica a **região B** (tabela de SP) em `catalogo_planos_regiao` só onde o valor mudou, reaplica nos vendedores da região B e confere que cada um dos 27 estados tem exatamente a tabela da sua região (`hash_tabela`); estado diferente → aviso ao dono e contratação pausada nele. A região A continua vindo de `site_sync_*`/`cnh_aplicar` (07:00 e 15:00). |
 | `honda_passo` | `*/2 * * * *` | Reabre UF travada (6 min, até 3 tentativas), fecha execuções antigas e chama o coletor só quando há UF pendente. |
 
 Botão **ATUALIZAR TABELAS AGORA**: Admin geral › Catálogo › 🗺️ Tabelas Honda (27 estados) → `mestre_honda_atualizar_agora()` (consulta real à fonte).
@@ -75,3 +76,11 @@ Nenhuma região coletada: as 27 (AC, AL, AM, AP, BA, CE, DF, ES, GO, MA, MG, MS,
 10. Tela no Chrome (1280 e 400 px) com dados simulados e com o site fora: sem erros de JS.
 
 **Não testado** (depende do site voltar): respostas reais das 3 rotas, comparação com valores do site, campos exatos do `/api/site/consorcio/planos` e da rota de categorias, outras requisições do site, coleta real das 27 UFs.
+
+## Situação em 19/11/2026: site oficial voltou
+
+- Coletor leu as 27 UFs com sucesso (execução 41, 18/11 22:07 Rio Branco): 28 motos, 3 planos, 249 parcelas por estado.
+- As tabelas formam exatamente 2 grupos (mesmo `hash_tabela`): **AC, AM, RO, RR** = região A; **os outros 23** = região B (referência SP). Bate com `ufs.regiao_preco`.
+- Comparação com o sistema: região B idêntica; região A idêntica exceto CG 160 FAN 24x (oficial 1204,78; sistema 1204,79 desde o ajuste manual de 18/11). Corrige sozinha na leitura das 07:00.
+- O site não envia `ETag`/`Last-Modified` nem avisa mudanças: é preciso ler para saber. Ler não grava nada; só o que mudou é gravado.
+- A tabela própria da Cometa (COMETA-AM) bate com a oficial do AM nos prazos em comum.
