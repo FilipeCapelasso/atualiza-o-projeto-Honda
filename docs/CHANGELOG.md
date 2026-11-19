@@ -1,5 +1,22 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-19 — Calculadora sai do vendedor e vai para o Admin Geral
+
+**Pedido do dono:** a calculadora de consórcio estava complicada demais para o vendedor; tirar de lá e colocar no Admin Geral, para melhorar depois.
+
+**Vendedor (`vitrine/vitrine.html`, commit bdc99d1):** removidos o item **Calculadora**, o item **Comparar** do menu, os botões **Calcular / Comparar / Planos** das fichas de clientes e dos contatos, e todo o código (cerca de 500 linhas). O histórico já salvo em `public.simulacoes` continua no banco, sem uso por enquanto.
+
+**Admin Geral (`comercial/index.html`, commit bdcff08):** nova aba **Calculadora** (grupo Gestão, depois de Supervisores) com as três telas que existiam: Calculadora, CDC x Consórcio e Comparar planos. Mesmas contas da versão corrigida hoje (reposição diluir/entrada, total do plano, lance).
+- Roda numa página isolada (iframe), para não misturar com as variáveis do painel; o código fica em `<script type="text/plain" id="calcsrc">` (base64), como a aba Catálogo.
+- **Preços:** tabela oficial da Honda por região, escolhida no topo: **Região A** (AC, AM, RO, RR) ou **Região B** (demais estados). Não depende mais do catálogo de nenhum vendedor.
+- **Uso avulso:** sem cliente e sem histórico. Dá para preencher "Assinar proposta como" e WhatsApp, que saem no texto e na imagem da proposta.
+
+**Banco (migration `mestre_calc_catalogo`):** função `mestre_calc_catalogo()` devolve as motos ativas com os planos das regiões A (`catalogo_mestre.planos`, 31 motos) e B (`catalogo_planos_regiao`, 27 motos). `SECURITY DEFINER`, protegida por `_exige_dono()`; sem acesso para `anon`.
+
+**Testes:** página carregada num Chrome sem cabeçalho, com erro zero: calculadora com reposição, CDC x Consórcio, Comparar planos e troca de região; nomes de moto com `$&` e `</script>` carregam sem quebrar. Conferido que nenhum nome removido do vitrine ficou sendo usado.
+
+**Pendências:** a aba usa fundo claro mesmo no tema escuro do admin; a parte que gerava proposta já com os dados do cliente (histórico por cliente) foi desligada junto, e volta quando a calculadora for refeita. A retirada de "Notificações" só da versão web continua pausada.
+
 ## 2026-11-19 — Calculadora de consórcio: cota de reposição, total do plano e lance sem perda
 
 **O problema relatado:** mudando as "parcelas restantes" na Reposição, o valor da parcela não mudava. Confirmado: a conta ignorava o que o grupo já tinha pago. No exemplo da tela (CG 160 START, Acre, crédito R$ 19.734,00, 60x de R$ 463,18, 38 restantes), o cliente pagaria 38 × 463,18 = **R$ 17.600,84** — menos que o próprio crédito.
