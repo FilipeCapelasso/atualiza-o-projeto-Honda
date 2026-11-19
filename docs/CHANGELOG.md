@@ -1,5 +1,17 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-19 — Cliente sem moto some das listas e das contagens; cartão à vista com as regras de juros
+
+**1. Cliente que não escolheu a moto (banco, migration `clientes_sem_moto_ocultos`).** Não é mais contado, não aparece para o vendedor nem no Admin Geral e não dispara aviso. Aplicado no banco (policies de leitura das 5 tabelas, funções do Admin Geral, avisos e gatilhos), então vale para o painel do vendedor, o app e o Admin Geral de uma vez. Hoje isso esconde 94 rascunhos e 2 pedidos do chat. Os dados continuam no banco: se o cliente escolher a moto depois, ele aparece sozinho. Regra e lista de pontos em `supabase/DATABASE_RULES.md`.
+- Conferido com um vendedor de teste: dos 35 rascunhos dele, vê os 24 que têm moto.
+
+**2. Cartão na compra à vista (`vitrine/vitrine.html`).** Regra enviada pelo dono: débito ou crédito em 1x **sem juros**; parcelado no crédito **até 3x 5%, até 5x 10%, até 10x 20%**. Antes o chat oferecia "Até 6x", "Até 12x" e "Mais de 12x" (um cliente chegou a escolher 12x).
+- As opções agora são só as 4 acima, com o juros de cada faixa; quando a moto tem preço à vista, o chat mostra o **total com juros** de cada faixa. Quem digitar mais de 10x recebe o aviso de que o máximo é 10x.
+- O pedido salvo leva a faixa, o juros e o total (ex.: "Até 3x no crédito (juros de 5%) · total R$ 15.739,50").
+- Em "À vista" entram "Débito ou crédito (1x, sem juros)" e "Parcelar no cartão"; o detalhe da moto mostra as regras junto do preço à vista.
+- Juros tratado como percentual único sobre o preço à vista (total = preço × (1 + juros)); a parcela exata depende de quantas vezes o cliente escolher dentro da faixa. **A confirmar com o dono** se é isso mesmo.
+- Pedidos antigos com "Até 12x" / "Mais de 12x" (3 no banco) ficam como estão.
+
 ## 2026-11-19 — E-mail obrigatório também no Financiamento do site do vendedor
 
 Continuação do pedido de e-mail obrigatório. A tela "Financiamento" do site do vendedor (nome, telefone, CPF, nascimento) não pedia e-mail; o dono mandou a tela e pediu para pedir também ali.

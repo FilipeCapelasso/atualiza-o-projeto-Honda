@@ -49,6 +49,14 @@ Relações principais: `vendedores` → (`motos`, `leads`, `fichas`, `contratos`
 
 8 funções ativas em 2026-11-19: `BOTTELEGRAM` (v10), `cores-oficial` (v7), `aviso-whatsapp` (v1), `fotos-honda` (v1), `wa-webhook` (v1), `mp-webhook` (v3), `web-push` (v3), `honda-sync` (v2). Todas com `verify_jwt=false` (webhooks/cron) e cada uma confere uma chave/segredo própria no código. Código versionado aqui: `honda-sync`, `mp-webhook`, `web-push`. **Não versionadas ainda:** `BOTTELEGRAM`, `cores-oficial`, `aviso-whatsapp`, `fotos-honda`, `wa-webhook`.
 
+## Cliente sem moto não conta e não aparece
+
+Regra do dono (19/11/2026): quem não escolheu a moto **não é contado, não aparece para o vendedor nem no Admin Geral e não gera aviso**. Vale para `leads`, `fichas`, `contratos`, `pedidos_chat` e `rascunhos`.
+- **Definição:** `public._cliente_com_moto(moto_nome)` (vazio, nulo, "Ainda não escolhi", "Não informada", "Sem moto"… = sem moto).
+- **Onde é aplicada:** as policies de leitura das 5 tabelas (`contratos_sel`, `fichas_sel`, `leads_sel`, `p_sel`, `r_sel` = `pode_gerir(vendedor_id) AND _cliente_com_moto(moto_nome)`); as funções `mestre_pedidos`, `mestre_ranking`, `mestre_vendedores`, `dono_resumo`, `bot_contagem`; os avisos `_rascunho_notificar` e `aviso_preguicosos`; e os gatilhos de aviso (`tg_aviso_*`, `tg_app_push`), com `WHEN (_cliente_com_moto(new.moto_nome))`.
+- **Dado não é apagado:** quando o cliente passa a ter moto, ele aparece sozinho. Ao criar uma nova função/tela que liste ou conte clientes, **incluir `_cliente_com_moto`**; as funções `SECURITY DEFINER` não passam pela policy.
+- `checkup_entrega` (diagnóstico interno) não filtra de propósito.
+
 ## Segurança — resumo
 
 O linter do Supabase (2026-11-14, reconferido em 2026-11-19 sem novas categorias) aponta, em resumo: tabelas com RLS sem policy (intencional, acesso por RPC), uma view com `SECURITY DEFINER` (`vendedor_publico`, usada para leitura pública), funções `SECURITY DEFINER` executáveis por `anon`/`authenticated` (modelo de RPC do projeto), duas funções sem `search_path` fixo e a extensão `pg_net` no schema `public`. Detalhes e plano de revisão: [`../docs/KNOWN_ISSUES.md`](../docs/KNOWN_ISSUES.md).
