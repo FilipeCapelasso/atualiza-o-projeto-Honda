@@ -1,5 +1,14 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-19 — E-mail do cliente obrigatório nas fichas CDC e CNH
+
+**Pedido do dono:** pedir o e-mail do cliente, obrigatório, ao preencher a ficha de financiamento (CDC) e o pré-contrato de consórcio (CNH).
+
+- **CNH (`site-cnh`):** já era obrigatório (asterisco no campo e validação de formato). Nada a mudar.
+- **CDC (`site-cdc`):** era opcional, só validava o formato se fosse preenchido. Agora tem asterisco e bloqueia o envio se estiver vazio ou inválido ("Informe um e-mail válido"). Mudança de 2 linhas em `index.html`.
+
+**Banco:** nada alterado (a coluna de e-mail já existia nas duas tabelas). Fichas antigas sem e-mail continuam como estão.
+
 ## 2026-11-19 — Calculadora sai do vendedor e vai para o Admin Geral
 
 **Pedido do dono:** a calculadora de consórcio estava complicada demais para o vendedor; tirar de lá e colocar no Admin Geral, para melhorar depois.
