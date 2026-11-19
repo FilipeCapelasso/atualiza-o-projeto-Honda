@@ -133,3 +133,51 @@ Seguro (igual nos dois planos): 12 → 0,346% · 18 → 0,519% · 24 → 0,692% 
 ## Espelho interno que já existe
 
 O banco já guarda o JSON original da **última coleta boa**: `honda_regions.lista_raw` (27 UFs) e `honda_vehicles.detalhe_raw` (756 motos). Em falha nada é apagado, então o sistema já continua com a última tabela boa. O que **não** existe é um arquivo datado (só a versão mais recente é mantida, sobrescrita a cada coleta) nem um caminho para atualizar a tabela enquanto a fonte está fora.
+
+## Fonte secundária: busca ampliada em 19/11/2026 (manhã)
+
+Testes reais com a fonte principal no ar, por três saídas de rede diferentes (banco via `pg_net`, estação de análise e navegador), sem cabeçalho falso e sem desvio de bloqueio.
+
+### Candidatas testadas agora
+
+| Candidata | Resultado |
+|---|---|
+| `www.hondaservicosfinanceiros.com.br` | **200** nas rotas `planos` e `detalhe` (reconfirmado hoje). Mesmo JSON do host principal. Mesma infraestrutura (Imperva): serve como **segundo host**, não como fonte independente. |
+| `clientes.consorcionacionalhonda.com.br` | Existe e está no ar, mas responde **503** (página do Imperva) às rotas da API e à home quando chamado pelo banco. Área do cliente, não tem a tabela. |
+| `sistemas.consorcionacionalhonda.com.br` | **DNS não resolve mais** (só aparece em PDFs antigos indexados). |
+| `www2.consorcionacionalhonda.com.br` | DNS resolve (AWS, 54.232.236.14), mas o balanceador responde **503 "Access prohibited"**. |
+| `api.honda.com.br` | Existe (mesmo IP Imperva do site do consórcio) e é um roteador de API: responde **404 "Could not route request"** em todos os caminhos testados. Nenhuma rota pública de preços. Mesma infraestrutura. |
+| `www.honda.com.br` | **403 (Akamai) para o IP do banco**; alcançável pelo runtime das Edge Functions (a `fotos-honda` usa). Publica só o **Preço Público Sugerido nacional (referência SP/DF)**, que **não é o crédito do consórcio**: a diferença AC↔SP dos créditos vai de −0,16% a −1,03% e **não é proporção fixa**, então não dá para derivar a região A a partir da região B. |
+| `acqstg.…` / `acqdev.…` | Confirmado de novo: só PDFs estáticos antigos; `404` nas rotas da API e até no PDF de regulamento que estava indexado. |
+| Regulamento oficial em PDF (`/sites/default/files/.../regulamento_ago24.pdf`) | **200, 827 KB**, baixado e lido. Cita a "Planilha de Consórcio I" (taxa de administração e fundo de reserva por prazo e modelo), mas **a planilha não sai em texto** nessa versão e o documento é de 2024, anterior aos planos atuais. Não serve como fonte automática de parcela. |
+| `/api/site/consorcio/planos` (JSON oficial, 151 campos lidos um a um) | **Não traz percentual algum** (nem taxa de administração, nem fundo de reserva, nem seguro). Só textos e imagens da tela. O detalhe da moto também não: os campos são `credit`, `numberInstallments`, `value`, `contemplations`, `planoID`, `noInsurance`. |
+
+### Conclusão
+
+**Não existe segunda fonte oficial que publique a tabela regional do consórcio.** Todo endereço Honda que tem a tabela está atrás da mesma porta de entrada (Imperva). O que existe, e foi confirmado hoje, é **mais de um caminho até a mesma fonte oficial** — o que protege contra bloqueio por IP (o que aconteceu em 16/11), e não contra queda geral (17/11).
+
+### Fórmula reconferida contra a API oficial em 19/11/2026
+
+`parcela = arredonda( arredonda(credito × (1 + taxa) ÷ prazo, 2) × (1 + seguro), 2 )`
+
+| Caso | Oficial | Calculado | Diferença |
+|---|---|---|---|
+| AC · CG 160 TITAN · #voudeHonda+ · 99x | 349,67 | 349,66 | −0,01 |
+| AC · CRF 300F · #voudeHonda · 99x | 370,99 | 370,98 | −0,01 |
+| SP · XRE 190 · #voudeHonda+ · 99x | 396,85 | 396,83 | −0,02 |
+
+Diferença de 1 a 2 centavos (arredondamento do percentual). Serve para conferir e para completar modelo novo, **não** para substituir a leitura.
+
+### Planos por modelo: #voudeHonda+ não cobre tudo
+
+Lido na API oficial em 19/11/2026:
+
+| Modelo | Planos que a Honda publica |
+|---|---|
+| CG 160 TITAN (e os outros 15 modelos) | `#voudeHonda` **e** `#voudeHonda+` |
+| **POP 110i ES** e **POP 110i ES +10%** | **só `#voudeHonda`** (12 a 80 meses) |
+| **CRF 300F** | **só `#voudeHonda`** (24 a 99 meses) |
+
+No catálogo do sistema, POP e CRF 300F estão com `plano_fonte = #voudeHonda`, de acordo com a fonte. A CRF 250F já está com tabela marcada `"estimado": true`.
+
+A faixa de percentual do `#voudeHonda+` é **por modelo**, e POP 110i e CRF 300F não estão em nenhuma faixa publicada. Dá para calcular por semelhança (a CRF 300F tem exatamente os mesmos prazos da faixa de 300 cc; a POP, os da faixa de 125 cc), mas isso é **suposição**, não dado oficial: precisa de confirmação da administradora antes de ir para a tela do cliente.
