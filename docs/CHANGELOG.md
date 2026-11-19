@@ -1,5 +1,18 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-19 — Painel do vendedor: categoria "Sites" e revisão de todos os preenchimentos
+
+**Revisão (sem mudança de código):** todo preenchimento grava no sistema do vendedor e leva o cliente sozinho ao WhatsApp dele:
+- vitrine: chat (consórcio, financiamento, à vista, cartão) → `registrar_pedido_chat` + abre o WhatsApp; formulário Financiamento → `leads` + abre; consórcio pela tabela, Black Friday e repasse → `leads` + abre;
+- SITE-CDC e SITE-CNH: grava `fichas`/`contratos` + `leads` e abre o WhatsApp; se a gravação falhar, guarda no aparelho, reenvia sozinho e abre o WhatsApp do mesmo jeito (testado hoje contra o banco real).
+- Todos os vendedores têm WhatsApp válido (12–13 dígitos), condição para o redirecionamento.
+
+**Nova categoria "Sites" (`vitrine.html`, menu web e app, link `?t=sites`), logo abaixo de Acessos:**
+- **Para enviar ao cliente:** Seu site (vitrine), Ficha de financiamento (CDC) e Pré-contrato de consórcio (CNH), cada um com explicação, endereço, "Copiar link", "Enviar no WhatsApp" (mensagem pronta), "Compartilhar" (celular) e "Abrir".
+- **Só para você (com login, não enviar a clientes):** Seu painel (`/slug/admin`), Fichas de financiamento recebidas (`/slug/cdc#admin`) e Pré-contratos recebidos (`/slug/cnh#admin`).
+- Os endereços usam as mesmas funções do site (`siteUrl`, `fichaUrl`), então seguem o modelo de link configurado.
+- Testado no Chrome (1280 px, 400 px e modo app), sem erros. **Banco:** não alterado.
+
 ## 2026-11-19 — CORREÇÃO: fichas CDC e pré-contratos CNH eram descartados pelo campo anti-robô
 
 - **Sintoma (Dilorran e outros):** cliente preenchia o pré-contrato, via "Pré-contrato enviado!" com o botão "Avisar no WhatsApp", mas nada chegava em "Pré-contratos recebidos". Nenhum contrato nem ficha entrou no banco desde 17/11 (de nenhum vendedor).
