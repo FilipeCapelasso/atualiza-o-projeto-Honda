@@ -1,5 +1,26 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-19 — Calculadora de consórcio: cota de reposição, total do plano e lance sem perda
+
+**O problema relatado:** mudando as "parcelas restantes" na Reposição, o valor da parcela não mudava. Confirmado: a conta ignorava o que o grupo já tinha pago. No exemplo da tela (CG 160 START, Acre, crédito R$ 19.734,00, 60x de R$ 463,18, 38 restantes), o cliente pagaria 38 × 463,18 = **R$ 17.600,84** — menos que o próprio crédito.
+
+**Regra aplicada:** numa cota de reposição o grupo já rodou (prazo − restantes) parcelas, e quem assume deve esse acumulado. Ele entra de um dos dois jeitos, à escolha do vendedor, e nos dois o total fecha com o da cota cheia (prazo × parcela):
+- **Diluir nas parcelas que faltam** (padrão): 38x de **R$ 731,34**. Total R$ 27.790,92.
+- **Cobrar como entrada:** entrada de **R$ 10.189,96** (22 parcelas) + 38x de R$ 463,18. Total R$ 27.790,80.
+
+**Outros defeitos corrigidos no mesmo cálculo:**
+- **Lance com "quitar as parcelas do final":** a sobra sumia. Num lance de R$ 5.000 que quitava 6 parcelas, R$ 611,96 eram pagos sem abater nada. Agora a sobra reduz as parcelas que ficaram, e só restam os centavos que não dividem igual.
+- **Lance maior do que as parcelas conseguem absorver:** era ignorado em silêncio. Agora avisa e diz qual é o máximo.
+- **Cota nova com as parcelas restantes de uma simulação anterior** podia recalcular errado: a cota nova sempre vai até o fim do prazo.
+
+**Na tela e na proposta:** novas linhas de "parcelas que o grupo já pagou", "entrada para assumir a cota" e **"total que o cliente vai pagar"** — na tela, no texto do WhatsApp e na imagem (no cabeçalho da imagem, para não cortar o rodapé). A mesma regra vale na **Comparação de planos** e no **CDC x Consórcio**, que antes subestimavam o consórcio na reposição.
+
+**Testes:** 72 combinações de prazo, tipo de cota, lance e modo de quitação — em todas o total fecha com a cota cheia (diferença máxima de R$ 0,44, de arredondamento de centavos); 10 combinações passaram a ser recusadas com aviso (lance sem onde ser abatido). Cota nova conferida sem nenhuma mudança de valor. Sintaxe dos 4 blocos de script do arquivo verificada.
+
+**Arquivo:** `vitrine/vitrine.html`. **Banco:** nada alterado.
+
+**A conferir com a administradora:** qual das duas formas (diluir ou entrada) a concessionária usa de fato na reposição. A conta está correta nas duas; o padrão hoje é diluir.
+
 ## 2026-11-19 — Segunda fonte das tabelas do consórcio: segundo host oficial + histórico datado
 
 Pedido: não ficar dependendo só do site do Consórcio Nacional Honda, caso ele caia. A fonte principal **continua a mesma**; isto é o que entra quando ela falha.
