@@ -84,3 +84,52 @@ Nenhuma região coletada: as 27 (AC, AL, AM, AP, BA, CE, DF, ES, GO, MA, MG, MS,
 - Comparação com o sistema: região B idêntica; região A idêntica exceto CG 160 FAN 24x (oficial 1204,78; sistema 1204,79 desde o ajuste manual de 18/11). Corrige sozinha na leitura das 07:00.
 - O site não envia `ETag`/`Last-Modified` nem avisa mudanças: é preciso ler para saber. Ler não grava nada; só o que mudou é gravado.
 - A tabela própria da Cometa (COMETA-AM) bate com a oficial do AM nos prazos em comum.
+
+## Fonte secundária: o que foi testado em 19/11/2026
+
+Testes reais feitos pelo banco (`pg_net`), com a fonte oficial no ar. Nenhum cabeçalho falso e nenhum desvio de bloqueio.
+
+| Candidata | Resultado |
+|---|---|
+| `hondaservicosfinanceiros.com.br` (com e sem `www`) | **200 nas 4 rotas** (`planos`, `categorias`, `lista`, `detalhe`), conteúdo **idêntico byte a byte** ao oficial (mesmo MD5). Porém os cabeçalhos mostram a **mesma infraestrutura** (nginx + Varnish + Imperva): numa queda geral cai junto — foi o que aconteceu em 17/11. Serve contra falha de um host só (DNS, certificado, regra de WAF por host), não contra queda do serviço. |
+| `acqstg.consorcionacionalhonda.com.br` e `acqdev.…` | 404 "Web Site Not Found". Só servem PDFs estáticos antigos (regulamentos). Não têm a API. |
+| `api.consorcionacionalhonda.com.br` | O nome não existe (DNS não resolve). |
+| `consorciohonda.com.br` | 200, mas devolve o HTML do site nas rotas `/api/...`. Não serve como API. |
+| CDN `d138k0nccc9zty.cloudfront.net/api/...` | 403 (AccessDenied). A CDN só entrega arquivos estáticos, não a API. |
+| `sitemap.xml` e payload do Nuxt (`_payload.json`) | 404. Não há cópia estática da tabela. |
+| Wayback Machine (`archive.org`) | Nenhum snapshot das rotas da API. |
+| Dados abertos do Banco Central (`dadosabertos.bcb.gov.br`, 81 conjuntos com "consórcio") | Só estatísticas agregadas (cotas ativas por região, administradoras, filiais). **Não existe tabela de preço por modelo/região.** Não serve como fonte de preço. |
+| `honda.com.br` (preço da moto) | Akamai responde **403 ao IP do banco**, com e sem User-Agent identificado. Mas a Edge Function `fotos-honda` lê o site normalmente (última leitura boa em 18/11): é alcançável **pelo runtime das funções**, não pelo `pg_net`. Infraestrutura **independente** do site do consórcio (Akamai vs Imperva). |
+
+## A tabela regional é calculável (validado)
+
+A tabela de cada região é derivável do **crédito (preço da moto)** mais uma tabela de percentuais. Os percentuais **não variam por região** — só o crédito varia.
+
+```
+parcela_sem_seguro = arredonda( credito × (1 + taxa[plano, prazo, grupo do modelo]) ÷ prazo , 2 )
+parcela_com_seguro = arredonda( parcela_sem_seguro × (1 + seguro[prazo]) , 2 )
+```
+
+**Validação:** aplicando os percentuais de SP ao crédito de cada UF e comparando com as **6.723 parcelas reais das 27 UFs**: erro máximo **R$ 0,01**, nenhuma linha acima de 1 centavo.
+
+`#voudeHonda` (igual para todo modelo e toda UF) e `Advance`:
+
+| Prazo | 12 | 18 | 24 | 36 | 48 | 60 | 72 (Advance) | 80 | 99 |
+|---|---|---|---|---|---|---|---|---|---|
+| Taxa | 21,5% | 22% | 22,5% | 24,5% | 25,5% | 27% | 21% | 30% | 35% |
+
+Seguro (igual nos dois planos): 12 → 0,346% · 18 → 0,519% · 24 → 0,692% · 36 → 1,039% · 48 e 72 → 1,442% · 60 → 1,731% · 80 → 2,308% · 99 → 2,856%.
+
+`#voudeHonda+` tem **3 faixas por modelo** (a faixa é do modelo, não da região); diferenças de 0,01 pp são só arredondamento:
+
+| Faixa (modelos em 19/11) | 12 | 18 | 24 | 36 | 48 | 60 | 80 | 99 |
+|---|---|---|---|---|---|---|---|---|
+| BIZ 125 ES/EX, CG 160 FAN ESDI, CG 160 START, ELITE 125 | 32,43% | 32,98% | 33,53% | 35,70% | 36,79% | 38,43% | 41,70% | 47,15% |
+| CG 160 TITAN, HONDA ADV, NXR 160 BROS ABS/CBS, PCX STD ABS/CBS | 31,22% | 31,76% | 32,30% | 34,46% | 35,54% | 37,16% | 40,40% | 45,80% |
+| CB300F TWISTER ABS, SAHARA 300 ABS/ADVENTURE, XR 300L TORNADO, XRE 190 | — | — | 30,46% | 32,59% | 33,66% | 35,26% | 38,45% | 43,77% |
+
+**Importante:** esses percentuais valem para a leitura de 19/11/2026. A Honda pode mudá-los. Por isso a regra é **recalcular a tabela de percentuais a cada coleta boa** (sai de graça dos dados que já chegam) e nunca deixá-la fixa no código.
+
+## Espelho interno que já existe
+
+O banco já guarda o JSON original da **última coleta boa**: `honda_regions.lista_raw` (27 UFs) e `honda_vehicles.detalhe_raw` (756 motos). Em falha nada é apagado, então o sistema já continua com a última tabela boa. O que **não** existe é um arquivo datado (só a versão mais recente é mantida, sobrescrita a cada coleta) nem um caminho para atualizar a tabela enquanto a fonte está fora.
