@@ -1,5 +1,15 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-19 — Cartão à vista: juros sobre o preço com desconto e tabela de parcelas
+
+- **Conferência com a regra do dono (imagem do WhatsApp):** débito/crédito 1x sem juros; parcelado no crédito até 3x 5%, até 5x 10%, até 10x 20%. As faixas do commit 0ba7e09 batiam.
+- **Erro corrigido:** nas motos em promoção (Black Friday), o total com juros era calculado sobre `m.preco` (preço cheio ou de outro vendedor), não sobre o preço com desconto. Ex.: ELITE 125 dava 10x sobre R$ 18.990; agora é sobre R$ 16.490 (10x de R$ 1.978,80, total R$ 19.788,00). Base nova `ccBase(m)` = preço da oferta (`ofM(m).por`) ou, sem oferta, o preço à vista.
+- **Detalhe da moto:** a frase das regras virou uma tabela "No cartão" com o valor de cada faixa: 1x sem juros, 3x de, 5x de, 10x de, com o total de cada uma, dizendo se é sobre o preço com desconto.
+- **Chat:** a pergunta do cartão mostra a parcela e o total de cada faixa; o cliente pode digitar qualquer número de 1 a 10 (ex.: 7 → faixa de 20%, 7x de R$ 2.826,86). O pedido grava vezes, juros, parcela e total (ex.: "7x no crédito (juros de 20%) · 7x de R$ 2.826,86 · total R$ 19.788,00").
+- **Cálculo:** total = preço à vista × (1 + juros da faixa); parcela = total ÷ número de vezes; 2x e 3x usam 5%, 4x e 5x 10%, 6x a 10x 20%.
+- **Arquivo:** `vitrine/vitrine.html` (funções expostas `ccTabH`, `ccSim`, `ccBase`). Testado no Chrome (400 px), sem erros. **Banco:** não alterado.
+- **A confirmar com o dono:** se 2x cai na faixa de 5% (como "até 3x") e se o juros é percentual único sobre o total (não ao mês).
+
 ## 2026-11-19 — Cliente sem moto some das listas e das contagens; cartão à vista com as regras de juros
 
 **1. Cliente que não escolheu a moto (banco, migration `clientes_sem_moto_ocultos`).** Não é mais contado, não aparece para o vendedor nem no Admin Geral e não dispara aviso. Aplicado no banco (policies de leitura das 5 tabelas, funções do Admin Geral, avisos e gatilhos), então vale para o painel do vendedor, o app e o Admin Geral de uma vez. Hoje isso esconde 94 rascunhos e 2 pedidos do chat. Os dados continuam no banco: se o cliente escolher a moto depois, ele aparece sozinho. Regra e lista de pontos em `supabase/DATABASE_RULES.md`.
