@@ -27,9 +27,9 @@ Duplicatas/variantes: `VITRINE/index_VITRINE_v39-antes-cores.html` é uma versã
 | BCB (CDI) | função `sync_cdi`, tabela `cdi_rates` | |
 | Fontes Honda (catálogo) | Edge Functions `cores-oficial`, `fotos-honda`, tabela `catalogo_fonte` | leitura periódica |
 
-## Edge Functions (4, todas ativas)
+## Edge Functions (8, todas ativas)
 
-`BOTTELEGRAM`, `cores-oficial`, `aviso-whatsapp`, `fotos-honda`, `mp-webhook`, `web-push`. O código de `web-push` está em `supabase/functions/web-push/`; o das demais **não está versionado** neste repositório (ver `KNOWN_ISSUES.md`).
+`BOTTELEGRAM`, `cores-oficial`, `aviso-whatsapp`, `fotos-honda`, `wa-webhook`, `mp-webhook`, `web-push`, `honda-sync`. O código de `honda-sync`, `mp-webhook` e `web-push` está em `supabase/functions/`; o das outras 5 **não está versionado** neste repositório (ver `KNOWN_ISSUES.md`).
 
 ## Deploy
 

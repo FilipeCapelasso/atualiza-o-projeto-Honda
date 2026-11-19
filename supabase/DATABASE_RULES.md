@@ -2,7 +2,7 @@
 
 Projeto Supabase **`vendashonda`**, região us-east-2, Postgres 17. Levantamento em **2026-11-14** via MCP do Supabase (somente leitura). Nenhum dado de cliente foi copiado para cá.
 
-Totais: 79 tabelas · 4 views · ~330 funções no schema `public` · 74 triggers · 71 policies RLS · 25 agendamentos pg_cron · 4 Edge Functions · buckets de Storage públicos `produtos` e `midia`.
+Totais (conferido em 2026-11-19): 104 tabelas · 4 views · 432 funções no schema `public` (352 `SECURITY DEFINER`) · 77 triggers · 82 policies RLS · 37 agendamentos pg_cron (27 ativos) · 141 migrations · 8 Edge Functions · buckets de Storage públicos `produtos` e `midia`.
 
 ## Princípios (confirmados no esquema)
 
@@ -28,7 +28,7 @@ Totais: 79 tabelas · 4 views · ~330 funções no schema `public` · 74 trigger
 
 Relações principais: `vendedores` → (`motos`, `leads`, `fichas`, `contratos`, `pedidos_chat`, `rascunhos`, `visitas`, `simulacoes`, `vendedor_custom`, `vendedor_plano`, `receitas`, …); `motos.catalogo_id` → `catalogo_mestre`; `customers` → `orders` → `payments`; `customers` → `subscriptions` → `plans`; `vendedores.uf` → `ufs`; `vendedores.concessionaria_id` → `concessionarias`.
 
-## Agendamentos (pg_cron, 26)
+## Agendamentos (pg_cron, 37 em 2026-11-19; a tabela abaixo é um resumo por grupo)
 
 | Grupo | Frequência (UTC no cron) | Função |
 |---|---|---|
@@ -47,11 +47,11 @@ Relações principais: `vendedores` → (`motos`, `leads`, `fichas`, `contratos`
 
 ## Edge Functions
 
-`BOTTELEGRAM` (v10), `cores-oficial` (v7), `aviso-whatsapp` (v1), `fotos-honda` (v1). Todas com `verify_jwt=false` (webhooks/cron). Código-fonte **não versionado** ainda.
+8 funções ativas em 2026-11-19: `BOTTELEGRAM` (v10), `cores-oficial` (v7), `aviso-whatsapp` (v1), `fotos-honda` (v1), `wa-webhook` (v1), `mp-webhook` (v3), `web-push` (v3), `honda-sync` (v2). Todas com `verify_jwt=false` (webhooks/cron) e cada uma confere uma chave/segredo própria no código. Código versionado aqui: `honda-sync`, `mp-webhook`, `web-push`. **Não versionadas ainda:** `BOTTELEGRAM`, `cores-oficial`, `aviso-whatsapp`, `fotos-honda`, `wa-webhook`.
 
 ## Segurança — resumo
 
-O linter do Supabase (2026-11-14) aponta, em resumo: tabelas com RLS sem policy (intencional, acesso por RPC), uma view com `SECURITY DEFINER` (`vendedor_publico`, usada para leitura pública), funções `SECURITY DEFINER` executáveis por `anon`/`authenticated` (modelo de RPC do projeto), duas funções sem `search_path` fixo e a extensão `pg_net` no schema `public`. Detalhes e plano de revisão: [`../docs/KNOWN_ISSUES.md`](../docs/KNOWN_ISSUES.md).
+O linter do Supabase (2026-11-14, reconferido em 2026-11-19 sem novas categorias) aponta, em resumo: tabelas com RLS sem policy (intencional, acesso por RPC), uma view com `SECURITY DEFINER` (`vendedor_publico`, usada para leitura pública), funções `SECURITY DEFINER` executáveis por `anon`/`authenticated` (modelo de RPC do projeto), duas funções sem `search_path` fixo e a extensão `pg_net` no schema `public`. Detalhes e plano de revisão: [`../docs/KNOWN_ISSUES.md`](../docs/KNOWN_ISSUES.md).
 
 ## Estado das migrations
 

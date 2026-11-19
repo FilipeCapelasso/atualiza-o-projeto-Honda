@@ -1,5 +1,12 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-19 — Revisão completa do projeto (6 repositórios + Supabase) e atualização dos documentos
+
+- **Escopo:** leitura dos 6 repositórios (comercial, VITRINE, SITE-CNH, SITE-CDC, Termo, hub), conferência de todas as chamadas `rpc()`/`from()` dos sites contra o banco (as 102 funções chamadas existem), análise do Supabase (tabelas, policies, grants, funções, triggers, storage, cron, Edge Functions, linter de segurança e de performance).
+- **Documentos atualizados:** totais do banco (`DATABASE_RULES.md`, `PROJECT_CONTEXT.md`), lista das 8 Edge Functions (`INVENTORY.md`, `DATABASE_RULES.md`), pendências (`KNOWN_ISSUES.md`).
+- **Código e banco:** nenhuma alteração.
+- **Segurança:** o relatório com os pontos de atenção foi entregue ao responsável em conversa privada; este repositório é público e não detalha falhas.
+
 ## 2026-11-19 — Cota da Vez: menu, horário de Rio Branco e mais automação
 
 - **Menu:** "Cota da Vez" agora fica logo abaixo de "Motos" (no modo app, que não tem Motos, continua depois de Acessos).

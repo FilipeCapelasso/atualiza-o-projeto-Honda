@@ -40,7 +40,7 @@ Navegador / robô de prévia (WhatsApp, Instagram...)
 
 ## Banco (resumo)
 
-79 tabelas, 4 views, ~330 funções, 74 triggers, 71 policies RLS, 25 agendamentos (pg_cron), 4 Edge Functions, 2 buckets públicos. Detalhes em [`supabase/DATABASE_RULES.md`](supabase/DATABASE_RULES.md).
+104 tabelas, 4 views, 432 funções, 77 triggers, 82 policies RLS, 37 agendamentos (pg_cron, 27 ativos), 8 Edge Functions, 2 buckets públicos (números de 2026-11-19). Detalhes em [`supabase/DATABASE_RULES.md`](supabase/DATABASE_RULES.md).
 
 ## Rotinas automáticas importantes
 
