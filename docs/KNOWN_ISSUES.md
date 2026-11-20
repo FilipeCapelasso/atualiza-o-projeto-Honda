@@ -18,6 +18,11 @@ Atualizado em 2026-11-19. Repositórios **públicos**: não detalhar aqui falhas
 - [ ] `sync_cdi()` falhou 1× nos últimos 3 dias porque o BCB respondeu 304; tratar 304 como "sem novidade".
 - [ ] Os crons novos `honda_regioes_aplicar`, `lf_buscar` e `lf_aplicar` ainda não tinham rodado em 2026-11-19 (foram criados no mesmo dia): conferir `cron.job_run_details` depois da primeira janela.
 
+- [ ] **Avisos de WhatsApp aos vendedores parados:** 139 avisos (contato, chat, ficha, contrato) estão na fila `aviso_wa_fila` com status `aguardando_config` porque o envio de WhatsApp ainda não está configurado. Hoje o vendedor só é avisado por push (poucos aparelhos inscritos) e pelo próprio painel. Decidir: configurar o envio ou ampliar o push.
+- [ ] Conferir após a 1ª janela (12:46 e 12:48 UTC de 2026-11-20): `cometa_oficial_aplicar` e `plano_normal_atualizar` em `cron.job_run_details` e `regiao_log`.
+- [ ] Decidir se os robôs antigos da Cometa (`cometa_iniciar`, `cometa_buscar`, `cometa_aplicar`) são desativados; a tabela oficial do Amazonas passou a ser a fonte da Cometa.
+- [ ] Rascunhos parados há mais de 1 dia: 48 (27 sem aviso). Revisar o aviso de "cliente que parou".
+
 ## Riscos operacionais
 
 - Cada site é um arquivo único de ~60 a 690 KB: conflitos de edição simultânea entre contas são fáceis. Regra: uma conta por vez por site; sempre `git pull` antes e conferir o último commit.

@@ -1,5 +1,16 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-19 (noite) — Revisão geral do sistema
+
+- **Rotinas agendadas (cron):** todas as ativas rodaram com sucesso na última execução. Os crons novos (`cometa_oficial_aplicar`, `plano_normal_atualizar`) ainda não tiveram janela; primeira em 12:46/12:48 UTC.
+- **Dados dos clientes até o vendedor:** leads (124), fichas (4), contratos (3), pedidos do chat (108), rascunhos (258) e simulações (3): **nenhum registro sem vendedor**. Teste de isolamento no banco como vendedor logado (marcos, pereira, isravel, shayron): cada um vê só os seus pedidos e rascunhos, 0 de outros vendedores. Cliente do chat sem moto escolhida fica oculto do painel por regra (migration `clientes_sem_moto_ocultos`).
+- **Catálogo e tabelas:** 0 motos sem catálogo, 0 com tabela fora da sua região, 0 com emplacamento errado, 0 modelos sem foto ou sem plano; as 27 UFs do site oficial lidas com sucesso nas últimas 14 h.
+- **Repositórios:** vitrine, comercial, site-cdc, site-cnh e termo-honda-grupo-star atualizados (`git pull`), sem alterações pendentes.
+- **Achado principal:** 139 avisos de WhatsApp aos vendedores parados em `aviso_wa_fila` (`aguardando_config`). Ver `docs/KNOWN_ISSUES.md`.
+- **Correção feita:** removida a permissão de chamada pública da função de gatilho `tg_motos_excluir_uf` (criada hoje).
+- **Banco alterado:** apenas essa permissão. Sites sem alteração.
+- **Pendente:** ver `docs/KNOWN_ISSUES.md` (WhatsApp, rascunhos parados, crons antigos da Cometa, limpeza de performance, segurança tratada em conversa privada).
+
 ## 2026-11-19 (noite) — Cometa Manaus passa a seguir a tabela oficial da Honda para o Amazonas (2×/dia)
 
 - **Regra de ouro (confirmada pelo dono):** cada região/localização segue a tabela do site oficial da Honda. A Cometa fica em Manaus (AM), **não no Acre**; a tabela dela agora vem do **Amazonas oficial**, não do site da própria Cometa.
