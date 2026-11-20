@@ -9,7 +9,7 @@ Totais (conferido em 2026-11-19): 105 tabelas · 4 views · 432 funções no sch
 - **RLS ligado em todas as tabelas.** Muitas não têm policy de propósito: o acesso é só por funções RPC (`SECURITY DEFINER`) ou pelo servidor. Não "consertar" criando policy aberta.
 - **Multi-vendedor:** tabelas de negócio têm `vendedor_id` (default `tenant_id()`), ligado a `vendedores(id)`. O `slug` do vendedor vem do cabeçalho `x-vendedor` nas leituras públicas.
 - Leitura pública do site do vendedor passa pela view `vendedor_publico` e por RPCs `*_publica`/`ps_publico`/`config_publica`.
-- Funções com prefixo: `mestre_*` (painel do dono), `meu_*` (vendedor logado), `ps_*` (plataforma/checkout), `assin_*` (assinaturas), `app_*` (app), `patrao_*` (apresentação), `site_sync_*`/`regiao_b_*` (atualização do catálogo), `honda_*`/`mestre_honda_*` (tabelas nacionais do Consórcio Honda, ver `docs/HONDA_API.md`).
+- Funções com prefixo: `mestre_*` (painel do dono), `meu_*` (vendedor logado), `ps_*` (plataforma/checkout), `assin_*` (assinaturas), `app_*` (app), `site_sync_*`/`regiao_b_*` (atualização do catálogo), `honda_*`/`mestre_honda_*` (tabelas nacionais do Consórcio Honda, ver `docs/HONDA_API.md`).
 - Alterações de estrutura: **sempre por migration** (`apply_migration`), nunca DDL solto. Lista em [`MIGRATIONS_APLICADAS.md`](MIGRATIONS_APLICADAS.md).
 
 ## Tabelas por domínio
@@ -21,7 +21,7 @@ Totais (conferido em 2026-11-19): 105 tabelas · 4 views · 432 funções no sch
 | Dados do vendedor | `motos` (~1.2 mil, por vendedor, ligadas ao catálogo), `leads`, `fichas`, `contratos`, `pedidos_chat`, `rascunhos`, `simulacoes`, `visitas` |
 | Assinaturas e pagamentos | `plans`, `customers`, `orders`, `payments`, `subscriptions`, `payment_events`, `receitas`, `assin_planos`, `assin_pedidos`, `plano_ajustes`, `support_tickets` |
 | App, avisos e bots | `app_dispositivos`, `app_dispositivos_dono`, `app_prefs`, `app_notificacoes`, `aviso_wa_fila`, `telegram_fila`, `bot_sessoes`, `bot_log` |
-| Engajamento | `votacoes`, `votos`, `atualizacoes`, `patrao_sessoes`, `patrao_respostas` |
+| Engajamento | `votacoes`, `votos`, `atualizacoes` |
 | Acesso e segredos (sem conteúdo aqui) | `admins`, `donos`, `painel_donos`, `config_privada`, `segredos`, `vendedor_segredos`, `vendedor_senhas` |
 | Sistema | `erros_sistema` |
 | Possível legado de outros sistemas *(inferido pelos nomes; não confirmado)* | `categorias`, `produtos`, `produtos_estoque`, `centros`, `sabores`, `pedidos`, `clientes`, `avaliacoes`, `carrinhos_abandonados`, `pix_cobrancas`, `pagamentos`, `configuracoes`, `registros`, `movimentos` |

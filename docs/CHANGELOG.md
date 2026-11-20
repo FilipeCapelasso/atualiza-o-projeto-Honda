@@ -1,5 +1,12 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-20 (tarde) — Removida a apresentação "patrão" do banco
+
+- **O que mudou:** a apresentação "patrão" não é mais usada, então foi apagada do banco: as funções `patrao_*` e `mestre_patrao*`, as tabelas `patrao_sessoes` e `patrao_respostas` e as duas chaves `patrao_*` da `plataforma_config` (migration `remove_apresentacao_patrao`). Isso também elimina um item de segurança em aberto da auditoria do mesmo dia.
+- **Não mexido:** a conta de vendedor ligada à apresentação continua existindo (só saiu o que a apresentação guardava).
+- **Conferido:** nenhum site, trigger, cron ou função usa mais o que foi apagado.
+- **Banco alterado:** sim. **Pendente:** a pasta local `work/patrao_r` (página antiga) não está em repositório e pode ser descartada.
+
 ## 2026-11-20 — Segurança: auditoria geral e 4 correções no banco
 
 - **Auditoria:** banco (permissões, RLS, funções), Edge Functions, os 6 repositórios e o histórico do git, logs, cabeçalhos do Vercel e `api/og.js`. Nenhum segredo nos repositórios (só a chave pública anon) e nenhum ponto de XSS encontrado. Os detalhes técnicos das brechas ficam fora deste repositório público.
@@ -10,7 +17,7 @@
   - Tabela `catalogo_planos_normal`: permissões de anon/authenticated removidas (o RLS já bloqueava).
 - **Testado:** acessos de anon negados onde deveriam, checkout chega até a validação do plano, limites disparam e liberam outro cliente, cron `honda_tabela_versionar` OK. Dados de teste desfeitos (pedidos 38, eventos 10, como antes).
 - **Banco alterado:** sim (só permissões e as duas funções acima). Nenhum arquivo de site mudou.
-- **Pendente (dono):** decidir como proteger as funções da apresentação (`patrao_*`); ligar "proteção contra senha vazada" no Auth do Supabase; para limite por IP/CAPTCHA/bloqueio de robôs, colocar Cloudflare (WAF/Turnstile) na frente do domínio.
+- **Pendente (dono):** ligar "proteção contra senha vazada" no Auth do Supabase; para limite por IP/CAPTCHA/bloqueio de robôs, colocar Cloudflare (WAF/Turnstile) na frente do domínio.
 
 ## 2026-11-20 — Vitrine: chat em tela cheia no computador, com fundo novo
 
