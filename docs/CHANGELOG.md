@@ -1,5 +1,13 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-19 (noite) — Regra fixa: modelos só #voudeHonda não têm emplacamento
+
+- **Regra:** modelo que a Honda publica **só no `#voudeHonda`** (POP 110i ES +10%, CRF 300F e CRF 250F; no banco: `catalogo_mestre.plano_fonte = '#voudeHonda'`) **nunca mostra emplacamento**, em nenhuma loja e em nenhum modo (`#voudeHonda+`, `#voudeHonda` ou os dois). Antes a POP aparecia "Com emplacamento" e a CRF 300F "Sem emplacamento".
+- **Como:** o gatilho `e_plano` (função `tg_motos_plano`) grava `emplacamento = ''` nas motos desses modelos a cada gravação; o catálogo mestre também ficou com `''`. Assim a regra vale mesmo quando uma leitura externa (vendedor.site, site oficial) reescrever o campo. Reaplicado nas 129 motos existentes (3 modelos × 43 vendedores).
+- **Banco alterado:** sim. Migration `regra_sem_emplacamento_modelos_so_voudehonda`. Os modelos com `#voudeHonda+` não mudaram.
+- **Sites:** sem alteração (a vitrine já esconde o texto quando o campo é vazio).
+- **Pendente:** nada.
+
 ## 2026-11-19 (noite) — Tabela de consórcio em duas colunas e visual do celular
 
 - **O que mudou (vitrine):** quando a loja vende **os dois planos**, a tela "Tabela de consórcio" mostra duas colunas lado a lado: **Sem emplacamento (#voudeHonda)** à esquerda e **Com emplacamento (#voudeHonda+)** à direita, com uma única escolha de parcela entre as duas. O botão que alternava os planos deixou de existir nesse modo. Nos detalhes da moto, o mesmo par de colunas aparece em formato de leitura; "a partir de" usa a menor parcela (sem emplacamento). O chat de consórcio lista as opções com "· sem/com emplacamento", e a mensagem de WhatsApp informa o plano escolhido.
