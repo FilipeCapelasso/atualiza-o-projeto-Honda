@@ -16,7 +16,7 @@ Totais (conferido em 2026-11-19): 105 tabelas · 4 views · 432 funções no sch
 
 | Domínio | Tabelas |
 |---|---|
-| Catálogo de motos | `catalogo_mestre` (31), `catalogo_fonte`, `catalogo_planos_regiao`, `catalogo_planos_hist`, `catalogo_versoes`, `catalogo_avisos`, `ofertas`, `historico_motos`, `site_sync_log`, `regiao_req`, `regiao_log`, `cnh_req`, `cdi_rates`, `ufs` |
+| Catálogo de motos | `catalogo_mestre` (32; coluna `excluir_ufs` = UFs que não recebem o modelo, gatilho `a0_excluir_uf`), `catalogo_fonte`, `catalogo_planos_regiao`, `catalogo_planos_hist`, `catalogo_versoes`, `catalogo_avisos`, `ofertas`, `historico_motos`, `site_sync_log`, `regiao_req`, `regiao_log`, `cnh_req`, `cdi_rates`, `ufs` |
 | Vendedores e plataforma | `vendedores` (39), `vendedor_custom` (personalização: publicado/rascunho/anterior), `vendedor_plano`, `vendedor_mensagens`, `ps_destaques`, `lojas`, `concessionarias`, `plataforma_config`, `config_multi`, `site_conteudo`, `vendedor` (legado, 1 linha) |
 | Dados do vendedor | `motos` (~1.2 mil, por vendedor, ligadas ao catálogo), `leads`, `fichas`, `contratos`, `pedidos_chat`, `rascunhos`, `simulacoes`, `visitas` |
 | Assinaturas e pagamentos | `plans`, `customers`, `orders`, `payments`, `subscriptions`, `payment_events`, `receitas`, `assin_planos`, `assin_pedidos`, `plano_ajustes`, `support_tickets` |

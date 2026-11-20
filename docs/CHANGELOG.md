@@ -1,5 +1,16 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-19 (noite) — Novo modelo: POP 110i ES (simples), sem o Acre
+
+- **O que mudou:** a **POP 110i ES** (sem "+10% de documentação") entrou no catálogo geral (`catalogo_mestre`, slug oficial `pop-110i-es`), com nome e tabela próprios (não é a "POP 110I ES +10%"). Selo "Lançamento", categoria Street, só `#voudeHonda` (sem emplacamento, pela regra fixa), seguro prestamista nos dois valores. Tabela oficial: região B (referência SP) 80x R$ 197,73 com seguro / R$ 193,26 sem, crédito R$ 11.893; região A (referência AC) 80x R$ 196,91 / R$ 192,47, crédito R$ 11.844; prazos 12–80 meses (7 linhas por região).
+- **Quem recebeu:** todos os vendedores **fora do Acre (uf ≠ AC)** — hoje 6 (AM ×2 Cometa, AP, ES, GO, MT). Os 37 vendedores do Acre ficam sem a moto. Interpretei "região Acre" como `uf = 'AC'`; os de AM/RO/RR (mesma tabela de preço do Acre) **recebem**. Se o dono quiser tirar também esses, basta incluir as UFs em `catalogo_mestre.excluir_ufs`.
+- **Como o Acre fica de fora para sempre:** nova coluna `catalogo_mestre.excluir_ufs` e gatilho `a0_excluir_uf` em `motos` (função `tg_motos_excluir_uf`): qualquer criação de moto (novo vendedor, sincronização do catálogo, cópia) é descartada se a UF do vendedor estiver na lista do modelo.
+- **Atualização automática:** `catalogo_fonte` (`pop-110i-es`) deixou de ser "ignorar" e aponta para o novo modelo; a leitura do site oficial (2×/dia) e `honda_regioes_aplicar` mantêm a região B (`catalogo_planos_regiao`) e as demais rotinas.
+- **Fotos/descrição:** reaproveitadas da POP 110i ES +10% (mesma moto: Azul, Branco, Vermelho). Trocar por fotos próprias é opcional.
+- **Banco alterado:** sim. Migration `pop_110i_es_simples_sem_acre`; depois `mestre_sincronizar_vendedor` para todos e `regiao_reaplicar_todos('B')` (16 motos região B reaplicadas). Conferido: 6 motos criadas, valores iguais ao oficial, 0 no Acre.
+- **Sites alterados:** nenhum.
+- **Pendente:** os 2 vendedores Cometa (AM) ficaram com a tabela oficial da região A (a Cometa não tem tabela própria para este modelo); trocar por fotos próprias se quiser.
+
 ## 2026-11-19 (noite) — Regra fixa: modelos só #voudeHonda não têm emplacamento
 
 - **Regra:** modelo que a Honda publica **só no `#voudeHonda`** (POP 110i ES +10%, CRF 300F e CRF 250F; no banco: `catalogo_mestre.plano_fonte = '#voudeHonda'`) **nunca mostra emplacamento**, em nenhuma loja e em nenhum modo (`#voudeHonda+`, `#voudeHonda` ou os dois). Antes a POP aparecia "Com emplacamento" e a CRF 300F "Sem emplacamento".
