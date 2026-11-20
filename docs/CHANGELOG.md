@@ -1,5 +1,14 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-20 — Vitrine: chat em tela cheia no computador, com fundo novo
+
+- **O que mudou (vitrine):** no computador (tela a partir de 721 px) o chat com o vendedor deixou de ser uma janela de 540 px e passou a **ocupar a tela toda**: topo com logo/nome do vendedor e botão de fechar no canto direito, conversa numa coluna central (900 px; 980 px em telas ≥ 1500 px; 1100 px em telas ≥ 2000 px) e campo de resposta embaixo. Fundo novo: escuro com brilhos vermelho (cor do site), verde e azul de movimento lento, linhas diagonais finas e a coluna da conversa levemente destacada. Balões do vendedor em branco, do cliente em verde; respostas rápidas em vidro. Letras maiores em telas grandes. Rola só a conversa (a página atrás fica travada).
+- **Celular:** igual ao que era (nada mudou). Temas Alta/Premium continuam valendo (linha dourada no topo).
+- **Correção junto:** quando o vendedor não tem foto, o avatar de letra aparecia esticado/oval no topo e quadrado nas mensagens; agora é redondo.
+- **Testado:** 2560×1270, 1920×1080, 1366×768, 1024×768, 800×600 e celular 390×844: sem rolagem lateral, sem erro de script.
+- **Banco alterado:** não.
+- **Pendente:** nada deste item. (Os demais pendentes seguem em `docs/KNOWN_ISSUES.md`.)
+
 ## 2026-11-20 — Vitrine: card da tabela de consórcio menor e cabeçalho com logo e Instagram
 
 - **O que mudou (vitrine):** no cartão que abre ao tocar numa moto, o topo agora mostra **logo da concessionária + foto do vendedor + telefone + @Instagram** (a logo é a da concessionária nos vendedores de fora do Acre e a da loja nos do Acre; some se não houver logo). A tela "Tabela de consórcio" ficou menor: largura de 600 px no computador (antes 1060 px), foto da moto mais baixa (150 px), linhas e textos mais compactos.
