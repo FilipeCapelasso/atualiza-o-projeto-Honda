@@ -1,5 +1,13 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-19 (noite) — Tabela de consórcio em duas colunas e visual do celular
+
+- **O que mudou (vitrine):** quando a loja vende **os dois planos**, a tela "Tabela de consórcio" mostra duas colunas lado a lado: **Sem emplacamento (#voudeHonda)** à esquerda e **Com emplacamento (#voudeHonda+)** à direita, com uma única escolha de parcela entre as duas. O botão que alternava os planos deixou de existir nesse modo. Nos detalhes da moto, o mesmo par de colunas aparece em formato de leitura; "a partir de" usa a menor parcela (sem emplacamento). O chat de consórcio lista as opções com "· sem/com emplacamento", e a mensagem de WhatsApp informa o plano escolhido.
+- **Visual (celular e computador):** cartões por plano (cabeçalho escuro para #voudeHonda e vermelho para #voudeHonda+), linhas de toque grandes (mín. 52 px), parcela escolhida destacada, barra fixa no rodapé com "Parcela escolhida" e o botão principal, foco visível no teclado, leitor de tela (grupos de opção com nome, aviso da parcela escolhida) e sem animação com "reduzir movimento".
+- **Planos únicos:** os modos #voudeHonda+ e #voudeHonda usam o mesmo cartão em coluna única.
+- **Banco alterado:** não.
+- **Pendente:** conferir no celular real do responsável e com o vendedor que escolher "Os dois".
+
 ## 2026-11-19 (noite) — Plano de consórcio por concessionária (#voudeHonda+ / #voudeHonda / os dois)
 
 - **O que mudou:** algumas concessionárias vendem só o `#voudeHonda` (sem emplacamento). Agora o dono escolhe, **por concessionária e por loja do Acre**, entre `#voudeHonda+` (padrão), `#voudeHonda` ou **os dois** (cliente alterna por botão na vitrine). Todos os vendedores da loja passam a mostrar as parcelas do plano escolhido. No `#voudeHonda` o texto "com emplacamento" some; o seguro prestamista vale nos dois.
