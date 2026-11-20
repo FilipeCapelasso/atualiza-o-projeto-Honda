@@ -1,5 +1,12 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-20 (fim da tarde) — Anti-inspeção nos 4 sites (pedido do dono)
+
+- **O que mudou (vitrine, comercial, site-cdc, site-cnh):** bloco `anti-inspecao` no `<head>` que bloqueia o clique direito e os atalhos F12, Ctrl+Shift+I/J/C/K, Ctrl+U e Cmd+Option+I/J/C/U. Campos de texto continuam com o menu normal (colar, copiar) e o teclado comum não é afetado.
+- **Limite honesto:** é só um incômodo para curiosos. Quem usa o menu do navegador, outro navegador, `curl` ou um script continua vendo o que o navegador recebe. A proteção real está no banco (RLS e funções que checam quem chama). Para desativar, apagar o bloco `<script id="anti-inspecao">`.
+- **Testado:** clique direito bloqueado fora de campos e liberado em campos; atalhos bloqueados; Ctrl+C/V/F e letras livres; sem erro de script ao abrir os 4 sites.
+- **Banco alterado:** não. **Não incluído:** a página de termos (termo-honda-grupo-star).
+
 ## 2026-11-20 (tarde) — Removida a apresentação "patrão" do banco
 
 - **O que mudou:** a apresentação "patrão" não é mais usada, então foi apagada do banco: as funções `patrao_*` e `mestre_patrao*`, as tabelas `patrao_sessoes` e `patrao_respostas` e as duas chaves `patrao_*` da `plataforma_config` (migration `remove_apresentacao_patrao`). Isso também elimina um item de segurança em aberto da auditoria do mesmo dia.
