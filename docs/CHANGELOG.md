@@ -1,5 +1,14 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-19 (noite) — Logo da Moto Campo e checkout por região → concessionária
+
+- **O que mudou:** logo da concessionária **Moto Campo** (id `campo`, MT) refeita em alta resolução com fundo transparente (`conc-campo.png`, repositório VITRINE, servida em `https://www.sitevendedor.com/conc-campo.png`) e gravada em `concessionarias.logo_url` e na vendedora `paula`. Como a logo está no cadastro de concessionárias, todo vendedor futuro que escolher ou digitar essa concessionária recebe a logo sozinho (trigger `tg_vendedor_concessionaria` + `concessionaria_resolver`).
+- **Comercial (checkout):** a **região (estado)** passou a ser o primeiro campo; ao escolher um estado fora do Acre, aparecem as concessionárias já cadastradas naquele estado (cards com logo); o vendedor toca em uma, ou digita o nome (a lista filtra) ou informa uma nova. Acre continua com as lojas do grupo.
+- **Por que:** pedido do responsável (logo para futuros cadastros; vendedor escolhe região e depois a concessionária).
+- **Banco alterado:** sim. Migration `concessionarias_catalogo_publico_e_logo_moto_campo`: nova função `ps_concessionarias()` (pública, devolve id, nome, UF e logo das concessionárias) e `logo_url` da `campo`.
+- **Nota:** o nome do arquivo não começa com `logo-` de propósito: arquivos `logo-*.png` recebem o estilo sem caixa branca (feito para logos claras), e a Moto Campo é vermelha.
+- **Pendente:** logos das outras concessionárias sem logo (Brasmoto, Mônaco, Honda Freeway) quando o responsável enviar.
+
 ## 2026-11-19 — Painel do vendedor: categoria "Sites" e revisão de todos os preenchimentos
 
 **Revisão (sem mudança de código):** todo preenchimento grava no sistema do vendedor e leva o cliente sozinho ao WhatsApp dele:
