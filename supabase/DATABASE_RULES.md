@@ -40,6 +40,7 @@ Relações principais: `vendedores` → (`motos`, `leads`, `fichas`, `contratos`
 | Tabelas Honda nacionais (27 UFs): coleta pelo coletor `honda-sync` | 2×/dia: 12:25 e 20:25 UTC = 07:25 e 15:25 Rio Branco | `honda_agendar` |
 | Tabelas Honda: avança a fila e chama o coletor `honda-sync` | a cada 2 min | `honda_passo` |
 | Região B (23 estados) a partir da coleta oficial + conferência de que cada estado tem a tabela da sua região; roda sozinha ao fim da coleta e de novo às 12:45/20:45 UTC (pula se já aplicou) | 2×/dia | `honda_regioes_aplicar` (`regiao_b_*` desligados) |
+| `#voudeHonda` (sem +) por região em `catalogo_planos_normal`, validado contra o `#voudeHonda+`, e reaplicação nas motos das lojas que escolheram `#voudeHonda` ou os dois | `plano_normal_atualizar` | 12:48 e 20:48 UTC |
 | Expansão por estado | 2×/dia (12:55 e 20:55 UTC) | `expansao_manter` |
 | Fotos e cores oficiais | 2×/dia (cores 12:20/20:20, fotos 12:50/20:50 UTC) | chamam as Edge Functions `fotos-honda` e `cores-oficial` |
 | CDI | dias úteis, 21h UTC | `sync_cdi` |

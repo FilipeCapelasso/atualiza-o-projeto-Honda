@@ -1,5 +1,15 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-19 (noite) — Plano de consórcio por concessionária (#voudeHonda+ / #voudeHonda / os dois)
+
+- **O que mudou:** algumas concessionárias vendem só o `#voudeHonda` (sem emplacamento). Agora o dono escolhe, **por concessionária e por loja do Acre**, entre `#voudeHonda+` (padrão), `#voudeHonda` ou **os dois** (cliente alterna por botão na vitrine). Todos os vendedores da loja passam a mostrar as parcelas do plano escolhido. No `#voudeHonda` o texto "com emplacamento" some; o seguro prestamista vale nos dois.
+- **Quem muda:** só o dono, em Admin geral › Expandir › "Plano de consórcio de cada loja" (RPC `mestre_plano_modo_salvar`). O vendedor não altera.
+- **Como funciona:** as tabelas `#voudeHonda` por região (A = AC, B = estado de referência) vêm da coleta oficial (`honda_installments`) e ficam em `catalogo_planos_normal`; a função `plano_normal_atualizar()` roda 12:48/20:48 UTC, valida (precisa ser menor que o `#voudeHonda+` e ter os mesmos prazos) e reaplica. O gatilho `e_plano` em `motos` grava na moto do vendedor o plano ativo (`plano_ativo`: null = +, `n` = normal, `ambos` = +, com o normal em `planos_alt`). Só vale para modelos que a Honda publica nos dois planos (16); Advance, POP e CRF 300F não mudam. **Cometa fica de fora** (tabela própria).
+- **Banco alterado:** sim. Migrations `plano_consorcio_por_concessionaria_voudehonda` e `plano_consorcio_gatilho_planos_alt_vazio`: colunas `plano_modo` (concessionarias, lojas) e `plano_ativo` (motos), tabela `catalogo_planos_normal`, funções `vend_plano_modo`, `tg_motos_plano`, `plano_modo_reaplicar(_todos)`, `plano_normal_atualizar`, `mestre_plano_modos`, `mestre_plano_modo_salvar`, gatilho em `vendedores`, cron `plano_normal_atualizar`.
+- **Sites alterados:** vitrine (texto de emplacamento, botão `#voudeHonda+ | #voudeHonda`) e comercial (painel do dono).
+- **Estado atual:** todas as lojas continuam em `#voudeHonda+` até o dono escolher. Testado no banco com reversão (Moto Campo, região B: 60x CG 160 TITAN = R$ 538,14 no + e R$ 498,28 no normal).
+- **Pendente:** o dono definir o plano de cada loja; conferir `plano_normal_atualizar` depois da primeira janela das 12:48 UTC.
+
 ## 2026-11-19 (noite) — Logo da Moto Campo e checkout por região → concessionária
 
 - **O que mudou:** logo da concessionária **Moto Campo** (id `campo`, MT) refeita em alta resolução com fundo transparente (`conc-campo.png`, repositório VITRINE, servida em `https://www.sitevendedor.com/conc-campo.png`) e gravada em `concessionarias.logo_url` e na vendedora `paula`. Como a logo está no cadastro de concessionárias, todo vendedor futuro que escolher ou digitar essa concessionária recebe a logo sozinho (trigger `tg_vendedor_concessionaria` + `concessionaria_resolver`).
