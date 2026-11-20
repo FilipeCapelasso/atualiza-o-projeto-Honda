@@ -1,5 +1,12 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-20 — Vitrine: card da tabela de consórcio menor e cabeçalho com logo e Instagram
+
+- **O que mudou (vitrine):** no cartão que abre ao tocar numa moto, o topo agora mostra **logo da concessionária + foto do vendedor + telefone + @Instagram** (a logo é a da concessionária nos vendedores de fora do Acre e a da loja nos do Acre; some se não houver logo). A tela "Tabela de consórcio" ficou menor: largura de 600 px no computador (antes 1060 px), foto da moto mais baixa (150 px), linhas e textos mais compactos.
+- **Instagram:** o campo já existia; só aparece se o vendedor preencher em Meu site › Redes sociais. A Paula (Moto Campo) está **sem Instagram salvo** no banco; o exemplo mostra @paulapireshonda, mas não gravei no cadastro dela.
+- **Banco alterado:** não.
+- **Pendente:** Paula (ou o dono) preencher o Instagram.
+
 ## 2026-11-19 (noite) — Revisão geral do sistema
 
 - **Rotinas agendadas (cron):** todas as ativas rodaram com sucesso na última execução. Os crons novos (`cometa_oficial_aplicar`, `plano_normal_atualizar`) ainda não tiveram janela; primeira em 12:46/12:48 UTC.
