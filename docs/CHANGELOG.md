@@ -1,5 +1,17 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-20 — Segurança: auditoria geral e 4 correções no banco
+
+- **Auditoria:** banco (permissões, RLS, funções), Edge Functions, os 6 repositórios e o histórico do git, logs, cabeçalhos do Vercel e `api/og.js`. Nenhum segredo nos repositórios (só a chave pública anon) e nenhum ponto de XSS encontrado. Os detalhes técnicos das brechas ficam fora deste repositório público.
+- **O que mudou (banco, migrations `seguranca_revoga_funcao_interna_e_tabela_catalogo`, `seguranca_limites_checkout_e_webhook_mp`, `seguranca_corrige_alias_limite_ps_criar_pedido`):**
+  - Checkout (`ps_criar_pedido`): limite de tentativas por e-mail/WhatsApp (24 h) e no total (1 h) e campo-isca anti-robô (`site`); o checkout normal não muda.
+  - Webhook do Mercado Pago (`mp_webhook`): valida o formato do id e limita por minuto; continua liberado para o Mercado Pago e sempre responde ok.
+  - Função interna `honda_tabela_versionar` agora só roda pelo cron e pela Edge Function `honda-sync`.
+  - Tabela `catalogo_planos_normal`: permissões de anon/authenticated removidas (o RLS já bloqueava).
+- **Testado:** acessos de anon negados onde deveriam, checkout chega até a validação do plano, limites disparam e liberam outro cliente, cron `honda_tabela_versionar` OK. Dados de teste desfeitos (pedidos 38, eventos 10, como antes).
+- **Banco alterado:** sim (só permissões e as duas funções acima). Nenhum arquivo de site mudou.
+- **Pendente (dono):** decidir como proteger as funções da apresentação (`patrao_*`); ligar "proteção contra senha vazada" no Auth do Supabase; para limite por IP/CAPTCHA/bloqueio de robôs, colocar Cloudflare (WAF/Turnstile) na frente do domínio.
+
 ## 2026-11-20 — Vitrine: chat em tela cheia no computador, com fundo novo
 
 - **O que mudou (vitrine):** no computador (tela a partir de 721 px) o chat com o vendedor deixou de ser uma janela de 540 px e passou a **ocupar a tela toda**: topo com logo/nome do vendedor e botão de fechar no canto direito, conversa numa coluna central (900 px; 980 px em telas ≥ 1500 px; 1100 px em telas ≥ 2000 px) e campo de resposta embaixo. Fundo novo: escuro com brilhos vermelho (cor do site), verde e azul de movimento lento, linhas diagonais finas e a coluna da conversa levemente destacada. Balões do vendedor em branco, do cliente em verde; respostas rápidas em vidro. Letras maiores em telas grandes. Rola só a conversa (a página atrás fica travada).
