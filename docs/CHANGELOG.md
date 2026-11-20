@@ -1,5 +1,14 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-19 (noite) — POP 110i ES: Acre = lojas Star Motos, Juruá Motocenter e Acre Motos; tabelas por região; POPs lado a lado
+
+- **Esclarecimento do dono:** "região Acre" são as 3 lojas **Star Motos (23), Juruá Motocenter (6) e Acre Motos (8)**, que não vendem a POP simples. Conferido no banco: são exatamente os 37 vendedores com `uf = 'AC'` (loja_id das 3 lojas), então a exclusão `excluir_ufs = {AC}` já cobre só elas. Vendedores de AM, AP, ES, GO e MT (concessionárias Cometa, Mônaco, Brasmoto, Moto Formosa, Moto Campo) recebem.
+- **Tabelas separadas como no site oficial:** conferido nas 27 UFs lidas do site oficial: a POP 110i ES tem **duas tabelas** — região A (AC, AM, RO, RR: 80x R$ 196,91, crédito R$ 11.844) e região B (as outras 23 UFs: 80x R$ 197,73, crédito R$ 11.893), idênticas dentro de cada região. No sistema: A = `catalogo_mestre.planos`, B = `catalogo_planos_regiao` ('B'), e agora também **Cometa Manaus** = `catalogo_planos_regiao` ('COMETA-AM'), semeada igual à região A porque a Cometa ainda não publica este modelo no mapa (`cometa_mapa`); passa a ser atualizada sozinha quando o mapa existir.
+- **POPs lado a lado:** no catálogo geral e nas motos dos 6 vendedores, **POP 110I ES (ordem 0)** e **POP 110I ES +10% (ordem 1)** ficam em sequência, no topo; as demais motos desceram uma posição.
+- **Banco alterado:** sim (dados): `catalogo_mestre.ordem`, `motos.ordem` dos 6 vendedores, nova linha COMETA-AM em `catalogo_planos_regiao`. Sem migration nova.
+- **Sites:** sem alteração.
+- **Pendente:** preço próprio da Cometa para a POP simples (precisa mapear o plano da Cometa em `cometa_mapa`; hoje usa a tabela da região A).
+
 ## 2026-11-19 (noite) — Novo modelo: POP 110i ES (simples), sem o Acre
 
 - **O que mudou:** a **POP 110i ES** (sem "+10% de documentação") entrou no catálogo geral (`catalogo_mestre`, slug oficial `pop-110i-es`), com nome e tabela próprios (não é a "POP 110I ES +10%"). Selo "Lançamento", categoria Street, só `#voudeHonda` (sem emplacamento, pela regra fixa), seguro prestamista nos dois valores. Tabela oficial: região B (referência SP) 80x R$ 197,73 com seguro / R$ 193,26 sem, crédito R$ 11.893; região A (referência AC) 80x R$ 196,91 / R$ 192,47, crédito R$ 11.844; prazos 12–80 meses (7 linhas por região).
