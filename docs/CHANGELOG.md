@@ -1,5 +1,13 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-19 (noite) — Cometa Manaus passa a seguir a tabela oficial da Honda para o Amazonas (2×/dia)
+
+- **Regra de ouro (confirmada pelo dono):** cada região/localização segue a tabela do site oficial da Honda. A Cometa fica em Manaus (AM), **não no Acre**; a tabela dela agora vem do **Amazonas oficial**, não do site da própria Cometa.
+- **O que foi feito:** nova função `cometa_oficial_aplicar()` (cron `cometa_oficial_aplicar`, job 87, **12:46 e 20:46 UTC = 07:46 e 15:46 em Rio Branco**, logo depois da coleta do site oficial). Lê `honda_vehicles` (uf = AM), escolhe o plano de cada modelo como a região B (`catalogo_fonte`), valida (números, prazos, faixa contra a região A) e grava em `catalogo_planos_regiao` região `COMETA-AM`, com histórico em `catalogo_planos_hist` e registro em Admin geral › Regiões (`regiao_log`). Só aplica se a leitura de AM for da coleta mais recente (menos de 12 h) e ao menos 90% dos modelos forem válidos; senão não altera nada e avisa o dono. Depois reaplica nos vendedores Cometa (`regiao_reaplicar`).
+- **Conferência feita:** as 27 UFs do site oficial seguem a tabela da sua região (nenhum aviso). A tabela oficial de AM hoje é **idêntica** à do AC nos 249 prazos lidos. Primeira aplicação: 28 modelos lidos, 4 ajustados (CG 160 FAN/START/TITAN ganharam o prazo oficial de 99 meses; CRF 300F, centavos); 8 motos dos 2 vendedores Cometa reaplicadas. POP 110i ES (simples) e +10% já estavam iguais ao oficial.
+- **Banco alterado:** sim. Migration `cometa_manaus_tabela_oficial_honda_amazonas`; cron novo. Sites sem alteração.
+- **Pendente (decisão do dono):** os jobs antigos `cometa_iniciar`/`cometa_buscar`/`cometa_aplicar` (11:00–11:04 e 19:00–19:04 UTC) ainda leem o site da Cometa e podem sobrescrever a tabela às 06:04/14:04 de Rio Branco; a rotina oficial corrige às 07:46/15:46. O ideal é desativá-los; não foi feito sem autorização.
+
 ## 2026-11-19 (noite) — POP 110i ES: Acre = lojas Star Motos, Juruá Motocenter e Acre Motos; tabelas por região; POPs lado a lado
 
 - **Esclarecimento do dono:** "região Acre" são as 3 lojas **Star Motos (23), Juruá Motocenter (6) e Acre Motos (8)**, que não vendem a POP simples. Conferido no banco: são exatamente os 37 vendedores com `uf = 'AC'` (loja_id das 3 lojas), então a exclusão `excluir_ufs = {AC}` já cobre só elas. Vendedores de AM, AP, ES, GO e MT (concessionárias Cometa, Mônaco, Brasmoto, Moto Formosa, Moto Campo) recebem.
