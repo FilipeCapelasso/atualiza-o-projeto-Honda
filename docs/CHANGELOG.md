@@ -1,5 +1,15 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-21 — Catálogo: XR 300L Tornado agora com a cor Preta (fotos do site da loja)
+
+- **O que mudou (banco, via `_mestre_aplicar`):** a XR 300L Tornado passou a ter **Vermelho + Preto** no catálogo geral, com as fotos oficiais da loja (grupostarmotos.com.br). Propagado para os **44 vendedores** que têm a moto; nenhum tinha a foto personalizada, então todos receberam.
+- **Por quê:** no site do **consórcio** da Honda a Tornado sai só em vermelho, mas a loja publica a preta no próprio site. O pedido foi mostrar a preta também. As imagens são as duas do site da loja (vermelha e preta, mesmo enquadramento), referenciadas direto por https (o CSP do site já libera imagem https).
+- **Testado:** no site ao vivo, o card mostra "Vermelho, Preto"; nos detalhes, tocar em "Preto" troca a foto para a moto preta e o WhatsApp já vai com "na cor Preto". Sem erro.
+- **Banco alterado:** sim (catalogo_mestre da Tornado + 44 motos). Nenhum arquivo de site mudou.
+- **Atenção:** se a Honda publicar uma versão nova da Tornado no site oficial, a rotina automática de cores pode reconstruir a moto a partir do oficial (só vermelho) e tirar a preta — ela guarda a versão anterior e avisa. Se isso acontecer, é só reaplicar a preta.
+- **Foto vermelha anterior (oficial), caso precise voltar:** midia/1792458608273-f7kuy-9725R1GDJOIelnIw38tNeGd3NZJpWu9cTnar723K.png
+- **Pendente:** se quiser, puxar do site da loja as cores/fotos que faltam em outras motos (ex.: as que aparecem com "1 cor").
+
 ## 2026-11-20 (fim da tarde) — Anti-inspeção nos 4 sites (pedido do dono)
 
 - **O que mudou (vitrine, comercial, site-cdc, site-cnh):** bloco `anti-inspecao` no `<head>` que bloqueia o clique direito e os atalhos F12, Ctrl+Shift+I/J/C/K, Ctrl+U e Cmd+Option+I/J/C/U. Campos de texto continuam com o menu normal (colar, copiar) e o teclado comum não é afetado.
