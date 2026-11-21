@@ -1,5 +1,12 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-21 — Catálogo: removido o selo "Lançamento" da POP 110i ES
+
+- **O que mudou (banco):** o selo "Lançamento" foi apagado do catálogo geral (1 moto, POP 110I ES) e das cópias dos vendedores (7 motos: rafael, daniel, andrezanes, dilorran, robson, paula, victor). O card deixa de mostrar a etiqueta.
+- **Por quê:** pedido do dono.
+- **Conferido:** nenhuma função do banco recoloca esse selo; nenhum vendedor tinha personalizado. O vendedor ainda pode pôr um selo próprio no painel.
+- **Banco alterado:** sim (só a coluna `selo`). Nenhum arquivo de site mudou.
+
 ## 2026-11-21 — Vitrine: as duas POP 110i ES fixas nas 2 primeiras posições
 
 - **O que mudou (vitrine.html, função `lista`):** os modelos cujo nome começa com "POP 110I ES" (a POP e a POP +10%) passam sempre para o início da lista, a "POP 110I ES" primeiro e a "+10%" em seguida. No computador (4 colunas) ficam lado a lado na primeira linha; em tablet (2 colunas) também; no celular a grade é de 1 coluna, então ficam uma embaixo da outra.
