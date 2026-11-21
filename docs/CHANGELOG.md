@@ -1,5 +1,13 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-21 — Vitrine: as duas POP 110i ES fixas nas 2 primeiras posições
+
+- **O que mudou (vitrine.html, função `lista`):** os modelos cujo nome começa com "POP 110I ES" (a POP e a POP +10%) passam sempre para o início da lista, a "POP 110I ES" primeiro e a "+10%" em seguida. No computador (4 colunas) ficam lado a lado na primeira linha; em tablet (2 colunas) também; no celular a grade é de 1 coluna, então ficam uma embaixo da outra.
+- **Por quê:** pedido do dono, para as duas POP serem as primeiras que o cliente vê.
+- **Regras:** vale quando o cliente não escolheu outra ordenação (menor preço, A–Z etc.); nas vitrines de alta cilindrada (categoria `alta`) a ordem não muda. Não mexe na ordem salva no painel de cada vendedor.
+- **Testado:** páginas reais de dois vendedores com o arquivo novo: POP e POP +10% nas posições 1 e 2, mesma linha, sem erro de script.
+- **Banco alterado:** não. **Pendente:** se quiser as duas lado a lado também no celular, é preciso passar a grade do celular para 2 colunas (muda o visual de todos os cards).
+
 ## 2026-11-21 — Catálogo: XR 300L Tornado agora com a cor Preta (fotos do site da loja)
 
 - **O que mudou (banco, via `_mestre_aplicar`):** a XR 300L Tornado passou a ter **Vermelho + Preto** no catálogo geral, com as fotos oficiais da loja (grupostarmotos.com.br). Propagado para os **44 vendedores** que têm a moto; nenhum tinha a foto personalizada, então todos receberam.
