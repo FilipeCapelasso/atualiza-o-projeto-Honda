@@ -1,5 +1,12 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-23 — Concessionária Nordeste Motos: logo sem fundo
+
+- **Logo:** a imagem enviada (335x597, letras e anel brancos sobre vermelho) foi tratada: fundo vermelho removido (PNG transparente, branco puro), redesenhada em 4x com bordas nítidas e cortada no círculo (1291x1293, 160 KB). Arquivo `logo-nordestemotos.png` na raiz do repositório **vitrine** (`https://www.sitevendedor.com/logo-nordestemotos.png`).
+- **Como aparece:** o nome `logo-xxx.png` ativa o modo "logo curada": sem caixa branca, direto no fundo do site (preto/vermelho), com leve brilho, ao lado do nome "Nordeste Motos". Serve para logos claras; para logos escuras usar `conc-xxx.png` (caixa branca).
+- **Banco (dados, sem migration):** `concessionarias` id `nordeste` (SE): `logo_url` preenchido; o vendedor `cleiton-santana` (único nela) acompanhou (`concessionaria_logo`). Nome já era "Nordeste Motos".
+- **Testado no ar** (celular e computador): logo transparente ao lado do nome, sem erro de script. Pendente: nada.
+
 ## 2026-11-23 — Concessionária MotoSul: logo e nome
 
 - **Logo:** a imagem enviada (240x240, fundo branco) foi tratada: fundo removido (PNG transparente), redesenhada em 4x com bordas nítidas e cortada no conteúdo (837x460, 49 KB). Arquivo `conc-motosul.png` na raiz do repositório **vitrine** (publicado em `https://www.sitevendedor.com/conc-motosul.png`).
