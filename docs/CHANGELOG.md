@@ -1,5 +1,10 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-22 — Comercial: link "Área do dono" removido do rodapé
+
+- O rodapé do site de vendas agora tem só "Planos" e "Dúvidas". Não sobrou nenhum link para o admin na página pública; o Admin Geral continua funcionando pelo endereço direto (`.../#admin`), que o dono já usa. A tela de login do admin mantém o título "Área do dono" (só aparece dentro do `#admin`).
+- Testado: página pública sem nenhum link para o admin; `#admin` abre a tela de login normalmente; sem erro de script. Banco: não alterado.
+
 ## 2026-11-22 — Segurança: painéis do Admin Geral fora do HTML público, robots.txt contra IAs, arquivos internos fora do ar
 
 - **Motivo:** o dono testou o site com outra IA (ChatGPT). Ela não entrou em nada (o próprio relatório diz que painel, banco, APIs e permissões ficaram "não acessados"), mas leu o texto da barra do Admin Geral, que ia escondido no HTML público.
