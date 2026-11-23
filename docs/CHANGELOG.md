@@ -1,5 +1,12 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-23 — Concessionária MotoSul: logo e nome
+
+- **Logo:** a imagem enviada (240x240, fundo branco) foi tratada: fundo removido (PNG transparente), redesenhada em 4x com bordas nítidas e cortada no conteúdo (837x460, 49 KB). Arquivo `conc-motosul.png` na raiz do repositório **vitrine** (publicado em `https://www.sitevendedor.com/conc-motosul.png`).
+- **Por que `conc-…` e não `logo-…`:** nomes `logo-xxx.png` ativam o modo "logo curada" (sem caixa, para logos claras). A MotoSul tem letras pretas e some no fundo escuro; com `conc-…` ela aparece dentro da caixa branca, ao lado do nome, como a Moto Campo.
+- **Banco (dados, sem migration):** `concessionarias` id `motosul`: nome "Motosul" → **"MotoSul"** e `logo_url` preenchido; o vendedor `cleiton` (único nela) acompanhou (`concessionaria`, `concessionaria_logo`). Atenção: `mestre_concessionaria_salvar` normaliza o nome (viraria "Motosul" de novo); para manter "MotoSul" alterar direto no banco.
+- **Testado no ar** (site do cleiton, celular e computador): logo na caixa branca ao lado de "MotoSul". Pendente: nada.
+
 ## 2026-11-23 — Admin geral: criar concessionária pelo perfil do vendedor
 
 - **Motivo:** o dono colocou um vendedor numa concessionária errada e a certa não existia no sistema; só dava para escolher as 6 já cadastradas.
