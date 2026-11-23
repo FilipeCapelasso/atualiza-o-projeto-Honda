@@ -139,3 +139,4 @@ remove_apresentacao_patrao (20/11/2026)
 - `seguranca_reduz_api_publica_anon_corrige_public` — as 3 funções do dono continuavam acessíveis porque o Postgres concede EXECUTE a `PUBLIC` por padrão: tira de `PUBLIC` e devolve para `authenticated` e `service_role`.
 - `comercial_vendedores_extra_config` (2026-11-22) — chave `vendedores_extra`: `mestre_config_salvar` aceita, `ps_publico` devolve.
 - `seguranca_painel_privado` (2026-11-22) — tabela `painel_privado` (RLS, sem policies) + `mestre_painel_privado(text)` só para o dono; guarda os painéis Catálogo e Calculadora do Admin Geral, que saíram do HTML público.
+- 2026-11-23 `mestre_concessionaria_criar` e `mestre_concessionaria_criar_corrige_uf`: função owner-only para criar concessionária (nome + UF), sem acesso de anon.

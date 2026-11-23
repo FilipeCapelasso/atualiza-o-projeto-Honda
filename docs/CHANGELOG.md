@@ -1,5 +1,13 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-23 — Admin geral: criar concessionária pelo perfil do vendedor
+
+- **Motivo:** o dono colocou um vendedor numa concessionária errada e a certa não existia no sistema; só dava para escolher as 6 já cadastradas.
+- **Tela (comercial/index.html):** no perfil do vendedor, o campo **Loja** ganhou a última opção **"➕ Criar nova concessionária…"**. Abre uma janela com Nome e Estado (UF, já vem o do vendedor); ao confirmar, cria a concessionária e já coloca o vendedor nela. Se o nome já existir, usa a existente e avisa. No Acre não cria (lá valem as lojas do grupo). A opção só aparece no perfil do vendedor, não na tela de supervisores.
+- **Banco (migrations `mestre_concessionaria_criar` e `mestre_concessionaria_criar_corrige_uf`):** função `mestre_concessionaria_criar(p_nome, p_uf)`: só o dono (`_exige_dono`), EXECUTE só para authenticated e service_role (anon e público sem acesso; conferido), valida nome e UF, evita duplicar pelo nome-chave (mesma regra de `conc_chave`), gera o id sozinha.
+- **Testado:** janela abre com a UF do vendedor; valida campos vazios; cancelar volta o campo; criar chama `mestre_concessionaria_criar` e depois `mestre_vendedor_local` com `c:<id>`; erro do banco aparece na janela; sem erro de script. No banco, o teste foi feito com uma concessionária "Teste" (SP) que **foi apagada** (continuam as 6 reais).
+- **Não testado ao vivo logado** (exige login do dono): conferir na primeira vez. Banco alterado: sim (função nova). Pendente: nada.
+
 ## 2026-11-23 — Link dos termos: termossistemahonda.vercel.app
 
 - O dono trocou o domínio do projeto dos termos na Vercel para `termossistemahonda.vercel.app` (o antigo `termosgrupostar.vercel.app` passou a dar 404). Atualizado em **vitrine** (vitrine.html e `frame-src`/CSP do vercel.json), **site-cdc** e **site-cnh**. Conferido no ar: a página abre com o título "Vendas Honda"; o link gerado pela vitrine fica `…/?loja=NomeDaLoja`. Banco: não alterado.
