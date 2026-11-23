@@ -1,5 +1,16 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-23 — Termos: política flexível para qualquer loja/concessionária (atuais e futuras)
+
+- **Motivo:** o texto falava só em "vendedor independente" e Grupo Star. Para lojas e concessionárias de outros estados (e as que ainda vão entrar), faltava dizer quem é a Loja no tratamento dos dados e deixar claro o que é simulação x contratação.
+- **termo-honda-grupo-star/index.html (conteúdo jurídico, atualizado a pedido do dono; recomenda-se revisão por advogado/encarregado):**
+  - Seção 1: papéis ampliados: **Vendedor e, quando houver, a Loja (loja ou concessionária de qualquer cidade/estado)** como controladores; Grupo Star continua operadora. Seção 6 inclui a Loja entre quem recebe os dados; seção 8 permite pedir direitos ao Vendedor ou à Loja.
+  - Novas seções: **11 Simulações, propostas e contratação** (valores informativos, simulação não é aprovação, regras do consórcio, contrato é com a instituição/administradora/Loja, dados verdadeiros, pagar só em canais oficiais), **12 Comunicações** (ofertas e como parar), **13 Alterações e contato** (versão em vigor, lei brasileira, e-mail de privacidade). Seção 5: aviso de incidente de segurança (ao titular e à ANPD).
+  - A página aceita `?loja=Nome` e mostra "Este site é atendido pela loja ou concessionária X" (só texto, limpo de HTML, máx. 80 caracteres). Sem o parâmetro, o texto continua valendo para qualquer loja. Data de atualização: 23/11/2026.
+- **vitrine/vitrine.html:** `polUrl()` monta o link dos termos com o nome da loja (Acre: loja do vendedor; fora do Acre: concessionária). Vale para o link do rodapé e o do aviso de cookies. Sites CDC/CNH continuam abrindo a página sem parâmetro (texto genérico).
+- **Testado:** página sem parâmetro, com loja e com tentativa de código no nome (aparece só como texto); links gerados para dois vendedores reais (Brasmoto, Motoformosa); sem erro de script. Banco: não alterado.
+- **Pendente:** revisão jurídica do texto; confirmar se a Loja/supervisor realmente enxerga os pedidos do vendedor (o texto diz que a Loja recebe os dados do atendimento); passar `?loja=` também no CDC e CNH se quiser.
+
 ## 2026-11-23 — Vitrine: tabela de parcelas do consórcio escura no tema escuro
 
 - **Motivo:** com o vendedor no tema escuro ("Fundo da página: preto"), o quadro das parcelas do consórcio (80x, 60x, 48x…) ficava com fundo **branco** e os valores quase invisíveis.
