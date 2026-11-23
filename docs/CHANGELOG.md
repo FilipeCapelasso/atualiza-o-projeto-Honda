@@ -1,5 +1,10 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-23 — Termos: marca "Vendas Honda" no lugar de "Grupo Star"
+
+- A página dos termos agora se chama **Vendas Honda** (título, topo, texto, rodapé) e usa a asa da Honda como logo (a estrela do Grupo Star saiu). **Star Motos (Grupo Star)** continua aparecendo só como a empresa que opera a plataforma (quadro de identificação, CNPJ e e-mail de privacidade), porque o texto legal precisa nomear uma empresa de verdade, não só uma marca. Dados em `EMPRESA` no script (`nome`, `operadora`).
+- **Link:** ainda `termosgrupostar.vercel.app`. O dono quer trocar (ex.: `termossistemahonda.vercel.app`, conferido livre na Vercel em 23/11). Falta ele adicionar o domínio no projeto da Vercel; depois trocar `POLITICA_URL` na vitrine, CDC e CNH e o `frame-src`/CSP dos sites, e manter o endereço antigo funcionando por um tempo. Banco: não alterado.
+
 ## 2026-11-23 — Termos: política flexível para qualquer loja/concessionária (atuais e futuras)
 
 - **Motivo:** o texto falava só em "vendedor independente" e Grupo Star. Para lojas e concessionárias de outros estados (e as que ainda vão entrar), faltava dizer quem é a Loja no tratamento dos dados e deixar claro o que é simulação x contratação.
