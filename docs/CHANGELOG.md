@@ -1,5 +1,11 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-23 — Vitrine: tabela de parcelas do consórcio escura no tema escuro
+
+- **Motivo:** com o vendedor no tema escuro ("Fundo da página: preto"), o quadro das parcelas do consórcio (80x, 60x, 48x…) ficava com fundo **branco** e os valores quase invisíveis.
+- **O que mudou (só CSS em vitrine.html, bloco `v53`, vale só com `body.fpr`):** cartões de parcela escuros com leve brilho; parcela escolhida em destaque vermelho (borda, brilho, texto claro); botão de seleção redondo próprio; "Valor da carta de crédito" virou uma faixa com o valor em vermelho; "Parcela escolhida" maior; selo "com Seguro de Vida em Grupo" em dourado. Vale também para o quadro "com/sem emplacamento" da tela de detalhes.
+- **Testado (celular e computador):** tema escuro com a tabela escura e troca de parcela funcionando; tema claro idêntico ao anterior; sem erro de script. Banco: não alterado. Pendente: nada.
+
 ## 2026-11-22 — Comercial: link "Área do dono" removido do rodapé
 
 - O rodapé do site de vendas agora tem só "Planos" e "Dúvidas". Não sobrou nenhum link para o admin na página pública; o Admin Geral continua funcionando pelo endereço direto (`.../#admin`), que o dono já usa. A tela de login do admin mantém o título "Área do dono" (só aparece dentro do `#admin`).
