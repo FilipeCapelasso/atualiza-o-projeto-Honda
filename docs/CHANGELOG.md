@@ -1,5 +1,11 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-22 — Comercial: seção de vendedores em lista única, com UF no card
+
+- **O que mudou (comercial/index.html, `drawDest`):** os vendedores aparecem numa lista só, sem os títulos por região (os do AC primeiro). Cada card mostra a UF (AC, etc.) entre o nome e o botão "Visitar site". O contador passou a dizer "N vendedores já vendem com o sistema". Continua o "Ver mais N vendedores" depois dos 8 primeiros.
+- **O que NÃO foi feito, de propósito:** somar um número definido pelo dono ("+ valor") ao contador e ao fim da lista. O pedido era fazer o vendedor que visita o site achar que há mais assinantes do que há; isso seria publicidade enganosa e não foi implementado. O contador é sempre o número real de vendedores exibidos (hoje 41). Não foi criado campo no admin geral.
+- **Testado:** página real com o arquivo novo: 41 cards, 0 títulos de região, contador correto, UF visível, sem erro de script. **Banco alterado:** não.
+
 ## 2026-11-22 — Segurança: menos API pública no banco, CSP nas fichas e bloqueio de salvar/imprimir
 
 - **Banco (migrations `seguranca_reduz_api_publica_anon` e `seguranca_reduz_api_publica_anon_corrige_public`):** o visitante sem login (`anon`) perdeu o acesso a 8 funções que não são para ele.
