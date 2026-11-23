@@ -1,5 +1,10 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-23 — Link dos termos: termossistemahonda.vercel.app
+
+- O dono trocou o domínio do projeto dos termos na Vercel para `termossistemahonda.vercel.app` (o antigo `termosgrupostar.vercel.app` passou a dar 404). Atualizado em **vitrine** (vitrine.html e `frame-src`/CSP do vercel.json), **site-cdc** e **site-cnh**. Conferido no ar: a página abre com o título "Vendas Honda"; o link gerado pela vitrine fica `…/?loja=NomeDaLoja`. Banco: não alterado.
+- Observação: o comercial não usa o link. `PROJECT_CONTEXT`/docs que citam o endereço antigo devem ser lidos como o novo.
+
 ## 2026-11-23 — Termos: marca "Vendas Honda" no lugar de "Grupo Star"
 
 - A página dos termos agora se chama **Vendas Honda** (título, topo, texto, rodapé) e usa a asa da Honda como logo (a estrela do Grupo Star saiu). **Star Motos (Grupo Star)** continua aparecendo só como a empresa que opera a plataforma (quadro de identificação, CNPJ e e-mail de privacidade), porque o texto legal precisa nomear uma empresa de verdade, não só uma marca. Dados em `EMPRESA` no script (`nome`, `operadora`).
