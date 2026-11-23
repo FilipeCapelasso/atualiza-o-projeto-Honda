@@ -1,5 +1,15 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-22 — Comercial: número de vendedores que não aparecem na lista (editável no admin geral)
+
+- **Correção do registro anterior:** a entrada "lista única" dizia que o "+ valor" não foi feito. Agora foi feito, depois do dono esclarecer que o número representa vendedores **reais** do sistema que não querem aparecer no site comercial (cadastrados pessoalmente ou que pediram para sair).
+- **Banco (migration `comercial_vendedores_extra_config`):** nova chave `vendedores_extra` em `plataforma_config`; `mestre_config_salvar` aceita `vendedores_extra` (inteiro de 0 a 100000; negativo vira 0; texto é recusado; só o dono) e `ps_publico` devolve `vendedores_extra`. Funções alteradas por substituição de texto (permissões mantidas: `mestre_config_salvar` continua sem acesso do visitante).
+- **Site comercial:** no fim da lista aparece "+ N vendedores que também vendem com o sistema e preferem não aparecer aqui" (não aparece se for 0). O contador do topo vira "mais de 41 vendedores já vendem com o sistema" quando N > 0 (e "41 vendedores…" exato quando é 0).
+- **Admin geral → Configurações:** novo cartão "Vendedores que não aparecem na lista" com o campo Quantidade. O texto lembra que o número deve ser real.
+- **Ocultar um vendedor específico:** já existia (admin → vendedor → "Mostrar este vendedor na página inicial", tabela `ps_destaques.ativo`); nada novo.
+- **Testado:** DB (12 salva, -5 vira 0, "abc" recusado, valor de teste apagado); site com extra 0, 12 e 1 (singular/plural, posição depois da lista, contador), sem erro de script; scripts do arquivo sem erro de sintaxe. O cartão do admin não foi aberto logado (exige login do dono): conferir na primeira vez.
+- **Banco alterado:** sim. **Pendente:** o dono definir o número real em Configurações.
+
 ## 2026-11-22 — Comercial: seção de vendedores em lista única, com UF no card
 
 - **O que mudou (comercial/index.html, `drawDest`):** os vendedores aparecem numa lista só, sem os títulos por região (os do AC primeiro). Cada card mostra a UF (AC, etc.) entre o nome e o botão "Visitar site". O contador passou a dizer "N vendedores já vendem com o sistema". Continua o "Ver mais N vendedores" depois dos 8 primeiros.

@@ -137,3 +137,4 @@ remove_apresentacao_patrao (20/11/2026)
 ## 2026-11-22
 - `seguranca_reduz_api_publica_anon` — tira do papel `anon` o EXECUTE de 3 funções só do dono (`mestre_concessionaria_salvar`, `mestre_honda_versoes`, `mestre_promo_bf_ligar`) e das 5 funções do módulo de assinatura antigo (`assin_consultar`, `assin_criar_pedido`, `assin_slug_livre`, `assin_planos_publicos`, `assin_config_publica`). Nada que os sites usem.
 - `seguranca_reduz_api_publica_anon_corrige_public` — as 3 funções do dono continuavam acessíveis porque o Postgres concede EXECUTE a `PUBLIC` por padrão: tira de `PUBLIC` e devolve para `authenticated` e `service_role`.
+- `comercial_vendedores_extra_config` (2026-11-22) — chave `vendedores_extra`: `mestre_config_salvar` aceita, `ps_publico` devolve.
