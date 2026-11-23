@@ -28,7 +28,7 @@ Atualizado em 2026-11-19. Repositórios **públicos**: não detalhar aqui falhas
 - Cada site é um arquivo único de ~60 a 690 KB: conflitos de edição simultânea entre contas são fáceis. Regra: uma conta por vez por site; sempre `git pull` antes e conferir o último commit.
 - O hub é público e contém o mapa do banco. Considerar torná-lo **privado** (o espelho continua funcionando com o token).
 - Não existe teste automatizado nem ambiente de homologação identificados; a `main` vai direto para produção *(inferido)*.
-- `VITRINE/index_VITRINE_v39-antes-cores.html` é um backup grande no repositório; avaliar mover/remover (com autorização).
+- `VITRINE/index_VITRINE_v39-antes-cores.html` é um backup grande no repositório. Desde 2026-11-22 não é mais publicado (`.vercelignore`); remover do repositório só com autorização.
 
 ## Segurança (resumo; ver o relatório do linter do Supabase)
 

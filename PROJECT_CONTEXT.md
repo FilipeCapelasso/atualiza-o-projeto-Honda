@@ -33,7 +33,7 @@ Navegador / robô de prévia (WhatsApp, Instagram...)
 ## Peças por repositório
 
 - **comercial**: `index.html` (~670 KB), `vercel.json` (cabeçalhos de segurança + CSP), ícones/imagens.
-- **VITRINE**: `vitrine.html` (~630 KB), `index_VITRINE_v39-antes-cores.html` (backup antigo, ~470 KB, não é servido), `sw.js` (cache de fotos do Supabase Storage no aparelho), `api/og.js` (função serverless de prévia de link), `vercel.json` (roteamento + CSP), imagens.
+- **VITRINE**: `vitrine.html` (~630 KB), `index_VITRINE_v39-antes-cores.html` (backup antigo, ~470 KB; fica no GitHub mas não é publicado, por causa do `.vercelignore`), `sw.js` (cache de fotos do Supabase Storage no aparelho), `api/og.js` (função serverless de prévia de link), `vercel.json` (roteamento + CSP), imagens.
 - **SITE-CNH** / **SITE-CDC**: `index.html` + `vercel.json` (só `/:slug` → `/index.html` e `?v=slug` → `/slug`).
 
 - **Termo-Honda-Grupo-Star**: só `index.html` (~44 KB), página estática de Política de Privacidade e Termo de Ciência do Grupo Star; sem Supabase, sem formulário, sem `vercel.json`. Domínio `termosgrupostar.vercel.app` *(inferido pela CSP e pelo link da vitrine)*.
@@ -51,3 +51,9 @@ Navegador / robô de prévia (WhatsApp, Instagram...)
 ## Não confirmado
 
 Regras comerciais Honda (preços, parcelas, carências) estão no banco/código; **nenhuma foi confirmada pelo responsável nesta documentação**. Não inventar valores.
+
+## Painéis do Admin Geral guardados no banco (desde 2026-11-22)
+- As abas **Catálogo** (antigo "Admin Geral | Catálogo") e **Calculadora** do Admin Geral não ficam mais no `comercial/index.html`. O HTML de cada uma fica em base64 na tabela `painel_privado` (linhas `catalogo` e `calculadora`) e o site busca com `sb.rpc('mestre_painel_privado', {p_nome})`, que só o dono executa.
+- **Para mudar um desses painéis:** pegue o base64 atual da tabela (como dono ou pelo SQL Editor), decodifique, edite, codifique de novo e grave com `update painel_privado set conteudo = '<base64>', atualizado_em = now() where nome = 'catalogo';`. Não volte a embutir no HTML.
+- **Arquivos não publicados:** cada repositório tem um `.vercelignore`; o que estiver listado nele fica só no GitHub.
+
