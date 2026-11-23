@@ -1,5 +1,9 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-22 — Comercial: texto do número extra encurtado
+
+- O fim da lista passou a dizer só "+ N vendedores que também vendem com o sistema" (saiu "e preferem não aparecer aqui", a pedido do dono). Só texto, em comercial/index.html. Banco: não alterado. O número em Configurações continua devendo ser real.
+
 ## 2026-11-22 — Comercial: número de vendedores que não aparecem na lista (editável no admin geral)
 
 - **Correção do registro anterior:** a entrada "lista única" dizia que o "+ valor" não foi feito. Agora foi feito, depois do dono esclarecer que o número representa vendedores **reais** do sistema que não querem aparecer no site comercial (cadastrados pessoalmente ou que pediram para sair).
