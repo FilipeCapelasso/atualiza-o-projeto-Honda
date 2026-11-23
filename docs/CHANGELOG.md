@@ -1,5 +1,10 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-22 — Comercial: o "+ N vendedores" só aparece no fim da lista expandida
+
+- O texto "+ N vendedores que também vendem com o sistema" foi movido para dentro da área que abre com "Ver mais N vendedores", depois do último vendedor. Com a lista fechada ele não aparece. Se houver 8 vendedores ou menos (sem "Ver mais"), aparece logo abaixo da grade. Só mudança em comercial/index.html; banco não alterado.
+- Testado: fechado (área com altura 0, texto invisível), aberto (texto depois do último card, 41 cards), sem erro de script.
+
 ## 2026-11-22 — Comercial: texto do número extra encurtado
 
 - O fim da lista passou a dizer só "+ N vendedores que também vendem com o sistema" (saiu "e preferem não aparecer aqui", a pedido do dono). Só texto, em comercial/index.html. Banco: não alterado. O número em Configurações continua devendo ser real.
