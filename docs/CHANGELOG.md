@@ -1,5 +1,15 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-24 — Calculadora do vendedor: proposta automática (cliente, consórcio, financiamento e imagem)
+
+- **Pedido do dono:** algo no estilo da calculadora do Admin Geral, porém mais automático; escolher clientes já salvos, cadastrar cliente novo, e um resultado bonito com foto do vendedor, loja, contato, foto da moto e economia.
+- **vitrine.html (aba 🧮 Calculadora, reescrita, v56):**
+  1. **Cliente:** busca nos clientes do vendedor (chat, ficha CDC, contrato CNH, contatos e rascunhos). Ao tocar, preenche nome, WhatsApp, moto de interesse, entrada informada, lance (contrato) e escolhe o modo (consórcio/financiamento) pela forma de pagamento; prazo do consórcio mais próximo da parcela que o cliente pediu. Ou **＋ Cliente novo** (nome e WhatsApp digitados).
+  2. **Moto e condições:** moto do catálogo (preço da região do vendedor) ou valor digitado; abas **Comparar / Consórcio / Financiamento**. Consórcio: com ou sem seguro prestamista, prazo dos planos da moto, lance em R$ ou % e opção de quitar as parcelas do final (mesma regra da calculadora do Admin Geral: o lance abate da 3ª parcela em diante). Financiamento: entrada, juros do Banco Honda (`meu_fin_taxa`), 12–60x.
+  3. **Proposta:** cartão com foto, nome, loja e WhatsApp do vendedor; foto e valor da moto; consórcio e financiamento lado a lado; faixa de economia. Botões: **Enviar para o cliente** (abre o WhatsApp do próprio cliente com o texto), **Imagem da proposta** (PNG 1080x1350; no celular abre o compartilhar) e **Copiar texto**.
+- **Banco:** sem mudança nesta etapa (usa `meu_fin_taxa` e as tabelas já lidas pelo painel).
+- **Testado:** cliente salvo preenchendo moto/entrada/prazo; contas do lance conferidas (R$ 3.000 na Biz 48x: 6 parcelas quitadas + 40x de R$ 427,23); imagem gerada com foto do vendedor e da moto; celular e computador. Pendente: conferir logado; a criação da atualização semanal da taxa segue aguardando autorização.
+
 ## 2026-11-24 — Calculadora de financiamento volta para os vendedores (taxa do Banco Honda)
 
 - **Pesquisa:** o Banco Honda não publica tabela de juros por região. A fonte oficial e pública é o Banco Central (relatório "Taxas de juros por instituição", modalidade Aquisição de veículos – prefixado, pessoa física, `BCO HONDA S.A.`): média de **2,46% a.m. / 33,85% a.a.** (03 a 09/11/2026). Essa média é custo efetivo (inclui encargos). Sites de blog citam 1,49% a.m., sem fonte; não foram usados.
