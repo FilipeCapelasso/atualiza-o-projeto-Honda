@@ -1,5 +1,25 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-24 — "Mais um sonho realizado": só vídeo (sem foto nova), vários vídeos de uma vez; conferida a contagem de indicação
+
+- **Pedido do dono:** (1) tirar a opção de enviar foto no painel do vendedor, deixar só vídeo, e permitir escolher vários vídeos de uma vez (uma "sequência"), reaproveitando os mesmos dados (nome do cliente, moto, tipo), podendo repetir a mesma moto; (2) garantir que realmente existe contagem de compras feitas pelo link de indicação.
+- **Arquivo alterado:** `vitrine.html` (VITRINE), função `pEntregas()` (seção "Mais um sonho realizado" do painel do vendedor). Não mexeu no sistema de fotos do catálogo de motos (`upF`/`fcSet`/`fcAuto`), que é outra coisa.
+  - Removido o botão/input de enviar foto e a função `enAdd` (não publica foto nova nesta seção).
+  - Input de vídeo ganhou `multiple`; `enAddVideo` agora percorre os arquivos escolhidos, enviando um por um e criando uma entrada por vídeo, todas com o mesmo nome do cliente/moto/tipo preenchido uma única vez no formulário (permite repetir o nome da moto). Para no meio se bater o limite de vídeos do plano (`LIMV`), avisando o vendedor.
+  - Fotos já publicadas antes continuam no site (não foram apagadas) e podem ser removidas manualmente como antes; só a entrada de fotos novas foi desativada. Isso foi uma decisão de não mexer em dado real de vendedor sem confirmação — se o dono quiser também esconder/apagar as fotos antigas já publicadas, é só pedir.
+  - Textos da seção e `enDel` ajustados (fala só em vídeo; a mensagem de remover ficou genérica, já que a lista pode ter foto antiga + vídeo juntos).
+- **Conferência da contagem de indicação (pedido 2), sem alterar nada, só ponta a ponta:**
+  1. Link de indicação do vendedor: `https://www.sitevendedor.com/ind/<slug>` (gerado em `vitrine.html`).
+  2. Visitar esse link cai no `comercial/index.html` (conforme o roteamento do domínio), onde um trecho já existente captura o slug da URL (`/ind/<slug>` ou `?ref=`/`?ind=`) e grava em `localStorage.hn_ref2` com validade de 30 dias.
+  3. No cadastro/checkout, `refGet()` lê esse `hn_ref2` e manda `ref: <slug>` para a função do banco `ps_criar_pedido`.
+  4. Conferido o código da função no Supabase: `ps_criar_pedido` grava esse `ref` (em minúsculo, sem espaço, até 40 caracteres) dentro de `orders.dados->>'ref'`.
+  5. As funções que contam (`exp_ranking`, e a nova `_vendas_indicacao_total` da meta) buscam exatamente `lower(btrim(orders.dados->>'ref'))` batendo com o `slug` do vendedor, só pedidos com `status='pagamento_aprovado'`, excluindo auto-indicação e upgrade.
+  - **Conclusão:** a cadeia inteira (link → localStorage → checkout → pedido → contagem) está funcionando e consistente ponta a ponta. Nenhum código precisou mudar aqui.
+- **Banco de dados:** não alterado.
+- **Validação:** sintaxe (`node --check` no bloco de script extraído) validada.
+- **Pendente:** confirmar com o dono se quer esconder/remover as fotos já publicadas antes desta mudança, ou se ficam como estão (decisão hoje: ficam como estão).
+- **Deploy:** push para a `main` da VITRINE, Vercel reimplanta automaticamente.
+
 ## 2026-11-24 — Calculadora: valor da moto editável no financiamento CDC
 
 - **Relato do vendedor (print do WhatsApp, Admin Geral):** o campo "Valor da moto" na aba CDC x Consórcio vinha travado (`readonly`), sempre igual ao valor do crédito do consórcio — mas a moto pode custar um pouco mais na loja do que a carta de crédito.
