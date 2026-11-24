@@ -1,5 +1,13 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-24 — Expansão: prêmio do 1º lugar sobe de R$ 200 para R$ 300
+
+- **Pedido do dono:** aumentar o prêmio do 1º lugar do ranking de indicação (seção "O sistema está em expansão!") de R$ 200 para R$ 300, pra investir mais na expansão (contas do dono: na meta de 50 vendas de indicação, são R$ 1.250 de receita extra; pagando R$ 300 do 1º e R$ 100 do 2º, sobram R$ 850, dá pra cobrir o sistema por uns 3 meses, e os vendedores indicados ficam fixos pagando mensalidade).
+- **Arquivo alterado:** `vitrine.html` (VITRINE), função `exLoad()`. É só texto fixo (não vem do banco): trocado "R\$ 200"→"R\$ 300" no card de prêmios e "GANHE ATÉ 200 REAIS"→"GANHE ATÉ 300 REAIS" na tag de destaque. Prêmio do 2º lugar (R$ 100) e do 3º (2 meses grátis) não mudaram.
+- **Banco de dados:** não alterado (o valor do prêmio é só texto exibido; o pagamento do prêmio em si é feito manualmente pelo dono, fora do sistema).
+- **Validação:** sintaxe (`node --check` no bloco de script extraído) validada; conferido que não sobrou nenhuma menção a "R\$ 200"/"200 reais" no arquivo.
+- **Deploy:** push para a `main` da VITRINE, Vercel reimplanta automaticamente.
+
 ## 2026-11-24 — "Mais um sonho realizado": só vídeo (sem foto nova), vários vídeos de uma vez; conferida a contagem de indicação
 
 - **Pedido do dono:** (1) tirar a opção de enviar foto no painel do vendedor, deixar só vídeo, e permitir escolher vários vídeos de uma vez (uma "sequência"), reaproveitando os mesmos dados (nome do cliente, moto, tipo), podendo repetir a mesma moto; (2) garantir que realmente existe contagem de compras feitas pelo link de indicação.
