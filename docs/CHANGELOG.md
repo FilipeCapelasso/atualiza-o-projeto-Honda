@@ -1,5 +1,12 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-24 — Auditoria: taxa de financiamento da Calculadora conferida (sem mudança de código)
+
+- **Pedido do dono:** desconfiou dos juros depois de comparar com um print de uma tabela antiga (Prazo/Parcela, 48x = R$ 908,48 para a Titan com R$ 3.000 de entrada).
+- **Conferido:** `sync_taxa_honda()` rodado de novo (ainda 2,46% a.m., semana 03–09/11, nenhuma semana nova publicada pelo BCB); único ponto de leitura da taxa no front é `fTaxa()`, usado no cabeçalho, caixa de financiamento, imagem e texto do WhatsApp (sem taxa duplicada/hardcoded em nenhum dos 5 repositórios); fórmula Price (`fPmt`) conferida à mão (20.990 a 2,46% em 48x = R$ 749,92, bate com o site).
+- **Origem do print antigo:** confirmado com o dono — é da calculadora pública de financiamento que existia na vitrine antes de 19/11 (removida, usava outra fonte de taxa). Não representa a calculadora atual.
+- **Pendente:** nada relacionado à taxa; segue pendente só a criação da tarefa agendada para atualização semanal automática (aguardando autorização do dono) e a conferência logada com vendedor real.
+
 ## 2026-11-24 — Cursor do mouse: seta escura com contorno em todo o site
 
 - **Pedido do dono:** "o mouse branco se perde nas partes brancas do site" (cursor do sistema renderizando branco e sumindo no fundo claro).
