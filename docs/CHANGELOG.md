@@ -1,5 +1,12 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-24 — Cursor do mouse: seta escura com contorno em todo o site
+
+- **Pedido do dono:** "o mouse branco se perde nas partes brancas do site" (cursor do sistema renderizando branco e sumindo no fundo claro).
+- **vitrine.html:** `html{cursor:url(...svg...) 4 2, auto}` logo no início do CSS — uma seta escura (#14141c) com contorno branco, embutida como SVG em base64. Vale para site público e painel do vendedor. Não mexe nos cursores já definidos (botões, links etc. continuam com `pointer`), só substitui a seta padrão.
+- **Banco:** sem mudança.
+- **Pendente:** confirmar com o dono em um computador/navegador onde o cursor do sistema de fato aparecia branco (não foi possível reproduzir o navegador real nesta sessão; só conferido que a sintaxe do CSS é válida).
+
 ## 2026-11-24 — Calculadora: diferencia "Valor da moto" e "Valor da carta de crédito"
 
 - **Pedido do dono:** a calculadora estava mostrando só "Valor" em vários pontos, misturando o preço à vista da moto (usado no financiamento) com o valor da carta de crédito do consórcio (que vem da tabela cadastrada e pode ser diferente).
