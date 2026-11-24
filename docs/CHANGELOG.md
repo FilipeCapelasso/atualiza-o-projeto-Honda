@@ -1,5 +1,19 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-24 — Meta de vendas por indicação (somando todos os vendedores)
+
+- **Pedido do dono:** adicionar uma meta que só ele vê (com os números reais), e que para "vendedores admin" apareça só como uma barra de 0% a 100%. O progresso real é a soma das vendas de indicação de todos os vendedores (ex.: Sharon 20 indicados + Emily 20 indicados + ... = total geral), não por vendedor.
+- **"Vendas de indicação" = o mesmo que já existia no ranking (`exp_ranking`):** indicados que entraram pelo link (`?ref=slug`) de um vendedor e viraram vendedores pagantes (`orders.status='pagamento_aprovado'`, exclui upgrade, auto-indicação e vendedores tipo parceiro/suspensos).
+- **"Vendedores admin" = supervisores** (tabela `supervisores`, painel `/slug/supervisor` no comercial): é o único nível "acima" de vendedor comum que já existe no sistema. Vendedor comum não vê nada disso.
+- **Banco (migration `meta_vendas_indicacao`):**
+  - `_vendas_indicacao_total()`: função interna, soma as vendas de indicação de todos os vendedores (mesmo filtro do `exp_ranking`, sem agrupar por vendedor).
+  - `mestre_meta_indicacao()` / `mestre_meta_indicacao_salvar(p_meta)`: só o dono (`_exige_dono()`), com número real, meta, faltam e %. Meta fica em `plataforma_config` (`chave='meta_vendas_indicacao'`).
+  - `sup_meta_indicacao()`: só para supervisor ativo (`supervisores.ativo`) logado; devolve só `{ativo, pct}` — nunca o total real nem a meta.
+- **comercial/index.html:** novo cartão "📣 Meta de vendas por indicação" na Visão geral (aba `dash`), do lado do cartão de meta de custos já existente, com edição do valor-alvo.
+- **vitrine.html (painel do vendedor, aba Início):** se o vendedor logado for supervisor ativo e houver meta definida, aparece um cartão só com a barra de progresso (0–100%), sem nenhum número real. Vendedor comum não vê o cartão.
+- **Testado:** `mestre_meta_indicacao_salvar(50)` e `mestre_meta_indicacao()` direto no banco (meta salva, % calculada certo); depois apagado o valor de teste (`delete from plataforma_config where chave='meta_vendas_indicacao'`) para o dono definir o valor real pela interface. `sup_meta_indicacao()` sem usuário logado devolve `null`, como esperado. Sintaxe dos dois HTMLs (`node --check`) validada.
+- **Pendências:** nenhuma meta está definida ainda (fica 0/sem meta até o dono salvar um valor); testar com um supervisor real logado para conferir a barra.
+
 ## 2026-11-24 — Calculadora: remove parágrafo de explicação do cabeçalho
 
 - **Pedido do dono:** mandou print do topo da aba Calculadora (título "Calculadora de proposta" + o parágrafo "Escolha o cliente e a modalidade: consórcio..." + o cartão de juros) e pediu para tirar essa parte, sem explicação.
