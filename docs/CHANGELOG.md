@@ -1,5 +1,10 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-24 — Início do vendedor: Expansão no topo, sem frase e sem "Receba cada cliente"
+
+- **vitrine.html (só a aba Início):** o card "Expansão" passou para o topo (antes do "Bom dia"); removidos o card "Receba cada cliente na hora, no celular" (`appIniH` não é mais chamado no Início) e a frase do dia (CSS `body[data-ptab="inicio"] .shell .frase`, `adm()` grava a aba em `data-ptab`). Nas outras abas a frase e o aviso do app seguem como antes; as Atualizações continuam abaixo.
+- **Banco:** sem mudança. Pendente: conferir logado.
+
 ## 2026-11-24 — Expansão: link novo /ind/<vendedor>, visual e contador
 
 - **Link de indicação** agora é `https://www.sitevendedor.com/ind/<slug do vendedor>` (cada vendedor o seu). O formato antigo `?ref=` e `/comercial/<slug>` continua funcionando.
