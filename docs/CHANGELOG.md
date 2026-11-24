@@ -1,5 +1,13 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-24 — Calculadora: valor da moto editável no financiamento CDC
+
+- **Relato do vendedor (print do WhatsApp, Admin Geral):** o campo "Valor da moto" na aba CDC x Consórcio vinha travado (`readonly`), sempre igual ao valor do crédito do consórcio — mas a moto pode custar um pouco mais na loja do que a carta de crédito.
+- **Arquivo alterado:** `vitrine.html` (VITRINE). Novo estado `CQ.pv` (texto, vazio = usa o valor do catálogo). Campo "Valor da moto" deixou de ser `readonly`: vem pré-preenchido com o valor do catálogo, mas o vendedor pode digitar o valor real cobrado na loja (mesmo padrão de campo da "Valor da entrada", com `oninput`/`onblur` formatando). Resetado ao trocar de moto (`cqMotoSet`). `cqForm()` e `cqCalc()` passaram a usar `vNum(CQ.pv)||valor do catálogo`, então o ajuste entra no saldo financiado, na parcela e no total comparado com o consórcio.
+- **Banco de dados:** não alterado.
+- **Validação:** harness jsdom reaproveitado da reconstrução da Calculadora (2026-11-24, mais abaixo): confirmado que ajustar o valor da moto para R$ 26.150,00 (igual ao print do vendedor) muda `cqCalc().fin.pv`/parcela/total, e que sem ajuste continua igual ao catálogo. Sintaxe (`node --check`) validada.
+- **Deploy:** push para a `main`, Vercel reimplanta automaticamente.
+
 ## 2026-11-24 — Meta de vendas por indicação (somando todos os vendedores)
 
 - **Pedido do dono:** adicionar uma meta que só ele vê (com os números reais), e que para "vendedores admin" apareça só como uma barra de 0% a 100%. O progresso real é a soma das vendas de indicação de todos os vendedores (ex.: Sharon 20 indicados + Emily 20 indicados + ... = total geral), não por vendedor.
