@@ -1,5 +1,12 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-24 — Expansão: link novo /ind/<vendedor>, visual e contador
+
+- **Link de indicação** agora é `https://www.sitevendedor.com/ind/<slug do vendedor>` (cada vendedor o seu). O formato antigo `?ref=` e `/comercial/<slug>` continua funcionando.
+- **vercel.json (vitrine):** rewrite `/ind/:slug` → comercial com `?ref=:slug`. **comercial/index.html:** captura o ref também por `/ind/<slug>` e `?ind=`; o resto do checkout não mudou.
+- **Card (vitrine.html):** o link não aparecia (texto branco em campo branco); agora é um bloco legível com botões Copiar link e Enviar no WhatsApp; abaixo, "Vendedores que compraram pelo seu link: N"; pódio mantido.
+- **Banco:** sem mudança. Testado no ar: `/ind/shayron` abre o comercial e guarda o ref. Pendente: conferir o card logado e uma compra real pelo link.
+
 ## 2026-11-24 — Correção: aviso Expansão não aparecia (erro na função do ranking)
 
 - **Causa:** `exp_ranking()` falhava com "column reference pos is ambiguous" (variável com o mesmo nome de coluna); o painel então escondia o card. A tela estava certa; o erro era só no banco.
