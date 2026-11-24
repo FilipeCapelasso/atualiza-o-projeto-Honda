@@ -1,5 +1,13 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-24 — Calculadora: diferencia "Valor da moto" e "Valor da carta de crédito"
+
+- **Pedido do dono:** a calculadora estava mostrando só "Valor" em vários pontos, misturando o preço à vista da moto (usado no financiamento) com o valor da carta de crédito do consórcio (que vem da tabela cadastrada e pode ser diferente).
+- **vitrine.html (🧮 Calculadora):** cabeçalho da proposta, texto de WhatsApp/copiar e imagem gerada agora dizem "Valor da moto" para o preço à vista. O box do Consórcio Honda (proposta, texto e imagem) passa a mostrar também "Valor da carta de crédito" (`c.cr`, já calculado em `fcCon()` a partir da tabela da moto). Só rótulo/exibição; as contas de consórcio e financiamento não mudaram.
+- **Banco:** sem mudança.
+- **Testado:** sintaxe do script verificada (`node --check`); conferido visualmente que `.carta` (classe já usada no site) renderiza certo dentro do box do consórcio.
+- **Pendente:** conferir logado com vendedor real.
+
 ## 2026-11-24 — Calculadora do vendedor: proposta automática (cliente, consórcio, financiamento e imagem)
 
 - **Pedido do dono:** algo no estilo da calculadora do Admin Geral, porém mais automático; escolher clientes já salvos, cadastrar cliente novo, e um resultado bonito com foto do vendedor, loja, contato, foto da moto e economia.
