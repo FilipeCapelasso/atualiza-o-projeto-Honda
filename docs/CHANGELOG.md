@@ -1,5 +1,12 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-24 — Supervisor: pedido mínimo de 5 vendedores
+
+- **Regra:** compra de vagas de vendedor pelo supervisor é pacote: mínimo **5**, máximo 500, aumentando de 1 em 1.
+- **Banco (migration `sup_pedido_minimo_5`):** `sup_comprar` (Pix) e `sup_mensal_criar` (cartão mensal) agora recusam menos de 5 ("O pedido mínimo é de 5 vendedores (pacote)…"). Permissões mantidas (só authenticated). Vagas já compradas e assinaturas existentes não mudam.
+- **supervisor.html:** quantidade padrão 5; atalhos 5/10/25/50; botão − para em 5; aviso "mínimo de 5, depois de 1 em 1"; mensagem de erro igual à do banco.
+- **Não testado com compra real** (gera cobrança). Pendente: nada.
+
 ## 2026-11-24 — Expansão: selo "ATENÇÃO · GANHE ATÉ 200 REAIS NO PIX"
 
 - vitrine.html: texto do selo do card Expansão trocado. Banco: sem mudança. Pendente: nada.
