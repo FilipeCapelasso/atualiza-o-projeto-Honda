@@ -1,5 +1,20 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-24 — Calculadora: reconstruída em 3 abas, como a calculadora antiga do Admin Geral (v57)
+
+- **Pedido do dono:** mandou 3 prints da calculadora antiga do Admin Geral (abas **Calculadora**, **CDC x Consórcio**, **Comparar planos**) e pediu "antigo era assim, quero desse jeito, só que melhorado e usando fonte de taxa do banco Honda". A Calculadora v56 (fluxo único por moto, com abas Comparar/Consórcio/Financiamento) não seguia esse layout e não tinha cota de Reposição.
+- **Pesquisa antes de mexer:** decodificado de novo o HTML da calculadora antiga (`painel_privado.conteudo`, `nome='calculadora'`, base64) para extrair a matemática exata (`calcCore`, inclusive o caso de cota **Reposição**: diluir o que o grupo já pagou nas parcelas restantes ou cobrar como entrada) e o layout das 3 abas.
+- **vitrine.html (🧮 Calculadora, reescrita completa, v57):**
+  1. **Cliente** continua como estava (busca nos clientes salvos ou cliente novo) — melhoria mantida em relação ao painel antigo, que só tinha campos de nome/telefone digitados.
+  2. **Aba Calculadora:** consórcio de uma moto, cota **Nova** ou **Reposição**, com ou sem seguro prestamista, lance em R$ com opção de quitar parcelas do final. Matemática portada exatamente da calculadora antiga (`calcCore`), conferida à mão (cota Nova, Reposição diluir/entrada, lance com quitação — resultados batem).
+  3. **Aba CDC x Consórcio:** financiamento Banco Honda x consórcio lado a lado. Diferença em relação ao painel antigo: a parcela do financiamento agora é **calculada automaticamente pela taxa oficial do Banco Honda** (`meu_fin_taxa`/BCB, já auditada em 24/11), com uma caixa para marcar "calcular pela taxa do Banco Honda" ligada por padrão; desmarcando, volta o campo manual do painel antigo ("valor de cada parcela, da simulação real do banco") para quando o vendedor tiver uma proposta já aprovada. Testado digitando R$ 908,48 manual: reproduz exatamente o print antigo auditado em 24/11.
+  4. **Aba Comparar planos:** até 3 motos/planos de consórcio lado a lado (cota Nova ou Reposição em cada), com "mesmo lance para todas".
+  5. Cada aba gera o texto para WhatsApp e a imagem da proposta (canvas 1080×1350), reaproveitando os helpers de imagem já existentes (`cdImg`/`cdFit`/`cdRr`/`cdZap`) e um cabeçalho comum com foto/nome/WhatsApp do vendedor.
+- **Simplificação consciente:** não foi portado o histórico de propostas por cliente (tabela `simulacoes` do painel antigo) nem os campos de frete/taxas adicionais do financiamento do painel antigo — não estavam no pedido e deixariam a tela mais pesada; se fizer falta, é fácil adicionar depois.
+- **Banco:** sem mudança — usa só o catálogo (`motos.planos`) e a função `meu_fin_taxa()` já existentes.
+- **Testado:** harness em Node/jsdom simulando as 3 abas (seleção de moto, prazo, cota Reposição, lance com quitação, troca de aba, autopreenchimento do cliente, geração das 3 imagens) sem erros; `node --check` na página inteira; matemática conferida à mão.
+- **Pendente:** conferir logado com vendedor real; decidir com o dono se vale portar o histórico de propostas por cliente (tabela `simulacoes`) e os campos de frete/taxas do financiamento, hoje deixados de fora.
+
 ## 2026-11-24 — Auditoria: taxa de financiamento da Calculadora conferida (sem mudança de código)
 
 - **Pedido do dono:** desconfiou dos juros depois de comparar com um print de uma tabela antiga (Prazo/Parcela, 48x = R$ 908,48 para a Titan com R$ 3.000 de entrada).
