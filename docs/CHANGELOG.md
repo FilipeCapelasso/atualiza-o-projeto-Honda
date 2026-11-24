@@ -1,5 +1,14 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-24 — Calculadora de financiamento volta para os vendedores (taxa do Banco Honda)
+
+- **Pesquisa:** o Banco Honda não publica tabela de juros por região. A fonte oficial e pública é o Banco Central (relatório "Taxas de juros por instituição", modalidade Aquisição de veículos – prefixado, pessoa física, `BCO HONDA S.A.`): média de **2,46% a.m. / 33,85% a.a.** (03 a 09/11/2026). Essa média é custo efetivo (inclui encargos). Sites de blog citam 1,49% a.m., sem fonte; não foram usados.
+- **Banco (migration `fin_taxa_banco_honda`):** tabelas `fin_taxa_bcb` (histórico do BCB) e `fin_taxa_uf` (taxa própria por estado, opcional: taxa, prazo máx., entrada mín., observação), RLS sem acesso direto. Funções: `sync_taxa_honda()` (busca no BCB; sem acesso para anon/authenticated), `meu_fin_taxa()` (vendedor logado: UF, região A/B, taxa do estado ou do BCB), `mestre_fin_taxas()` e `mestre_fin_taxa_salvar()` (só dono). Carga inicial feita: 16 períodos.
+- **vitrine.html:** novo item **🧮 Calculadora** no menu (site e app). Moto do catálogo do vendedor (preço da região dele) ou valor digitado; entrada em R$ ou atalhos 0–50%; taxa do Banco Honda já preenchida (editável); parcelas em 12/18/24/36/48/60x (Tabela Price); total, juros, aviso de entrada mínima do estado; comparação com o Consórcio Honda da mesma moto; Enviar no WhatsApp e Copiar.
+- **comercial/index.html (Admin geral → Calculadora):** card no topo com a taxa oficial atual e a opção de definir taxa própria por estado (o vendedor daquele estado passa a usar na hora). A calculadora antiga de consórcio continua abaixo.
+- **Testado:** cálculo conferido à mão (13.592 em 36x a 2,46% = R$ 573,43); tela no celular e no computador com dados simulados; taxa por estado testada no banco (transação desfeita); permissões (anon sem acesso).
+- **Pendente:** atualização automática semanal da taxa (precisa criar uma tarefa agendada no banco: aguardando autorização do dono); conferir logado.
+
 ## 2026-11-24 — Supervisor: pedido mínimo de 5 vendedores
 
 - **Regra:** compra de vagas de vendedor pelo supervisor é pacote: mínimo **5**, máximo 500, aumentando de 1 em 1.

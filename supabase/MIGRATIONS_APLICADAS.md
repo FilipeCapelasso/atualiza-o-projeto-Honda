@@ -144,3 +144,4 @@ remove_apresentacao_patrao (20/11/2026)
 - 2026-11-24 `exp_ranking_indicacao`: função `exp_ranking()` (ranking de indicações pagas; só authenticated).
 - 2026-11-24 `exp_ranking_corrige_ambiguo`: corrige erro de variável ambígua em exp_ranking().
 - 2026-11-24 `sup_pedido_minimo_5`: sup_comprar e sup_mensal_criar exigem no minimo 5 vagas.
+- 2026-11-24 `fin_taxa_banco_honda`: tabelas fin_taxa_bcb/fin_taxa_uf; funcoes sync_taxa_honda, meu_fin_taxa, mestre_fin_taxas, mestre_fin_taxa_salvar.
