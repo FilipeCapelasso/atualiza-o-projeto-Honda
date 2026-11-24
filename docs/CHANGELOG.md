@@ -1,5 +1,12 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-24 — Calculadora: remove parágrafo de explicação do cabeçalho
+
+- **Pedido do dono:** mandou print do topo da aba Calculadora (título "Calculadora de proposta" + o parágrafo "Escolha o cliente e a modalidade: consórcio..." + o cartão de juros) e pediu para tirar essa parte, sem explicação.
+- **Arquivo alterado:** `vitrine.html` (VITRINE) — removido o `<p>` de explicação logo abaixo do `<h2>Calculadora de proposta</h2>` no hero da aba (função que monta `#pn`). Título e o cartão de juros do financiamento continuam.
+- **Banco de dados:** não alterado.
+- **Deploy:** push para a `main`, Vercel reimplanta automaticamente.
+
 ## 2026-11-24 — Calculadora: reconstruída em 3 abas, como a calculadora antiga do Admin Geral (v57)
 
 - **Pedido do dono:** mandou 3 prints da calculadora antiga do Admin Geral (abas **Calculadora**, **CDC x Consórcio**, **Comparar planos**) e pediu "antigo era assim, quero desse jeito, só que melhorado e usando fonte de taxa do banco Honda". A Calculadora v56 (fluxo único por moto, com abas Comparar/Consórcio/Financiamento) não seguia esse layout e não tinha cota de Reposição.
