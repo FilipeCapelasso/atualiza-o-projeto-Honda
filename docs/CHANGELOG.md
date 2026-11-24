@@ -1,5 +1,13 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-24 — Aviso "Expansão": indicação por link + ranking (1º/2º/3º)
+
+- **O que é:** card vermelho no topo da aba Notificações do admin do vendedor (vitrine.html `/:slug/admin`): "ATENÇÃO — O sistema está em expansão!", link de indicação do próprio vendedor com botão Copiar, contador de pessoas que **pagaram** pelo link (sem região nem dados do comprador) e pódio com 1º R$ 200, 2º R$ 100, 3º 2 meses grátis do plano. Mostra nome abreviado (ex.: "Ana S.") e quantidade; destaca "você".
+- **Link:** `https://www.sitevendedor.com/?ref=<slug>`. A captura do `ref` já existia no comercial (`refGet`, 30 dias, vai em `orders.dados.ref`); não mudou o checkout.
+- **Banco (migration `exp_ranking_indicacao`):** função `exp_ranking()` (SECURITY DEFINER; EXECUTE só `authenticated`/`service_role`). Conta clientes distintos de pedidos `pagamento_aprovado` com `dados.ref` = slug do vendedor; ignora upgrade, o próprio vendedor/e-mail, suspensos e parceiros (que têm o esquema próprio `parceiro_*`). Desempate: quem chegou primeiro. Retorna só o próprio total/posição e o top 3.
+- **Testado:** visual do card (celular) com dados simulados; permissões da função (anon sem acesso). Não testado ao vivo logado nem com compra real (0 pedidos com ref aprovados hoje).
+- **Pendente:** regras/prazo e forma de pagamento dos prêmios (definir com o dono); conferir o card logado no primeiro uso.
+
 ## 2026-11-23 — Concessionária Nordeste Motos: logo sem fundo
 
 - **Logo:** a imagem enviada (335x597, letras e anel brancos sobre vermelho) foi tratada: fundo vermelho removido (PNG transparente, branco puro), redesenhada em 4x com bordas nítidas e cortada no círculo (1291x1293, 160 KB). Arquivo `logo-nordestemotos.png` na raiz do repositório **vitrine** (`https://www.sitevendedor.com/logo-nordestemotos.png`).

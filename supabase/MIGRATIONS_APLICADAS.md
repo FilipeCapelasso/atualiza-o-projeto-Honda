@@ -140,3 +140,5 @@ remove_apresentacao_patrao (20/11/2026)
 - `comercial_vendedores_extra_config` (2026-11-22) — chave `vendedores_extra`: `mestre_config_salvar` aceita, `ps_publico` devolve.
 - `seguranca_painel_privado` (2026-11-22) — tabela `painel_privado` (RLS, sem policies) + `mestre_painel_privado(text)` só para o dono; guarda os painéis Catálogo e Calculadora do Admin Geral, que saíram do HTML público.
 - 2026-11-23 `mestre_concessionaria_criar` e `mestre_concessionaria_criar_corrige_uf`: função owner-only para criar concessionária (nome + UF), sem acesso de anon.
+
+- 2026-11-24 `exp_ranking_indicacao`: função `exp_ranking()` (ranking de indicações pagas; só authenticated).
