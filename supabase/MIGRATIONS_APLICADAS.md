@@ -142,3 +142,4 @@ remove_apresentacao_patrao (20/11/2026)
 - 2026-11-23 `mestre_concessionaria_criar` e `mestre_concessionaria_criar_corrige_uf`: função owner-only para criar concessionária (nome + UF), sem acesso de anon.
 
 - 2026-11-24 `exp_ranking_indicacao`: função `exp_ranking()` (ranking de indicações pagas; só authenticated).
+- 2026-11-24 `exp_ranking_corrige_ambiguo`: corrige erro de variável ambígua em exp_ranking().

@@ -1,5 +1,12 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-24 — Correção: aviso Expansão não aparecia (erro na função do ranking)
+
+- **Causa:** `exp_ranking()` falhava com "column reference pos is ambiguous" (variável com o mesmo nome de coluna); o painel então escondia o card. A tela estava certa; o erro era só no banco.
+- **Banco (migration `exp_ranking_corrige_ambiguo`):** função reescrita com nomes sem conflito (mesma regra e mesmas permissões: só `authenticated`/`service_role`).
+- **Testado no banco** como o vendedor `shayron` (transação desfeita): sem indicações retorna 0 e pódio vazio; com um pedido simulado de `ref=shayron` retorna 1º lugar, total 1. Nenhum dado de teste ficou.
+- Obs.: o domínio sitevendedor.com ficou fora do ar por um tempo na manhã de 24/11 (DNS não resolvia) e voltou; sem relação com o código.
+
 ## 2026-11-24 — Aviso "Expansão": indicação por link + ranking (1º/2º/3º)
 
 - **O que é:** card vermelho no topo da aba Notificações do admin do vendedor (vitrine.html `/:slug/admin`): "ATENÇÃO — O sistema está em expansão!", link de indicação do próprio vendedor com botão Copiar, contador de pessoas que **pagaram** pelo link (sem região nem dados do comprador) e pódio com 1º R$ 200, 2º R$ 100, 3º 2 meses grátis do plano. Mostra nome abreviado (ex.: "Ana S.") e quantidade; destaca "você".
