@@ -145,3 +145,5 @@ remove_apresentacao_patrao (20/11/2026)
 - 2026-11-24 `exp_ranking_corrige_ambiguo`: corrige erro de variável ambígua em exp_ranking().
 - 2026-11-24 `sup_pedido_minimo_5`: sup_comprar e sup_mensal_criar exigem no minimo 5 vagas.
 - 2026-11-24 `fin_taxa_banco_honda`: tabelas fin_taxa_bcb/fin_taxa_uf; funcoes sync_taxa_honda, meu_fin_taxa, mestre_fin_taxas, mestre_fin_taxa_salvar.
+- 2026-11-25 `pix_automatico_asaas`: Pix Automático (Asaas, Jornada 3) na mesma tabela `assin_recorrente` (coluna `metodo` cartao/pix_auto + campos `asaas_*`, `pix_*`, `cpf_hash`/`cpf_final`); `assin_cobrancas.ref` único (id do pagamento no Asaas). Funções `ps_asaas`, `pa_checar`, `pa_reverificar` (cron novo, a cada minuto), `meu_pixauto_criar`, `sup_pixauto_criar`, `asaas_admin` (só dono), `asaas_webhook` (anon, confere token); `_rec_cancelar_mp`, `_rec_info`, `meu_mensal_*`, `sup_mensal_*` passam a tratar os dois métodos.
+- 2026-11-25 `pix_automatico_proximo_meio_dia`: `pa_checar` grava o próximo débito ao meio-dia de Brasília (data certa no fuso do Acre).

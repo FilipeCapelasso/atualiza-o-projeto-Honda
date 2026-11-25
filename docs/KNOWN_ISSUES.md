@@ -23,6 +23,8 @@ Atualizado em 2026-11-19. Repositórios **públicos**: não detalhar aqui falhas
 - [ ] Decidir se os robôs antigos da Cometa (`cometa_iniciar`, `cometa_buscar`, `cometa_aplicar`) são desativados; a tabela oficial do Amazonas passou a ser a fonte da Cometa.
 - [ ] Rascunhos parados há mais de 1 dia: 48 (27 sem aviso). Revisar o aviso de "cliente que parou".
 
+- [ ] **Pix Automático (Asaas)** pronto mas desligado: precisa de conta PJ com CNPJ ativo há 6+ meses; depois testar no sandbox (modo Teste) antes de ligar. Ver CHANGELOG 2026-11-25.
+
 ## Riscos operacionais
 
 - Cada site é um arquivo único de ~60 a 690 KB: conflitos de edição simultânea entre contas são fáceis. Regra: uma conta por vez por site; sempre `git pull` antes e conferir o último commit.
