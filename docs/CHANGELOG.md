@@ -1,5 +1,15 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-25 — Pix Automático escondido até registrar a chave do Asaas (volta o Pix manual)
+
+- **Pedido do dono:** tirar o Pix Automático por enquanto e deixar o pagamento manual; quando ele registrar a API do Asaas, o Pix Automático (com CPF etc.) volta.
+- **Como ficou:** o Pix Automático não tem mais botão de liga/desliga. Ele aparece **só quando há chave do Asaas salva**: chave de **Produção** → aparece para todos os vendedores e supervisores; chave de **Sandbox** → só para os endereços de teste. Sem chave (hoje), ninguém vê: o vendedor renova pelo **Pix manual** e o cartão mensal continua como antes. Conferido no banco: 0 de 43 vendedores veem a opção.
+- **Admin geral › Configurações:** o card virou "Pix Automático — Desligado", com o texto explicando e o formulário da chave recolhido em "Registrar a chave do Asaas". Ao salvar a chave, o aviso automático (webhook) é registrado sozinho. Com a chave salva aparecem Testar, Registrar aviso, Conferir agora e **Remover chave** (desliga de novo; recusa se houver Pix Automático ativo). A lista de assinaturas mensais (cartão e Pix) continua no card.
+- **Banco de dados: alterado.** Migration `pix_automatico_liga_pela_chave`: `_pa_disponivel` passa a depender só da chave + ambiente (e da lista de teste no sandbox); `asaas_admin` ganhou a ação `remover`; `pixauto_modo` ficou `off` e sem uso. Nada do Pix Automático foi apagado (funções, cron, webhook continuam prontos e parados).
+- **Arquivo:** `index.html` (comercial, commit 36c1d9e). `vitrine.html` e `supervisor.html` não mudaram: eles já escondem a opção quando o banco responde `pix_auto: false`.
+- **Validação:** `node --check`; card renderizado no Chrome sem erro.
+- **Pendente:** registrar a chave do Asaas (conta PJ, CNPJ 6+ meses, Pix Automático liberado). Recomendado testar antes com uma chave de Sandbox e o seu endereço na lista de teste.
+
 ## 2026-11-25 — Pix Automático mensal (Asaas) para vendedor e supervisor
 
 - **Pedido do dono:** cobrar a mensalidade por Pix "agendado", como fazem as assinaturas de apps: a pessoa autoriza uma vez e o banco manda o Pix sozinho todo mês.
