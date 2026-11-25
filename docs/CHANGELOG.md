@@ -1,5 +1,16 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-25 — Aba Clientes: não mostra mais "interesse" sem nenhum dado do cliente
+
+- **Pedido do dono:** na aba Clientes (painel do vendedor), apareciam clientes "Cliente sem nome" que só clicaram num botão de interesse em alguma moto, sem preencher nome, telefone ou qualquer dado. Só deve aparecer quando o cliente preencheu algum dado de verdade.
+- **Conferido no Supabase antes de mexer:** na tabela `leads`, os registros `tipo='consorcio'` (botão "Tenho interesse" no consórcio, sem formulário) e `tipo='contato'` (clique na promoção Black Friday) nunca têm nome/telefone/e-mail/CPF — 43 e 34 registros, 100% sem dado nos dois casos. `tipo='financiamento'`, `ficha` e `contrato` sempre têm dado (vêm de formulário).
+- **Arquivo alterado:** `vitrine.html` (VITRINE), função `vdLoad()` (monta a lista `VD` da aba Clientes). Os registros vindos da tabela `leads` agora só entram na lista se tiverem nome, telefone, e-mail ou CPF preenchido (filtro por conteúdo real, não pelo `tipo`, para já cobrir qualquer tipo de lead futuro que também não tenha dado). `pedidos_chat`, `fichas` e `contratos` não mudaram.
+- **Fora do escopo, de propósito:** a tela "Resumo" (contador "contatos" e "Contatos recentes") é outra tela e não foi alterada — só a aba Clientes ("Barra de clientes"). Se o dono também quiser isso ali, é só pedir.
+- **Banco de dados:** não alterado.
+- **Validação:** sintaxe (`node --check`) e um teste isolado da função de filtro em Node, cobrindo os casos reais (consórcio sem dado, Black Friday sem dado, financiamento com nome/telefone, só e-mail, só CPF, nome só com espaços).
+- **Nota:** este commit foi rebaseado em cima do commit `037b4f0` (Pix Automático mensal, de outra sessão) feito entre o fetch e o push; sem conflito, as duas mudanças ficaram juntas sem se sobrepor.
+- **Deploy:** push para a `main` da VITRINE, Vercel reimplanta automaticamente.
+
 ## 2026-11-25 — Pix Automático escondido até registrar a chave do Asaas (volta o Pix manual)
 
 - **Pedido do dono:** tirar o Pix Automático por enquanto e deixar o pagamento manual; quando ele registrar a API do Asaas, o Pix Automático (com CPF etc.) volta.
