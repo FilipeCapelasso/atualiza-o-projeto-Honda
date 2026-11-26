@@ -1,5 +1,14 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-26 — Admin Geral: aba "Cadastro Clientes" por concessionária (clientes e visitas em cada vendedor) e Calculadora fora do menu
+
+- **Pedido do dono:** trocar "Pedidos de clientes" por "Cadastro Clientes", organizar por concessionária e mostrar, em cada vendedor, o número de clientes cadastrados e as visitas; tirar a categoria "Calculadora".
+- **O que mudou (comercial, só `index.html`):** nova aba nativa `cad` (Cadastro Clientes). Cada concessionária/loja (Star Motos, Acre Motos, Juruá e as demais concessionárias) vira um bloco com total de clientes e de visitas; dentro dele, uma linha por vendedor com **clientes cadastrados** e **visitas** (e quantas hoje) já visíveis, com barras de comparação. Clicar no vendedor abre a lista dos clientes dele (nome, tipo, moto, data, botão de WhatsApp e "Ver todos os dados"). Filtro de período (7 dias, 30 dias, Tudo) e busca. A aba antiga "Pedidos de clientes" (painel privado `catalogo`, parte "pedidos") deixou de aparecer no menu, no dashboard e na busca Ctrl+K; o conteúdo continua no banco, sem uso. A **Calculadora** saiu do menu e dos módulos (o código e o painel `calculadora` continuam guardados, inacessíveis pelo menu).
+- **Banco de dados: alterado.** Migration `cadastro_clientes_por_vendedor`: função `mestre_cadastro_clientes(p_dias)`, só o dono executa (`_exige_dono`), sem acesso de `anon`. Devolve por vendedor: loja/concessionária, clientes (chat + fichas CDC + pré-contratos CNH + contatos/rascunhos, mesma regra do ranking), visitas sem repetição (mesma pessoa em 30 min conta uma vez, mesma regra de `meu_visitas`), visitantes diferentes, visitas de hoje (fuso do Acre) e última visita.
+- **Conferido:** total de clientes da função (334) igual ao do `mestre_ranking` (334); visitas 2.815 contra 2.924 registros brutos do tipo visita (diferença é a repetição em 30 min). Tela testada em navegador com dados de exemplo (computador e celular); não aberta com os dados reais do dono.
+- **Agrupamento:** por `loja_id` quando existir (38 dos 43 vendedores usam loja) e, senão, pelo nome da concessionária; sem nenhum dos dois, "Sem concessionária definida". `vendedores.concessionaria_id` só está preenchido em 5 vendedores.
+- **Pendente:** conferir no painel real; a lista de clientes de cada vendedor mostra os 200 mais recentes.
+
 ## 2026-11-26 — Novo Admin Geral (comercial): menu lateral, banner de boas-vindas, KPIs com minigráfico, módulos e listas
 
 - **Pedido do dono:** outra estrutura e outro design para o Admin Geral, inspirado em painel escuro com atalhos e números grandes.
