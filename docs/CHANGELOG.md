@@ -1,5 +1,16 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-25 — Segurança: segredos no Vault e link do Admin Geral que muda todo dia
+
+- **Pedido do dono:** melhorar a segurança seguindo o artigo "auditoria de segurança" (14 testes de falhas comuns em apps feitos com IA), trocar o link do admin todo dia e mandar pelo Telegram, com o token do bot o mais escondido possível.
+- **Auditoria:** feita só leitura, nos 5 sites + banco, item por item dos 14 testes. O relatório completo foi entregue em conversa privada (repositório público: não detalhar aqui). Nenhum segredo real (token do Telegram, Mercado Pago, Asaas, `service_role`) foi encontrado no histórico Git dos 6 repositórios; só a chave pública `anon`, que é pública por design.
+- **Segredos saíram da tabela comum:** o token do bot do dono, o segredo do webhook do bot e a chave do cofre de senhas dos vendedores estavam em texto puro em `plataforma_config` (sem acesso para anon/authenticated, mas legível por quem abrisse a tabela). Agora ficam no **Supabase Vault** (criptografado). Funções novas `_segredo(nome)` / `_segredo_definir(nome, valor)` (sem acesso para anon/authenticated). `tg_api`, `tg_dono`, `telegram_processar`, `ativar_bot` e `_cofre_chave` passaram a usar o Vault. Conferido antes de apagar: os 3 valores idênticos e as 43 senhas guardadas abrem com a chave do Vault. As linhas antigas foram apagadas de `plataforma_config`.
+- **Link do Admin Geral rotativo:** `#admin` sozinho não mostra mais a tela de login. Só abre com `#admin-<código do dia>` ou para quem já está logado como dono. O código é conferido no banco (`admin_link_ok`, só o hash sha256 fica salvo, limite de tentativas erradas por minuto) e some da barra de endereço depois de conferido. Todo dia às 00:05 (Acre) o cron `admin_link_diario` gera um novo e manda no Telegram do dono (`admin_link_rotacionar`, só Telegram, sem push). O anterior vale mais 2 h. Comando **/admin** no bot do dono gera um link novo na hora. A proteção de verdade continua sendo o login + `eh_dono()` em cada função do painel; o link é uma camada a mais.
+- **Banco de dados: alterado.** Migrations `segredos_para_vault`, `segredos_remove_texto_puro`, `admin_link_rotativo` (tabelas `admin_link`, `admin_link_falhas`, RLS sem policy, sem grant).
+- **Arquivo:** `index.html` (comercial, commit a34cba2), função `route()` + `admPode()`/`admGate()`.
+- **Testado:** lógica do portão do admin em Node (link certo, link errado, `#admin` sem sessão, dono logado, outra conta logada, site normal); no banco, em transação desfeita (código certo/errado/antigo na folga/novo/lixo); permissões das funções; `node --check`.
+- **Pendente:** 1) o dono precisa **desbloquear o bot do dono no Telegram** e mandar /start (o Telegram respondeu "bot bloqueado pelo usuário"; por isso o 1º link e os avisos ao dono não chegaram); 2) ligar a proteção contra senhas vazadas no Supabase Auth (painel); 3) itens de prioridade menor do relatório privado.
+
 ## 2026-11-25 — Aba Clientes: não mostra mais "interesse" sem nenhum dado do cliente
 
 - **Pedido do dono:** na aba Clientes (painel do vendedor), apareciam clientes "Cliente sem nome" que só clicaram num botão de interesse em alguma moto, sem preencher nome, telefone ou qualquer dado. Só deve aparecer quando o cliente preencheu algum dado de verdade.
