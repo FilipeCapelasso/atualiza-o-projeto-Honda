@@ -1,5 +1,12 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-26 — Admin Geral: Parceiros e Novidades saem do menu; lojas do Cadastro Clientes viram gavetas
+
+- **Pedido do dono:** retirar "Parceiros" e "Novidades" (as alterações de novidades passam a ser feitas por pedido ao Claude) e deixar os vendedores de cada loja em gaveta no Cadastro Clientes.
+- **O que mudou (comercial, só `index.html`):** abas Parceiros e Novidades removidas do menu, dos módulos do dashboard e da busca Ctrl+K (o código e os dados no banco continuam; só não há mais acesso pela tela). No Cadastro Clientes, cada loja/concessionária começa fechada: clicar no cabeçalho abre a gaveta com os vendedores, clientes e visitas, como antes. Ao digitar na busca, as lojas com resultado abrem sozinhas.
+- **Banco de dados:** não alterado.
+- **Atenção:** o programa de parceiros continua ativo no banco (cron, créditos de indicação); só a tela de gestão saiu.
+
 ## 2026-11-26 — Admin Geral: aba "Cadastro Clientes" por concessionária (clientes e visitas em cada vendedor) e Calculadora fora do menu
 
 - **Pedido do dono:** trocar "Pedidos de clientes" por "Cadastro Clientes", organizar por concessionária e mostrar, em cada vendedor, o número de clientes cadastrados e as visitas; tirar a categoria "Calculadora".
