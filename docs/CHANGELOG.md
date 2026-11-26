@@ -1,5 +1,14 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-26 — Clientes sem repetição: o mesmo cliente não vira cadastro novo
+
+- **Pedido do dono:** clientes apareciam repetidos (ex.: mesma pessoa com a moto duplicada, ou com sobrenome a mais). Pediu regra por nome, sobrenome, CPF e CEP para não repetir e continuar de onde a cliente parou.
+- **Regra adotada (dentro do mesmo vendedor):** é a mesma pessoa se (a) CPF igual; ou (b) telefone igual e nome sem conflito; ou (c) nome igual / um nome é o outro com sobrenome a mais (2+ palavras, ignorando maiúsculas, acentos e "de/da/do"); ou (d) primeiro + último nome iguais e CEP ou moto igual. CPF diferente nunca une. CEP sozinho ou só o primeiro nome NÃO unem (evita juntar pessoas diferentes).
+- **Banco (migrations `clientes_unicos_sem_repeticao` e `cliente_retoma_cadastro_incompleto`):** novas funções internas `_nome_tokens`, `_cpf_n`, `_cep_n`, `_tel_n`, `_clientes_regs`, `_clientes_cluster`, `_cliente_achar` (sem acesso público); nova `mestre_clientes_vendedor(p_vendedor,p_limit)` (clientes únicos + histórico de registros); `mestre_cadastro_clientes` agora conta clientes únicos e informa `registros`; `registrar_pedido_chat` passa a continuar o cadastro **incompleto** da mesma pessoa em vez de criar outro. Nenhum dado foi apagado ou alterado: a união dos repetidos já existentes é só na leitura (334 registros → 306 clientes).
+- **Site comercial (`index.html`, commit 5938ee1):** cada cliente aparece uma vez, com as motos, selos (CDC/CNH/em andamento), histórico dos registros e aviso "N repetido(s) juntado(s)" por vendedor.
+- **Sites dos vendedores (vitrine, CDC, CNH):** não alterados.
+- **Pendente:** (1) o rascunho de CDC/CNH (`registrar_rascunho`) e as fichas/contratos ainda criam registros próprios; ficam agrupados na tela, mas não são mesclados no banco; (2) preencher automaticamente os campos para a cliente que volta (precisa de consulta pública segura, avaliar privacidade); (3) `mestre_ranking` e o dashboard ainda contam por registro.
+
 ## 2026-11-26 — Admin Geral: Parceiros e Novidades saem do menu; lojas do Cadastro Clientes viram gavetas
 
 - **Pedido do dono:** retirar "Parceiros" e "Novidades" (as alterações de novidades passam a ser feitas por pedido ao Claude) e deixar os vendedores de cada loja em gaveta no Cadastro Clientes.
