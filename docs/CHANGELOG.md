@@ -4,6 +4,7 @@
 
 - **Pedido do dono:** outra estrutura e outro design para o Admin Geral, inspirado em painel escuro com atalhos e números grandes.
 - **O que mudou (comercial, commit eeb2fc1, só `index.html`):** menu lateral fixo com marca e ícones novos (agrupado em Gestão, Vitrine e Sistema; no celular vira barra inferior); banner "Boa tarde!" com resumo de pendências e 4 atalhos (Criar vendedor, Pedidos de clientes, Buscar, Monitoramento); 4 cartões de KPI com minigráfico e variação dos últimos 15 dias contra os 15 anteriores (receita 30 dias, pedidos aprovados, novos vendedores, vendedores); grade de **Módulos** com atalho para todas as abas; listas "Últimos vendedores" e "Assinaturas perto de vencer" (até 10 dias); gráficos em azul/verde; valores do gráfico mensal em formato curto (R$ 1,1 mil) para não encavalar. Os 8 números antigos, "Vendedores por plano", saúde, metas e visão por loja continuam abaixo.
+- **Ajuste no mesmo dia (pedido do dono):** menu lateral maior (letras de 16 a 19 px, ícones de 24 px, títulos de grupo maiores e barra mais larga), com espaçamento que se adapta à altura para o menu inteiro caber em telas de 800 px.
 - **Tema:** escuro agora é o padrão (nova chave `hn_tema2`; o botão de tema claro continua funcionando).
 - **Removido:** o atalho "Pedidos dos vendedores" do topo (recurso já removido em 16/11 e que só voltava ao dashboard).
 - **Banco de dados:** não alterado. Todas as funções e abas existentes foram mantidas.
