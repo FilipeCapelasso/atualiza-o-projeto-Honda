@@ -1,5 +1,14 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-25 — Link do Admin Geral: código longo no endereço, muda a cada 4 horas
+
+- **Pedido do dono:** link do admin no formato `www.sitevendedor.com/<código longo com símbolos>`, que muda de forma drástica a cada 4 horas, com o antigo desligado quando o novo é gerado. Substitui o `#admin-<código>` diário da entrada anterior.
+- **Como ficou:** código de 48 caracteres (letras, números e `@ _ -`, nunca termina em símbolo). O banco guarda só o hash sha256. Novo link às 00h, 04h, 08h, 12h, 16h e 20h (horário do Acre), enviado só ao Telegram do dono (cron `admin_link_4h`). O link anterior é **desligado quando o Telegram confirma a entrega** (cron `admin_link_confirmar`, a cada minuto). Se o envio falhar, o anterior continua valendo por até 4 h como reserva, para o dono não ficar trancado. `/admin` no bot gera um novo na hora e desliga o anterior na hora. Código errado ou vencido mostra o site comercial normal, sem pista de que existe admin; o código some da barra de endereço (vira `/#admin`). Dono já logado continua entrando por `/#admin`. Limite de 20 tentativas erradas por minuto. A proteção real continua sendo login + `eh_dono()` no servidor.
+- **Arquivos:** `vercel.json` (VITRINE, commit 4ff69bb): rewrite `/:code([A-Za-z][A-Za-z0-9_@-]{43,63})` → comercial, com `Cache-Control: no-store` e `X-Robots-Tag: noindex`; o mínimo de 44 caracteres garante que nenhum slug de vendedor (máx. 40) coincide. `index.html` (comercial, commit 49e14ba): `admCod()`/`admPode()`/`admGate()`/`route()`.
+- **Banco de dados: alterado.** Migration `admin_link_4h_caminho_longo` (colunas `confirmado` e `msg_req` em `admin_link`; funções `_admin_link_gerar(boolean)`, `_tg_dono_privado` (devolve o id do pedido), `admin_link_rotacionar`, `admin_link_confirmar`, `admin_link_ok`; `telegram_processar` usa `/admin` novo; cron diário antigo removido).
+- **Testado:** regex do rewrite com path-to-regexp (slugs e rotas existentes não casam); portão no Node (8 casos); banco em transação desfeita (código novo, reserva, entrega, 2ª rotação sem entrega, /admin, código curto e lixo rejeitados, 300 códigos todos dentro do padrão); no navegador, em produção: código errado mostra o site comercial, código de teste válido abre a tela do dono e a barra vira `/#admin`; o código de teste foi desligado em seguida.
+- **Pendente:** nada deste item.
+
 ## 2026-11-25 — Segurança: segredos no Vault e link do Admin Geral que muda todo dia
 
 - **Pedido do dono:** melhorar a segurança seguindo o artigo "auditoria de segurança" (14 testes de falhas comuns em apps feitos com IA), trocar o link do admin todo dia e mandar pelo Telegram, com o token do bot o mais escondido possível.

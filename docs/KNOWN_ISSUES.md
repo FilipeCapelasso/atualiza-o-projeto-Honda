@@ -25,7 +25,7 @@ Atualizado em 2026-11-19. Repositórios **públicos**: não detalhar aqui falhas
 
 - [ ] **Pix Automático (Asaas)** pronto e escondido até salvar a chave do Asaas (Admin › Configurações); exige conta PJ com CNPJ ativo há 6+ meses. Testar antes com chave de Sandbox + endereço na lista de teste. Ver CHANGELOG 2026-11-25.
 
-- [ ] **Bot do dono bloqueado no Telegram** (2026-11-25): desbloquear e mandar /start; sem isso não chegam o link diário do Admin Geral nem os avisos ao dono. Se ficar sem acesso ao admin: SQL Editor do Supabase → `select public._admin_link_gerar();` devolve um link válido.
+- [ ] Se ficar sem acesso ao admin (link não chegou e sem sessão logada): SQL Editor do Supabase → `select public._admin_link_gerar(true);` devolve um link válido.
 - [ ] Ligar "proteção contra senhas vazadas" no Supabase Auth (aviso do linter).
 
 ## Riscos operacionais
