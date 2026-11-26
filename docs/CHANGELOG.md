@@ -1,5 +1,15 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-26 — Novo Admin Geral (comercial): menu lateral, banner de boas-vindas, KPIs com minigráfico, módulos e listas
+
+- **Pedido do dono:** outra estrutura e outro design para o Admin Geral, inspirado em painel escuro com atalhos e números grandes.
+- **O que mudou (comercial, commit eeb2fc1, só `index.html`):** menu lateral fixo com marca e ícones novos (agrupado em Gestão, Vitrine e Sistema; no celular vira barra inferior); banner "Boa tarde!" com resumo de pendências e 4 atalhos (Criar vendedor, Pedidos de clientes, Buscar, Monitoramento); 4 cartões de KPI com minigráfico e variação dos últimos 15 dias contra os 15 anteriores (receita 30 dias, pedidos aprovados, novos vendedores, vendedores); grade de **Módulos** com atalho para todas as abas; listas "Últimos vendedores" e "Assinaturas perto de vencer" (até 10 dias); gráficos em azul/verde; valores do gráfico mensal em formato curto (R$ 1,1 mil) para não encavalar. Os 8 números antigos, "Vendedores por plano", saúde, metas e visão por loja continuam abaixo.
+- **Tema:** escuro agora é o padrão (nova chave `hn_tema2`; o botão de tema claro continua funcionando).
+- **Removido:** o atalho "Pedidos dos vendedores" do topo (recurso já removido em 16/11 e que só voltava ao dashboard).
+- **Banco de dados:** não alterado. Todas as funções e abas existentes foram mantidas.
+- **Testado:** `node --check`; renderização real em navegador com dados de exemplo (desktop 1440 px, celular 390 px, aba Vendedores). Não testado com os dados reais do dono (exige o link do Telegram).
+- **Pendente:** conferir no painel real com os dados de produção; as demais abas (Vendedores, Brasil, Catálogo etc.) ganharam só as cores e o menu novos, o conteúdo interno não foi redesenhado.
+
 ## 2026-11-26 — Correção: link do Admin Geral vencido ainda abria o painel (agora só o link válido abre) e rotação a cada 2 horas
 
 - **Problema (relato do dono):** o link anterior ainda levava ao Admin Geral.
