@@ -1,5 +1,15 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-26 — Correção: link do Admin Geral vencido ainda abria o painel (agora só o link válido abre) e rotação a cada 2 horas
+
+- **Problema (relato do dono):** o link anterior ainda levava ao Admin Geral.
+- **Causa:** no site comercial, `admPode()` aceitava qualquer endereço com cara de código se houvesse sessão de dono logada (`eh_dono`), sem olhar se o código ainda valia. O banco já recusava o link vencido (`admin_link_ok`); a falha era só na tela.
+- **Correção (comercial, commit 555b93b):** o admin só abre com código aprovado agora por `admin_link_ok`; estar logado não basta, e `#admin` sozinho não abre mais. O código aprovado fica só na aba (sessionStorage) para o recarregar da página e é conferido de novo a cada recarga e a cada 45 s com o painel aberto; se vencer, o painel fecha, sai da conta e volta ao site. Link vencido ou inválido cai no site comercial normal.
+- **Rotação:** a pedido do dono, passou de 4 h para **2 h** (cron `admin_link_2h`, `0 1-23/2 * * *` UTC = 00h, 02h, ... no Acre); validade 2h30; o link anterior fica como reserva só por 30 min e só se o novo não foi entregue no Telegram (a entrega confirmada o desliga na hora). Mensagens do bot dizem "2 horas".
+- **Banco de dados: alterado** (migration `admin_link_2h`: `_admin_link_gerar`, `admin_link_rotacionar`, `telegram_processar` e o agendamento).
+- **Testado:** lógica do portão em Node (link vencido, link novo, recarregar com código guardado, recarregar após vencer, `#admin` sem código); na produção, o link das 00h abre o site comercial normal; estado do banco sem link reserva.
+- **Pendente:** o painel do dono agora pede o link novo a cada vez que a aba é fechada; abrir sempre pelo último link do Telegram (ou /linkADMIN).
+
 ## 2026-11-25 — Bot do Telegram reorganizado, avisos de compra e vencimento, aba Monitoramento e telas de erro
 
 - **Pedido do dono:** funções só no bot do Telegram, em menu organizado (/cadastrar, /excluir, /linkADMIN, /resumo, /lucro, /dadosvendedor); avisos automáticos (compra com comprovante e 5 dias para o plano acabar, com o celular); desenho e monitoramento do sistema no admin geral; texto "ESSA PÁGINA NÃO HÁ NADA, SAIA DAQUI AGORA" para endereços sem nada; "O sistema está em atualização grande! Em breve voltaremos!" quando um site válido cai.
