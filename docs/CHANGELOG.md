@@ -1,5 +1,12 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-27 — App do vendedor: largura total e ampliação no "Site para computador"
+
+- **Pedido do dono:** o app aparecia pequeno e centralizado (print do Chrome); quer ocupar os lados e ficar maior; não tem problema as funções do menu saírem da tela, pois rolam para o lado.
+- **Causa:** o Chrome do celular estava no modo "Site para computador" (página com ~980 px numa tela de ~410 px) e o conteúdo tinha largura máxima de 760 px centralizada.
+- **O que mudou (`vitrine.html`):** sem largura máxima no celular; o app mede a tela (`appAjustaTela`) e, se detectar celular em modo computador, amplia o painel (`zoom`) até a largura do aparelho. Em celular normal nada muda.
+- **Banco:** não alterado. **Pendente:** conferir no aparelho do dono (a faixa do /demo não é ampliada, só afeta a demo).
+
 ## 2026-11-27 — Novo design do app do vendedor (menu embaixo com rolagem, topo "Olá", cartões ampliados)
 
 - **Pedido do dono:** inovar o design e a estrutura do app do vendedor com base em uma imagem de exemplo: tirar as funções da lateral, deixá-las embaixo com rolagem para o lado, ampliar as informações; sem o cartão "Plano ativo" e sem os números "33 novos / hoje / no total".
