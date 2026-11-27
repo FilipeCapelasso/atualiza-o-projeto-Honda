@@ -1,5 +1,12 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-27 — Novo design do app do vendedor (menu embaixo com rolagem, topo "Olá", cartões ampliados)
+
+- **Pedido do dono:** inovar o design e a estrutura do app do vendedor com base em uma imagem de exemplo: tirar as funções da lateral, deixá-las embaixo com rolagem para o lado, ampliar as informações; sem o cartão "Plano ativo" e sem os números "33 novos / hoje / no total".
+- **O que mudou (`vitrine.html`, só painel do vendedor):** no app instalado (qualquer largura) e em tela de celular (até 900 px) o menu lateral vira uma barra flutuante escura embaixo que rola para o lado (ordem: Clientes, Calculadora, Notificações, Configurações, Sites, Acessos, Cota da Vez, Personalizar; aba ativa vermelha e centralizada, sombra na ponta enquanto há mais abas). Novo topo escuro/vermelho: foto e loja (toque abre "Ver meu site" e "Sair da conta"), "Olá, <nome>!", data e hora, sino de Notificações com contador (só no app). Clientes: filtros em uma linha que rola, busca arredondada, cartões maiores com telefone, cidade, e-mail, entrada e parcela, botões WhatsApp/Ligar/Mensagem em largura total.
+- **Escondido neste layout (não apagado):** os 3 números (novos/hoje/total), o cartão do plano (aparece só se o prazo estiver acabando ou encerrado), a frase do dia e o botão de busca Ctrl K. Computador comum (fora do app) continua com o menu lateral de antes (verificado).
+- **Banco:** não alterado. **Pendente:** ver no celular real; se quiser, deixar o cartão do plano fixo ou o layout de 2 colunas do modelo (hoje o cartão é em coluna única para caber em celulares pequenos).
+
 ## 2026-11-27 — Botão de instalar o app do vendedor sempre disponível
 
 - **Pedido do dono:** quando o app já estava instalado, a opção de baixar sumia; se o vendedor apagasse o app, não conseguia instalar de novo.
