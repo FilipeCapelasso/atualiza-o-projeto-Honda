@@ -1,5 +1,16 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-26 — Concurso de divulgadores (R$ 400/200/100) e site de demonstração /demo
+
+- **Pedido do dono:** postar no grupo de WhatsApp (247 pessoas) para recrutar divulgadores; concurso que só acaba quando 60 vendedores comprarem o sistema (soma de todos os divulgadores); prêmios 1º R$ 400, 2º R$ 200, 3º R$ 100; demo aberta sem login (/demo, /demo/cdc, /demo/cnh, /demo/admin); área do divulgador com e-mail e senha mostrando vendas e pódio com nomes.
+- **Decisões confirmadas:** grupo novo separado dos parceiros (bruno, dilorran); cadastro aberto com aprovação do dono; demo editável com reset diário; só conta pagamento aprovado.
+- **Banco (migrations `divulgadores_concurso`, `slug_reservado_divulgador_demo`, `demo_vendedor_e_reset_diario`, `demo_sem_avisos_ao_dono`, `demo_fora_do_ranking_de_indicacao`):** tabelas `divulgadores`, `divulgador_config`, `divulgador_anulacoes`, `divulgador_premios` (RLS ligado, sem acesso direto); funções `_div_conta`/`_div_rank` (regra de pontos), `divulgador_info`, `divulgador_cadastrar` (anon, cria login só se o e-mail for novo), `divulgador_painel`, `mestre_divulgadores`, `mestre_divulgador_status`, `mestre_divulgador_config_salvar`, `mestre_divulgador_anular`, `mestre_divulgador_premio_pagar`. Pix e WhatsApp ficam só no banco.
+- **Regra de pontos:** pedido com `dados.ref` = link do divulgador aprovado, status `pagamento_aprovado`, comprador novo (sem pedido pago antes), um por cliente e por celular, sem auto-indicação, não anulado, só as primeiras `meta` (60) vendas por ordem de pagamento; desempate por quem chegou primeiro. Dono pode anular venda e marcar prêmio pago.
+- **Demo:** vendedor `slug=demo` (tipo `socio`, nome Demonstração, sem WhatsApp), 34 motos do catálogo geral. Edge function `demo-login` (sem JWT) troca a senha por uma aleatória e devolve sessão só dessa conta; a senha nunca sai do servidor. `demo_resetar()` roda todo dia 03:00 (cron `demo-reset`, 08:00 UTC): apaga leads, pedidos, fichas, contratos, rascunhos, visitas e refaz o catálogo. Demo fora do Cadastro Clientes, do ranking de indicação dos vendedores e dos avisos do Telegram ao dono. Slugs `demo`, `divulgador`, `divulgadores`, `ind` reservados.
+- **Sites:** comercial `index.html` (aba Divulgadores no admin geral, commit 36d081d) e novo `divulgador.html` (cadastro, login, link, ranking); roteador `vercel.json` (rota `/divulgador`, commit b21a78a); vitrine `vitrine.html` (entrada automática em `/demo/admin` e faixa de aviso, commit seguinte). CDC e CNH não mudaram (`/demo/cdc` e `/demo/cnh` funcionam pela rota genérica).
+- **Pendente:** (1) o link de cadastro é https://sitevendedor.com/divulgador (publicar o texto no grupo); (2) a demo ainda conta visitas em métricas gerais fora do Cadastro Clientes; (3) abuso de upload de imagens no admin demo não tem limite próprio; (4) avisar quem foi aprovado (hoje o dono avisa por WhatsApp, a lista tem o botão do número).
+- **Antes de postar:** a antiga aba "Parceiros" continua removida do admin; os parceiros atuais seguem com as regras antigas (dias grátis e prêmios de 10/20 indicações).
+
 ## 2026-11-26 — Nome e celular em primeiro lugar; "Cliente" sem nome some da lista
 
 - **Pedido do dono:** clientes apareciam como "Cliente" sem nome (só moto/cor/tipo). Nome e celular devem ser a prioridade; esconder os sem nome.
