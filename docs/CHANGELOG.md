@@ -1,5 +1,18 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-27 — App do Admin Geral + avisos do dono no celular; avisos dos vendedores melhorados
+
+- **Pedido do dono:** app para acessar o Admin Geral, com notificações de clientes cadastrados; melhorar as notificações dos vendedores e do admin.
+- **Antes:** só o vendedor tinha app (PWA `/:slug/admin`, Web Push). O dono só recebia Telegram (o `app_push_dono` mandava para o app Expo antigo). O Admin abre só com o link que gira a cada 2 h (Telegram `/admin`).
+- **App do Admin Geral:** `admin-geral.webmanifest` + ícones `admin-geral-*.png` na raiz do domínio (repo vitrine). O manifest só entra na página quando o Admin está aberto (o visitante do site não vê "instalar"). Abre em `/?app=admin#admin`.
+- **Aparelho liberado (segurança):** na 1ª vez o app pede o link do Telegram + e-mail/senha; aí cria uma chave do aparelho (`admin_aparelhos`, só o hash fica no banco, vale 60 dias sem uso). Depois o app abre direto (ainda exige a sessão de dono). Aparelhos listados na aba Avisos com "Tirar acesso". Sem internet não derruba a sessão.
+- **Avisos do dono:** nova aba **Avisos** no Admin (central com filtros Clientes/Começou/Vendas/Vendedores/Sistema, marcar como lido, WhatsApp do cliente, ver vendedor; contador no menu; aviso na tela quando chega). Liga Web Push no aparelho, botão de teste, escolha do que avisar. Todos os avisos que iam pelo `tg_dono` passam a ir também para o app (menos o link do admin 🔐). Clientes cadastrados vão com dados estruturados (vendedor, moto, celular, WhatsApp). Contatos com nome+celular agora também avisam o dono (só app; Telegram igual).
+- **Avisos dos vendedores:** avisos da mesma pessoa (mesmo celular) substituem o anterior no aparelho em vez de empilhar ("começou" → "enviou"); contato sem nome e sem celular não gera mais "Novo contato: Cliente"; contato do tipo ficha/contrato não duplica o aviso da ficha/contrato.
+- **Banco (migrations `admin_geral_app_e_avisos_dono`, `avisos_vendedor_agrupados_por_cliente`):** tabelas `admin_aparelhos`, `app_notificacoes_dono`, `push_inscricoes_dono` (RLS, sem acesso direto); funções `dono_aparelho_criar`, `admin_aparelho_ok`, `dono_aparelhos`, `dono_aparelho_revogar`, `dono_push_inscrever/remover/status/teste`, `dono_push_prefs_salvar` (`plataforma_config.dono_push_prefs`), `mestre_avisos`, `mestre_avisos_lidos`, `_dono_cat`, `_dono_pref_ok`; reescritas `app_push_dono`, `tg_aviso_dono` (+ trigger `g_aviso_dono` em `leads`), `app_push_enviar` (`pk`), `tg_app_push`. Edge function `web-push` v4 (`notif_dono`, Topic por pessoa).
+- **Sites:** comercial `index.html` (6fd5f97); vitrine `sw.js`, `vitrine.html` (ignora aviso do dono no painel do vendedor), `vercel.json`, manifest e ícones (2433ec0). CDC/CNH sem mudança.
+- **Como usar:** Android: abra o Admin pelo link, aba Avisos → Instalar o app → Ligar avisos. iPhone: Safari → Compartilhar → Adicionar à Tela de Início → abrir o app, colar o link do Telegram uma vez, entrar, Ligar avisos.
+- **Pendente:** testar no aparelho real do dono (push no iPhone só com o app instalado, iOS 16.4+); app Expo antigo (`app_dispositivos*`) continua recebendo, pode ser desligado depois.
+
 ## 2026-11-27 — Aviso "Ganhe até 300 reais no Pix" desligado no painel do vendedor
 
 - **Pedido do dono:** remover por enquanto, ninguém se interessou.
