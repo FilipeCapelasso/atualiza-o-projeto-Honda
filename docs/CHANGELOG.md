@@ -1,5 +1,12 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-27 — Botão de instalar o app do vendedor sempre disponível
+
+- **Pedido do dono:** quando o app já estava instalado, a opção de baixar sumia; se o vendedor apagasse o app, não conseguia instalar de novo.
+- **Causa:** o botão só aparecia quando o navegador oferecia a instalação direta (`beforeinstallprompt`); com o app já instalado, recusado ou apagado, ficava só um texto. Dentro do app instalado só aparecia "Você está usando o app".
+- **O que mudou (`vitrine.html`, aba Configuração › App e avisos):** o botão "Instalar (de novo) o app" aparece sempre; se o navegador não oferece a instalação direta, ele abre o passo a passo (menu ⋮ → Instalar app) com dica para quem apagou o app. Dentro do app há "Precisa instalar de novo ou em outro aparelho?" com botão de copiar o link do painel. iPhone: passos já eram fixos.
+- **Banco:** não alterado. **Pendente:** nada (o Chrome decide quando libera o botão nativo; o passo a passo cobre o resto).
+
 ## 2026-11-27 — App do Admin Geral + avisos do dono no celular; avisos dos vendedores melhorados
 
 - **Pedido do dono:** app para acessar o Admin Geral, com notificações de clientes cadastrados; melhorar as notificações dos vendedores e do admin.
