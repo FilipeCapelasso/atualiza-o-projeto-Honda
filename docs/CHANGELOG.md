@@ -1,5 +1,11 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-27 — Painel do vendedor: Atualizações trocadas pelo card do App do Vendedor
+
+- **Pedido do dono:** no Início do painel do vendedor, remover as Atualizações e colocar o app do vendedor já disponível para baixar, com passo a passo; destacar os benefícios (aviso de cliente novo, agilidade, mensagem e contato rápido).
+- **O que mudou (`vitrine.html`):** `iniAtuH()` agora desenha o card "Instale o App do Vendedor" (primeiro do Início): 4 benefícios, botão grande "Baixar o app agora" (usa o convite de instalação do navegador quando existe; senão leva ao passo 1) e 3 passos (instalar, abrir pelo ícone "Meu Painel", ativar avisos em Notificações), com texto próprio para Android, iPhone, computador e navegador de dentro de outros apps. O botão continua disponível mesmo com o app já instalado (para quem apagou).
+- **Banco:** não alterado. As 10 atualizações continuam na tabela `atualizacoes`, só não aparecem mais no painel. **Pendente:** conferir no celular do dono.
+
 ## 2026-11-27 — Admin Geral modernizado (site e app)
 
 - **Pedido do dono:** deixar a área admin geral como o modelo enviado (painel escuro, cabeçalho "Olá, Administrador!", gráfico, ranking, rosca, atividades, acesso rápido, resumo, barra inferior), modernizado e melhor.
