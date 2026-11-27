@@ -1,5 +1,11 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-27 — Admin Geral no celular: visão de celular, sem zoom de afastar, números ao lado do nome
+
+- **Problema (relato do dono, print do app):** ao afastar os dedos o app mostrava área branca à direita; textos das lojas vazavam da tela; em Cadastros, clientes e visitas caíam para baixo do nome; o app parecia a versão de computador (Chrome em "Site para computador").
+- **O que mudou (`comercial/index.html`, commit 5b89e7b):** (1) o admin trava o zoom de afastar (`touch-action`) e o fundo da página acompanha o tema, sem faixa branca; (2) quando o celular abre em modo computador, o painel amplia a tela para a largura do celular e ajusta as regras de largura (`@media`) para valer como celular; (3) em Cadastros, loja e vendedor mostram clientes e visitas na mesma linha do nome; (4) em Vendedores, as contagens da loja quebram de linha em vez de sair da tela. Só vale dentro do admin e em aparelho de toque pequeno; computador e site público não mudam.
+- **Banco:** não alterado. **Pendente:** conferir no celular do dono (o ajuste foi testado em emulação de "Site para computador").
+
 ## 2026-11-27 — Painel do vendedor: Atualizações trocadas pelo card do App do Vendedor
 
 - **Pedido do dono:** no Início do painel do vendedor, remover as Atualizações e colocar o app do vendedor já disponível para baixar, com passo a passo; destacar os benefícios (aviso de cliente novo, agilidade, mensagem e contato rápido).
