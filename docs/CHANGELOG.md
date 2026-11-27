@@ -1,5 +1,12 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-27 — Admin Geral modernizado (site e app)
+
+- **Pedido do dono:** deixar a área admin geral como o modelo enviado (painel escuro, cabeçalho "Olá, Administrador!", gráfico, ranking, rosca, atividades, acesso rápido, resumo, barra inferior), modernizado e melhor.
+- **O que mudou (`comercial/index.html`, commit b103a88):** novo cabeçalho (logo, saudação, data/hora, sino com contagem de avisos, menu "AD" com Buscar, Ver o site, Tema e Sair); bloco "Painel Administrativo" com aviso de pendências e botões Buscar, Criar vendedor e Exportar relatório (CSV de vendedores, aberto direto no Excel); KPIs mantidos; gráfico de vendas com abas 30 dias / 6M / 12M e dica ao tocar; Top vendedores (clientes cadastrados em 30 dias); rosca de vendedores por situação (pagos, não pagos, sócios, outros); Atividades recentes (últimos avisos); Acesso rápido; Resumo do sistema. Menu lateral virou barra inferior flutuante em qualquer largura, com botão Sair; claro e escuro funcionam. A faixa antiga do topo ficou oculta (continua no código).
+- **Só dados reais:** nada de "lucro", "espaço em uso" ou vendedores inventados; o ranking usa `mestre_cadastro_clientes` (30 dias), o gráfico usa `mestre_series_dashboard`, as atividades usam `mestre_avisos`.
+- **Banco:** não alterado. **Pendente:** conferir no celular e no computador do dono; 139 avisos parados em `aviso_wa_fila` e a escolha do WhatsApp oficial (Meta) continuam em aberto.
+
 ## 2026-11-27 — App do vendedor: cartões compactos (3 a 4 clientes por tela)
 
 - **Pedido do dono:** a ampliação deixou tudo grande demais (cerca de 1,5 cliente por tela); quer ver 3 ou 4.
