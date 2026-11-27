@@ -1,5 +1,14 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-26 — Nome e celular em primeiro lugar; "Cliente" sem nome some da lista
+
+- **Pedido do dono:** clientes apareciam como "Cliente" sem nome (só moto/cor/tipo). Nome e celular devem ser a prioridade; esconder os sem nome.
+- **Causa:** 83 contatos eram cliques de WhatsApp (consórcio, repasse, Black Friday) salvos sem nome e sem telefone, e 17 rascunhos nasciam só com cor/entrada antes de o cliente digitar nome e celular.
+- **Banco (migration `clientes_exige_nome_e_telefone`):** `_clientes_regs` não lista mais registro sem nome (vazio ou "Cliente") → Cadastro Clientes de 306 para 207 clientes únicos (nada foi apagado; os dados continuam nas tabelas). `registrar_rascunho` só cria rascunho novo quando já há nome e celular (≥10 dígitos); os já existentes continuam atualizando.
+- **Vitrine (`vitrine.html`, commit e9b4802):** antes de abrir o WhatsApp (consórcio/repasse e Black Friday) pede nome e celular com validação; guarda no aparelho (`idn_v1`, localStorage) para não pedir de novo e pré-preenche nome/telefone do financiamento. O lead passa a ser salvo com nome e telefone.
+- **CDC (166da55) e CNH (b3d6210):** telefone movido para logo depois do nome (no CNH estava no fim do formulário, então o rascunho quase nunca tinha telefone).
+- **Pendente:** 13 registros antigos com nome mas sem telefone continuam na lista (rascunhos antigos); cliques de WhatsApp antigos sem nome ficam escondidos; cobrar nome+celular também no chat se a conversa for aberta sem identificação (hoje o chat já pede nome).
+
 ## 2026-11-26 — Clientes sem repetição: o mesmo cliente não vira cadastro novo
 
 - **Pedido do dono:** clientes apareciam repetidos (ex.: mesma pessoa com a moto duplicada, ou com sobrenome a mais). Pediu regra por nome, sobrenome, CPF e CEP para não repetir e continuar de onde a cliente parou.
