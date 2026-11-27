@@ -1,5 +1,11 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-27 — App do vendedor: cartões compactos (3 a 4 clientes por tela)
+
+- **Pedido do dono:** a ampliação deixou tudo grande demais (cerca de 1,5 cliente por tela); quer ver 3 ou 4.
+- **O que mudou (`vitrine.html`):** ampliação reduzida (88% do tamanho de um celular comum, também aplicada em celular normal) e cartões mais baixos: nome em uma linha com "novo" ao lado, moto e origem em linhas curtas, telefone/cidade/e-mail/entrada juntos, etiquetas e botões menores. Topo e filtros também mais compactos.
+- **Banco:** não alterado. **Pendente:** conferir no aparelho do dono e ajustar o tamanho se preferir (o fator está em `appAjustaTela`).
+
 ## 2026-11-27 — App do vendedor: largura total e ampliação no "Site para computador"
 
 - **Pedido do dono:** o app aparecia pequeno e centralizado (print do Chrome); quer ocupar os lados e ficar maior; não tem problema as funções do menu saírem da tela, pois rolam para o lado.
