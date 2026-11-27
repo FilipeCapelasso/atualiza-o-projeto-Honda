@@ -1,5 +1,11 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-27 — Aviso "Ganhe até 300 reais no Pix" desligado no painel do vendedor
+
+- **Pedido do dono:** remover por enquanto, ninguém se interessou.
+- **O que mudou:** `vitrine.html` ganhou a chave `EXP_ATIVO=false`; o bloco "O sistema está em expansão" (ranking de indicação entre vendedores) não aparece mais no Início do painel. Nada foi apagado: para voltar, trocar para `true`.
+- **Banco:** não alterado (as funções `exp_ranking` e `sup_meta_indicacao` continuam). **Pendente:** nada.
+
 ## 2026-11-26 — Concurso de divulgadores (R$ 400/200/100) e site de demonstração /demo
 
 - **Pedido do dono:** postar no grupo de WhatsApp (247 pessoas) para recrutar divulgadores; concurso que só acaba quando 60 vendedores comprarem o sistema (soma de todos os divulgadores); prêmios 1º R$ 400, 2º R$ 200, 3º R$ 100; demo aberta sem login (/demo, /demo/cdc, /demo/cnh, /demo/admin); área do divulgador com e-mail e senha mostrando vendas e pódio com nomes.
