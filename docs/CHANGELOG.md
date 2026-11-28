@@ -1,5 +1,10 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-28 — Vitrine: "Clientes felizes" sem nome do cliente
+- **O que mudou (`vitrine.html`, `entCard`):** quando o registro não tem nome, o cartão não mostra mais "Parabéns, !" / "Contemplado(a): ". Passa a mostrar um texto neutro, sem nome nem gênero: "Sonho realizado 🏍️" (entrega) e "Contemplação realizada 🎉" (contemplação). Com nome, continua igual.
+- **Banco alterado:** não.
+- **Pendente:** pedido para retirar a faixa "🔥 Planos de consórcio e financiamento com parcelas reduzidas!..." (site da Shirley) ficou sem resolver: o texto não está no código; é a faixa de destaque que o vendedor configura em Personalizar (ou o aviso do painel).
+
 ## 2026-11-28 — Vitrine: logo e nome da Honda brancos em fundo avermelhado, sem o fundo redondo atrás
 - **O que mudou (`vitrine.html`):** o símbolo e o nome "HONDA" do topo (computador) ficam **brancos** e sem o disco/painel escuro atrás quando o fundo é vermelho (padrão Honda), rosa, laranja ou roxo (mistura com o vermelho da marca). Só ficam **vermelhos** se a cor do vendedor for azul/verde/ciano (matiz 90°–270°, com saturação). Implementado pela classe `hn-br` no `<html>` (função `hnCor`, chamada em `aplicaCustom`/`custReset`). Logo já era SVG vetorial; adicionado `shape-rendering:geometricPrecision` e sombra mais leve para ficar nítida em 4K/8K.
 - **Banco alterado:** não.
