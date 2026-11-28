@@ -1,5 +1,10 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-27 — Painel do Diretor: Atividades recentes igual ao Admin Geral
+- **O que mudou:** o card manteve o emoji no título e o texto corrido como no Admin Geral; o texto fica sempre alinhado à esquerda, ao lado do ícone; no desktop o card do meio da linha (Clientes por loja / Atividades / Acesso rápido) ficou mais largo para caber título e detalhe. Só CSS/JS de `diretor.html`.
+- **Banco alterado:** não.
+- **Pendente:** nada novo.
+
 ## 2026-11-27 — Painel do Diretor: acabamento do card Atividades recentes
 - **O que mudou:** o card ficou com o mesmo visual do Admin Geral (texto alinhado à esquerda, ícone de largura fixa, título e detalhe com reticências, tempo à direita, "Ver todas" vermelho e pequeno). Corrigido o problema de texto centralizado em larguras médias. Só CSS em `diretor.html`.
 - **Banco alterado:** não.
