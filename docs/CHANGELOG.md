@@ -1,5 +1,10 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-27 — Evento Expansão: "vendas" vira "indicações"
+- **O que mudou (`vitrine.html`):** no pódio, "N vendas" passou a "N indicações" e o texto "3 que mais venderem" a "3 que mais indicarem". Só texto.
+- **Banco alterado:** não.
+- **Pendente:** nada novo.
+
 ## 2026-11-27 — Evento Expansão: progresso em porcentagem (meta de 60 não aparece mais)
 - **O que mudou (`vitrine.html`):** o card do evento não mostra mais "X de 60" nem "faltam N vendas". Mostra "Progresso do evento" em % (1 casa decimal). A % = 85% pelas compras (cada compra paga pelo link soma ~1,4%) + 15% pelos compartilhamentos de todos os vendedores (cada envio soma ~0,05%, até 300 envios); fica no máx. 99,9% até a meta de compras ser batida, e só então vai a 100% e encerra. Assim a barra sobe sempre que alguém compartilha.
 - **Banco alterado:** sim — migration `expansao_progresso_em_porcentagem`: `exp_ranking()` devolve `pct` e não devolve mais `meta`/`total` (o 60 não trafega pelo navegador). A meta real continua em `plataforma_config.exp_meta_vendas` (60).
