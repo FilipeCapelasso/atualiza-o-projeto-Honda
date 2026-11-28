@@ -1,5 +1,10 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-27 — Painel do Diretor: ponteiro do mouse por tema
+- **O que mudou:** o ponteiro do mouse fica preto (com contorno branco) no tema claro e branco (com contorno preto) no tema escuro, em toda a página, incluindo janelas e botões (seta e mãozinha). Só CSS em `diretor.html`.
+- **Banco alterado:** não.
+- **Pendente:** vale conferir num computador real (a emulação só confirma o CSS aplicado).
+
 ## 2026-11-27 — Painel do Diretor: sem Compartilhamentos, dados do cliente nos Avisos, rascunho some ao concluir
 - **O que mudou:** (1) removido tudo de "Compartilhamentos" do painel do diretor (card do vendedor, resumo do período, indicador, relatórios e coluna "Comp." da tabela; o indicador do relatório virou "cliques no WhatsApp"). A contagem no site do vendedor (`compTrack`) continua gravando. (2) Em Avisos, cada aviso ganhou "Ver dados do cliente": nome, telefone, situação (contrato/ficha/chat/contato/não terminou), motos, cores, forma de pagamento e histórico; sem CPF, RG, CEP ou endereço. (3) O aviso "Cliente começou a preencher" deixa de aparecer no painel do diretor quando o cliente conclui (rascunho marcado como completo ou um aviso de cliente posterior do mesmo vendedor com o mesmo telefone/nome). Só no diretor: o Admin Geral continua mostrando o rascunho.
 - **Banco alterado:** sim — migration `diretor_avisos_rascunho_some_e_dados_cliente`: `diretor_atividades` filtra rascunhos concluídos (de 44 para 27 não lidos no teste); nova `diretor_cliente(p_slug, p_token, p_aviso)` (security definer, exige token do diretor).
