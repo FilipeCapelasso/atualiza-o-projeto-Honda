@@ -1,5 +1,9 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-28 — Painel do diretor: gráfico com uma linha por loja
+- **O que mudou (`diretor.html`):** o gráfico de Visitas/Clientes mostra uma linha (e área) por loja, com a cor da loja: **Star Motos sempre vermelho**; as outras lojas em azul, verde e roxo, na ordem. A escala passa a ser a do maior valor entre as lojas; o toque mostra o total e o valor de cada loja, e o ponto acompanha a loja mais forte do dia. Barrinhas dos cartões e legenda usam as mesmas cores (função `grupos`). Antes era uma linha vermelha única (total).
+- **Banco alterado:** não. **Pendente:** nada.
+
 ## 2026-11-28 — Painel do diretor (Marcelo): chave do link renovada
 - **O que mudou (só no banco):** a chave do link `/diretor/marcelo` foi trocada (`diretor_links.hash`, slug `marcelo`); o link antigo deixou de funcionar. O novo link completo (com `#k=...`) foi entregue só ao dono no chat; ao abrir uma vez, o aparelho guarda a chave e depois `/diretor/marcelo` abre direto. A chave NÃO está registrada aqui nem em repositório.
 - **Por que não foi removida a proteção:** o painel mostra nome e telefone de clientes (`diretor_cliente`, `diretor_atividades`); sem a chave, qualquer pessoa que digitasse o endereço veria esses dados.
