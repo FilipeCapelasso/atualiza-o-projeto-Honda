@@ -1,5 +1,10 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-27 — Painel do Diretor redesenhado no padrão do Admin Geral
+- **O que mudou:** `diretor.html` (repo VITRINE) refeito com o mesmo visual do Admin Geral: cabeçalho com logo Honda, hero, cartões de KPI com barra colorida e divisão por loja, gráfico de linha com dica por loja (visitas/clientes), Top 5 por loja com abas, rosca de clientes por loja, acesso rápido, resumo, barra de abas inferior flutuante (Início, uma aba por loja, Vendedores, Relatórios), busca de vendedor, relatório da loja e geral (PDF/copiar/WhatsApp) e tema claro/escuro (guardado no aparelho). Menu "MD" com tema, atualizar e sair deste aparelho.
+- **Banco:** não alterado nesta etapa (mesmas funções `diretor_painel`/`diretor_vendedor`).
+- **Pendente:** validar no aparelho real do Marcelo; o grupo "Sem loja" (vendedores sem loja_id) ainda aparece como aba própria.
+
 ## 2026-11-27 — Painel do Diretor (link secreto, sem login) + contagem de compartilhamentos
 - **O que mudou:** nova página `diretor.html` no repo VITRINE, aberta em `/diretor/<nome>` (primeiro link: `marcelo`). Mostra as 3 lojas, resultado, top 5 vendedores por loja, todos os vendedores (tocar abre visitas, clientes, motos mais vistas, origens, compartilhamentos), e gera relatório da loja (PDF/imprimir, copiar, WhatsApp). Só leitura.
 - **Segurança:** o acesso é por token no fragmento do link (`#k=...`, que não vai para o servidor nem para o Referer); o navegador guarda e limpa o endereço. No banco só existe o **hash SHA-256** do token (`diretor_links`); `_diretor_ok` valida slug+token com freio de tentativas. Sem token válido as funções respondem 403. Página com `noindex`, `no-store`, sem referrer, sem iframe. Para revogar: `update diretor_links set ativo=false where slug='marcelo';`. Para trocar o link: gerar novo token e gravar o novo hash (não registrar o token em lugar nenhum). Os dados de cliente mostrados são só nome, telefone, motos e status (sem CPF/RG/endereço).
