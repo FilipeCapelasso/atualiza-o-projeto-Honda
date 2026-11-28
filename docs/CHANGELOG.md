@@ -1,5 +1,10 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-27 — Painel do Diretor: acabamento do card Atividades recentes
+- **O que mudou:** o card ficou com o mesmo visual do Admin Geral (texto alinhado à esquerda, ícone de largura fixa, título e detalhe com reticências, tempo à direita, "Ver todas" vermelho e pequeno). Corrigido o problema de texto centralizado em larguras médias. Só CSS em `diretor.html`.
+- **Banco alterado:** não.
+- **Pendente:** nada novo.
+
 ## 2026-11-27 — Painel do Diretor: Atividades recentes por loja
 - **O que mudou:** no Início, o card "Compartilhamentos" foi trocado por "Atividades recentes" (avisos de clientes que pediram financiamento, finalizaram o chat ou começaram a preencher ficha), no mesmo estilo do Admin Geral. Cada tela de loja (Star, Acre, Juruá) ganhou o mesmo card, filtrado pela loja. "Ver todas" abre a lista completa. Os totais de compartilhamentos continuam no Resumo do período e nos indicadores.
 - **Banco alterado:** sim — migration `diretor_atividades_recentes`: função `diretor_atividades(p_slug, p_token, p_limit)` (security definer, exige o token do diretor; lê `app_notificacoes_dono` só dos tipos `cliente` e `rascunho`, só de vendedores das 3 lojas, sem o link do WhatsApp). Avisos de venda, pagamento e sistema do dono não aparecem.
