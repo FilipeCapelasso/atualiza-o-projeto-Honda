@@ -1,5 +1,9 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-27 — Painel do Diretor ocupa toda a largura do monitor
+- **O que mudou:** `diretor.html` sem largura máxima: margens, fonte, gráficos, logo e barra inferior escalam com a tela (de 1366 px a 2560 px); cartões das lojas lado a lado; listas de vendedores em 2 colunas em telas largas.
+- **Banco:** não alterado. **Pendente:** validar em monitor real.
+
 ## 2026-11-27 — Painel do Diretor redesenhado no padrão do Admin Geral
 - **O que mudou:** `diretor.html` (repo VITRINE) refeito com o mesmo visual do Admin Geral: cabeçalho com logo Honda, hero, cartões de KPI com barra colorida e divisão por loja, gráfico de linha com dica por loja (visitas/clientes), Top 5 por loja com abas, rosca de clientes por loja, acesso rápido, resumo, barra de abas inferior flutuante (Início, uma aba por loja, Vendedores, Relatórios), busca de vendedor, relatório da loja e geral (PDF/copiar/WhatsApp) e tema claro/escuro (guardado no aparelho). Menu "MD" com tema, atualizar e sair deste aparelho.
 - **Banco:** não alterado nesta etapa (mesmas funções `diretor_painel`/`diretor_vendedor`).
