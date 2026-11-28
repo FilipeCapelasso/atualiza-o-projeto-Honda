@@ -1,5 +1,10 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-27 — Painel do Diretor: só as 3 lojas
+- **O que mudou:** o painel do diretor mostra apenas vendedores ligados às lojas cadastradas (Star Motos, Acre Motos, Juruá Motocenter). O grupo "sem loja" foi removido da tela e dos totais.
+- **Banco alterado:** sim — `diretor_painel` e `diretor_vendedor` agora só consideram vendedores com `loja_id` existente em `lojas` (os dados nem saem do banco). Hoje: 26 Star, 8 Acre, 6 Juruá.
+- **Pendente:** 6 vendedores continuam sem `loja_id` (fora do painel do diretor até serem atribuídos).
+
 ## 2026-11-27 — Painel do Diretor ocupa toda a largura do monitor
 - **O que mudou:** `diretor.html` sem largura máxima: margens, fonte, gráficos, logo e barra inferior escalam com a tela (de 1366 px a 2560 px); cartões das lojas lado a lado; listas de vendedores em 2 colunas em telas largas.
 - **Banco:** não alterado. **Pendente:** validar em monitor real.
