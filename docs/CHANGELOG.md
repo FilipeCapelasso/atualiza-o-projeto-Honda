@@ -1,5 +1,11 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-28 — Admin Geral: link secreto passa a valer 5 horas (antes 2)
+- **O que mudou (só no banco):** migration `admin_geral_link_valido_5_horas`: `_admin_link_gerar` agora dá validade de 5h30 (5h + 30 min de folga para a entrega pelo Telegram; antes 2h30); a troca automática (cron `admin_link_2h`, jobid 94) passou de `0 1-23/2 * * *` para `0 1-23/5 * * *` (01h, 06h, 11h, 16h, 21h, horário UTC do cron); os textos do Telegram agora dizem "Vale por 5 horas" (`admin_link_rotacionar` e o comando `/admin` em `telegram_processar`).
+- **Site:** não mudou (o `comercial` só confere o link com `admin_link_ok`).
+- **Observação:** o link que já estava ativo antes da mudança mantém a validade antiga (2h30); vale 5h a partir do próximo link gerado (mande /admin no bot para um novo agora). O nome do job `admin_link_2h` ficou igual por compatibilidade.
+- **Pendente:** nada.
+
 ## 2026-11-28 — Vitrine: "Clientes felizes" sem nome do cliente
 - **O que mudou (`vitrine.html`, `entCard`):** quando o registro não tem nome, o cartão não mostra mais "Parabéns, !" / "Contemplado(a): ". Passa a mostrar um texto neutro, sem nome nem gênero: "Sonho realizado 🏍️" (entrega) e "Contemplação realizada 🎉" (contemplação). Com nome, continua igual.
 - **Banco alterado:** não.
