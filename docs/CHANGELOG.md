@@ -1,5 +1,10 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-28 — Painel do diretor (Marcelo): chave do link renovada
+- **O que mudou (só no banco):** a chave do link `/diretor/marcelo` foi trocada (`diretor_links.hash`, slug `marcelo`); o link antigo deixou de funcionar. O novo link completo (com `#k=...`) foi entregue só ao dono no chat; ao abrir uma vez, o aparelho guarda a chave e depois `/diretor/marcelo` abre direto. A chave NÃO está registrada aqui nem em repositório.
+- **Por que não foi removida a proteção:** o painel mostra nome e telefone de clientes (`diretor_cliente`, `diretor_atividades`); sem a chave, qualquer pessoa que digitasse o endereço veria esses dados.
+- **Site:** não mudou. **Pendente:** nada.
+
 ## 2026-11-28 — Clientes felizes: fotos de volta, envio misto e quadro novo (vitrine v63)
 - **O que mudou (`vitrine.html`):** (1) **Painel:** um só botão "Enviar fotos e vídeos" aceita várias fotos, vários vídeos ou os dois misturados, de uma vez, na ordem escolhida (função `enAddMidia`, antes `enAddVideo`); nome e moto agora são **opcionais**; autorização do cliente continua obrigatória; fotos guardam largura/altura (`w`,`h`). (2) **Site:** fotos em linhas justificadas, cada card com a proporção da própria foto (sem cortar), legenda só com o que existe (nome/moto, senão "Sonho realizado 🏍️"/"Contemplação realizada 🎉"); clique abre em tela maior (setas, teclado, deslizar). (3) **Quadro:** com vídeos e fotos, os vídeos aparecem primeiro; depois de um tempo sem interação (ou pelas abas 🎬 Vídeos / 📸 Fotos) eles saem com animação, o quadro se reajusta e as fotos entram em cascata; só fotos ou só vídeos funcionam como antes. Respeita "reduzir movimento".
 - **Banco alterado:** sim — migration `clientes_felizes_limite_fotos_20`: `plano_limites` passou de 6 para 20 fotos (vídeos continua 10). O gatilho `tg_limites_midia` continua validando os limites no servidor.
