@@ -1,5 +1,10 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-27 — Painel do Diretor: card do vendedor expandido
+- **O que mudou:** o card de detalhes do vendedor passou a ocupar quase toda a largura da tela no desktop, com colunas (resumo/visitas/compartilhamentos/origens | motos mais vistas | clientes) e 4 indicadores em linha. Em tablet fica em 2 colunas; no celular segue em coluna única. Só layout (`diretor.html`).
+- **Banco alterado:** não.
+- **Pendente:** nada novo.
+
 ## 2026-11-27 — Painel do Diretor: só as 3 lojas
 - **O que mudou:** o painel do diretor mostra apenas vendedores ligados às lojas cadastradas (Star Motos, Acre Motos, Juruá Motocenter). O grupo "sem loja" foi removido da tela e dos totais.
 - **Banco alterado:** sim — `diretor_painel` e `diretor_vendedor` agora só consideram vendedores com `loja_id` existente em `lojas` (os dados nem saem do banco). Hoje: 26 Star, 8 Acre, 6 Juruá.
