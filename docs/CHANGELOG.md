@@ -1,5 +1,11 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-27 — Painel do Diretor: função Avisos (igual ao Admin Geral)
+- **O que mudou:** novo sino com contador no topo e nova aba "Avisos" na barra de baixo. A aba tem filtro por loja, filtros Todos / Não lidos / Clientes / Começou, lista com título, detalhe, categoria, data e loja, e botões "WhatsApp do cliente", "Ver vendedor", "Marcar como lido" e "Marcar todos como lidos", além de um resumo por categoria e por loja. Os cards "Atividades recentes" (Início e cada loja) agora abrem a aba Avisos (já na loja certa) pelo clique em qualquer linha ou em "Ver todas". Aviso novo abre um alerta na tela e atualiza o contador (a lista se atualiza sozinha a cada 60 s). Só `diretor.html`.
+- **Banco alterado:** sim — migration `diretor_avisos_completo`: tabela `diretor_avisos_lidos` (leitura por link do diretor, RLS ligado, sem acesso direto); `diretor_atividades` passou a devolver `{nao_lidas, lista}` com vendedor_id, link do WhatsApp (só `https://wa.me/...`) e se já foi lido; nova `diretor_avisos_ler(p_slug, p_token, p_id)`. O estado de leitura do diretor é separado do do dono.
+- **Fora do escopo (de propósito):** avisos de vendas/pagamentos, novos vendedores e sistema (são financeiros/internos do dono); App do Admin Geral e aparelhos liberados; notificação push no celular (exige cadastro de aparelho e envio próprio).
+- **Pendente:** decidir se o diretor deve receber push no celular e/ou os avisos de venda e de vendedores.
+
 ## 2026-11-27 — Painel do Diretor: Atividades recentes igual ao Admin Geral
 - **O que mudou:** o card manteve o emoji no título e o texto corrido como no Admin Geral; o texto fica sempre alinhado à esquerda, ao lado do ícone; no desktop o card do meio da linha (Clientes por loja / Atividades / Acesso rápido) ficou mais largo para caber título e detalhe. Só CSS/JS de `diretor.html`.
 - **Banco alterado:** não.
