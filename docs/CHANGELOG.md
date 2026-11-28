@@ -1,5 +1,12 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-27 — Vitrine: botões em branco corrigidos e cores personalizadas blindadas (commit 6080a7d)
+- **Causa do bug (site da Sarinha_honda, rosa):** a variável `--rh` (tom mais claro da cor do vendedor) nunca foi definida; com botões "Degradê" o fundo do botão ficava inválido e o botão sumia (texto branco em fundo branco).
+- **O que mudou (`vitrine.html`):** (1) `:root{--rh}` definido; (2) `corAjusta()` em `aplicaCustom`: se a cor escolhida for clara demais para texto branco/preço (contraste < 3,4), escurece só o necessário; a cor original fica em `--r-escolhida` e `custReset` limpa; (3) textos secundários do topo (`.hsub`, `.hero p`, rótulos das estatísticas) com mais opacidade; (4) destaque do título ("começa aqui") do topo escuro agora usa tom claro da cor do vendedor, legível com qualquer cor (antes ficava preto com preto/branco).
+- **Como foi testado:** matriz de 12 cores × 5 combinações (botões, fundo, topo, cantos, fonte), na home e no modal de detalhes, medindo contraste por pixel; sem falhas reais. Caso Sarinha conferido visualmente.
+- **Banco alterado:** não.
+- **Pendente:** cores muito claras (ex.: amarelo) ficam mais escuras na tela (ficam "mostarda"); se o vendedor reclamar, dá para oferecer tema de topo escuro com botão claro e texto preto. Cores fixas de vermelho/laranja fora do tema (ex.: gráficos) não foram varridas uma a uma.
+
 ## 2026-11-27 — App do vendedor: "Calculadora" vira "Indicação" 💰 (evento Expansão)
 - **O que mudou (`vitrine.html`):** na barra do app instalado (modo app), a aba "🧮 Calculadora" foi trocada por "💰 Indicação", que abre o card do evento Expansão (prêmios, progresso em %, link com Copiar/WhatsApp/Compartilhar e contadores). O painel no computador/navegador não mudou (continua com a Calculadora e o card no Início). A Calculadora deixou de ser acessível pelo app.
 - **Banco alterado:** não.
