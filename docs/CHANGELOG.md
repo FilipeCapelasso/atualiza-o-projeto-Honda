@@ -1,5 +1,12 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-27 — Painel do Diretor (link secreto, sem login) + contagem de compartilhamentos
+- **O que mudou:** nova página `diretor.html` no repo VITRINE, aberta em `/diretor/<nome>` (primeiro link: `marcelo`). Mostra as 3 lojas, resultado, top 5 vendedores por loja, todos os vendedores (tocar abre visitas, clientes, motos mais vistas, origens, compartilhamentos), e gera relatório da loja (PDF/imprimir, copiar, WhatsApp). Só leitura.
+- **Segurança:** o acesso é por token no fragmento do link (`#k=...`, que não vai para o servidor nem para o Referer); o navegador guarda e limpa o endereço. No banco só existe o **hash SHA-256** do token (`diretor_links`); `_diretor_ok` valida slug+token com freio de tentativas. Sem token válido as funções respondem 403. Página com `noindex`, `no-store`, sem referrer, sem iframe. Para revogar: `update diretor_links set ativo=false where slug='marcelo';`. Para trocar o link: gerar novo token e gravar o novo hash (não registrar o token em lugar nenhum). Os dados de cliente mostrados são só nome, telefone, motos e status (sem CPF/RG/endereço).
+- **Compartilhamentos:** `registrar_visita` passou a aceitar `comp_link` e `comp_moto` (constraint `visitas_tipo_check` ampliada). A vitrine registra: cliente compartilhando moto, vendedor enviando o cartão da moto e vendedor copiando/enviando/compartilhando os links de cliente. Antes disso nada era contado.
+- **Banco alterado:** sim — tabelas `diretor_links` e `diretor_falhas` (RLS, sem acesso direto), funções `_diretor_ok`, `diretor_painel`, `diretor_vendedor`, `registrar_visita` (atualizada) e a constraint de `visitas`.
+- **Pendente:** testar com o Marcelo no aparelho real; decidir se a loja "sem loja" (6 vendedores sem loja) deve ser atribuída; se quiser, criar links para outros diretores com o mesmo modelo.
+
 ## 2026-11-27 — vitrine: instalação do app facilitada no iPhone
 - **O que mudou:** no iPhone (Safari ou outro navegador iOS) o botão do card "Instale o App do Vendedor" vira "Instalar no iPhone" e abre um guia em tela cheia com 4 passos grandes e ícones (Compartilhar → Adicionar à Tela de Início → Adicionar → abrir pelo ícone e ativar avisos). Se estiver em Chrome/Firefox/navegador interno, aparece antes o passo "Abrir no Safari" com botão copiar link. Passo 1 do card também ganhou o ícone de Compartilhar e botão "Ver passo a passo".
 - **Por quê:** o iPhone não tem o botão "Instalar app" nos 3 pontinhos/traços; a instalação só existe pelo Compartilhar do Safari.
