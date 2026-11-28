@@ -1,5 +1,11 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-27 — Admin Geral: Top vendedores abre relatório
+
+- **Pedido do dono:** ao tocar num vendedor do Top vendedores, mostrar só um relatório (visitas ao site, clientes cadastrados e loja), sem abrir o card de dados do vendedor.
+- **O que mudou (`comercial/index.html`, commit 6d7798f):** o toque abre uma janela com loja, clientes cadastrados, visitas, visitantes diferentes e visitas hoje (últimos 30 dias, dados de `mestre_cadastro_clientes`). Não abre mais `vend()`.
+- **Banco:** não alterado. **Pendente:** nada novo.
+
 ## 2026-11-27 — Admin Geral no celular: visão de celular, sem zoom de afastar, números ao lado do nome
 
 - **Problema (relato do dono, print do app):** ao afastar os dedos o app mostrava área branca à direita; textos das lojas vazavam da tela; em Cadastros, clientes e visitas caíam para baixo do nome; o app parecia a versão de computador (Chrome em "Site para computador").
