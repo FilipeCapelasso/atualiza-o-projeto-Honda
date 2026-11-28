@@ -1,5 +1,10 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-27 — Painel do Diretor: Atividades recentes por loja
+- **O que mudou:** no Início, o card "Compartilhamentos" foi trocado por "Atividades recentes" (avisos de clientes que pediram financiamento, finalizaram o chat ou começaram a preencher ficha), no mesmo estilo do Admin Geral. Cada tela de loja (Star, Acre, Juruá) ganhou o mesmo card, filtrado pela loja. "Ver todas" abre a lista completa. Os totais de compartilhamentos continuam no Resumo do período e nos indicadores.
+- **Banco alterado:** sim — migration `diretor_atividades_recentes`: função `diretor_atividades(p_slug, p_token, p_limit)` (security definer, exige o token do diretor; lê `app_notificacoes_dono` só dos tipos `cliente` e `rascunho`, só de vendedores das 3 lojas, sem o link do WhatsApp). Avisos de venda, pagamento e sistema do dono não aparecem.
+- **Pendente:** avisos de rascunho são ligados ao vendedor pelo nome ("Vendedor: ..."); se dois vendedores tiverem o mesmo nome, o aviso aparece para ambos.
+
 ## 2026-11-27 — Vitrine: detalhe da moto com Black Friday em faixa e cartão só à vista
 - **O que mudou:** no detalhe da moto em promoção, a sequência ficou igual à das motos normais (card do consórcio, cor, botões, planos). O bloco grande da Black Friday virou uma faixa compacta escura logo após os botões, mais um selo "BLACK FRIDAY" na foto; tocar na faixa abre o card da promoção (brindes, preço por região). A tabela "No cartão" saiu do detalhe e agora aparece no card da Black Friday (compra à vista); em motos sem promoção e com preço à vista, fica recolhida em "Pagar à vista no cartão". Só `vitrine.html`.
 - **Banco alterado:** não.
