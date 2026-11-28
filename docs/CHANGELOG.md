@@ -1,5 +1,10 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-27 — App do vendedor: "Calculadora" vira "Indicação" 💰 (evento Expansão)
+- **O que mudou (`vitrine.html`):** na barra do app instalado (modo app), a aba "🧮 Calculadora" foi trocada por "💰 Indicação", que abre o card do evento Expansão (prêmios, progresso em %, link com Copiar/WhatsApp/Compartilhar e contadores). O painel no computador/navegador não mudou (continua com a Calculadora e o card no Início). A Calculadora deixou de ser acessível pelo app.
+- **Banco alterado:** não.
+- **Pendente:** se o vendedor ainda precisar da Calculadora no celular, recolocar como aba ou dentro de Clientes.
+
 ## 2026-11-27 — Evento Expansão: "vendas" vira "indicações"
 - **O que mudou (`vitrine.html`):** no pódio, "N vendas" passou a "N indicações" e o texto "3 que mais venderem" a "3 que mais indicarem". Só texto.
 - **Banco alterado:** não.
