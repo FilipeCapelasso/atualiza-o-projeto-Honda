@@ -1,5 +1,10 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-27 — Painel do Diretor: barra de abas destacada
+- **O que mudou:** a barra de abas (Início, Star, Acre, Juruá, Vendedores, Relatórios) ganhou borda vermelha com brilho, para o diretor perceber que ali ficam as outras funções. Só CSS em `diretor.html`.
+- **Banco alterado:** não.
+- **Pendente:** nada novo.
+
 ## 2026-11-27 — Painel do Diretor: card do vendedor expandido
 - **O que mudou:** o card de detalhes do vendedor passou a ocupar quase toda a largura da tela no desktop, com colunas (resumo/visitas/compartilhamentos/origens | motos mais vistas | clientes) e 4 indicadores em linha. Em tablet fica em 2 colunas; no celular segue em coluna única. Só layout (`diretor.html`).
 - **Banco alterado:** não.
