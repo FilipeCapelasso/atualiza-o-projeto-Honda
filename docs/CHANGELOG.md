@@ -1,5 +1,10 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-28 — Vitrine: logo e nome da Honda brancos em fundo avermelhado, sem o fundo redondo atrás
+- **O que mudou (`vitrine.html`):** o símbolo e o nome "HONDA" do topo (computador) ficam **brancos** e sem o disco/painel escuro atrás quando o fundo é vermelho (padrão Honda), rosa, laranja ou roxo (mistura com o vermelho da marca). Só ficam **vermelhos** se a cor do vendedor for azul/verde/ciano (matiz 90°–270°, com saturação). Implementado pela classe `hn-br` no `<html>` (função `hnCor`, chamada em `aplicaCustom`/`custReset`). Logo já era SVG vetorial; adicionado `shape-rendering:geometricPrecision` e sombra mais leve para ficar nítida em 4K/8K.
+- **Banco alterado:** não.
+- **Pendente:** se o admin cadastrar `logo_honda` raster (PNG) em `CFG`, ele é convertido em branco por filtro; preferir SVG. No celular a logo da Honda não aparece nesse topo (só "Star Motos").
+
 ## 2026-11-27 — Vitrine: botões em branco corrigidos e cores personalizadas blindadas (commit 6080a7d)
 - **Causa do bug (site da Sarinha_honda, rosa):** a variável `--rh` (tom mais claro da cor do vendedor) nunca foi definida; com botões "Degradê" o fundo do botão ficava inválido e o botão sumia (texto branco em fundo branco).
 - **O que mudou (`vitrine.html`):** (1) `:root{--rh}` definido; (2) `corAjusta()` em `aplicaCustom`: se a cor escolhida for clara demais para texto branco/preço (contraste < 3,4), escurece só o necessário; a cor original fica em `--r-escolhida` e `custReset` limpa; (3) textos secundários do topo (`.hsub`, `.hero p`, rótulos das estatísticas) com mais opacidade; (4) destaque do título ("começa aqui") do topo escuro agora usa tom claro da cor do vendedor, legível com qualquer cor (antes ficava preto com preto/branco).
