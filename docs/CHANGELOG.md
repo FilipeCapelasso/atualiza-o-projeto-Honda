@@ -1,5 +1,10 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-28 — Clientes felizes: fotos de volta, envio misto e quadro novo (vitrine v63)
+- **O que mudou (`vitrine.html`):** (1) **Painel:** um só botão "Enviar fotos e vídeos" aceita várias fotos, vários vídeos ou os dois misturados, de uma vez, na ordem escolhida (função `enAddMidia`, antes `enAddVideo`); nome e moto agora são **opcionais**; autorização do cliente continua obrigatória; fotos guardam largura/altura (`w`,`h`). (2) **Site:** fotos em linhas justificadas, cada card com a proporção da própria foto (sem cortar), legenda só com o que existe (nome/moto, senão "Sonho realizado 🏍️"/"Contemplação realizada 🎉"); clique abre em tela maior (setas, teclado, deslizar). (3) **Quadro:** com vídeos e fotos, os vídeos aparecem primeiro; depois de um tempo sem interação (ou pelas abas 🎬 Vídeos / 📸 Fotos) eles saem com animação, o quadro se reajusta e as fotos entram em cascata; só fotos ou só vídeos funcionam como antes. Respeita "reduzir movimento".
+- **Banco alterado:** sim — migration `clientes_felizes_limite_fotos_20`: `plano_limites` passou de 6 para 20 fotos (vídeos continua 10). O gatilho `tg_limites_midia` continua validando os limites no servidor.
+- **Pendente:** interpretei "regulamento do quadro de exibições" como o reajuste/reorganização do quadro entre vídeos e fotos; se era outra coisa (um texto de regras?), ajustar. Ordem das fotos = ordem de envio (ainda sem botão de reordenar).
+
 ## 2026-11-28 — Admin Geral: link secreto passa a valer 5 horas (antes 2)
 - **O que mudou (só no banco):** migration `admin_geral_link_valido_5_horas`: `_admin_link_gerar` agora dá validade de 5h30 (5h + 30 min de folga para a entrega pelo Telegram; antes 2h30); a troca automática (cron `admin_link_2h`, jobid 94) passou de `0 1-23/2 * * *` para `0 1-23/5 * * *` (01h, 06h, 11h, 16h, 21h, horário UTC do cron); os textos do Telegram agora dizem "Vale por 5 horas" (`admin_link_rotacionar` e o comando `/admin` em `telegram_processar`).
 - **Site:** não mudou (o `comercial` só confere o link com `admin_link_ok`).
