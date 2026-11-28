@@ -1,5 +1,10 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-27 — Vitrine: detalhe da moto com Black Friday em faixa e cartão só à vista
+- **O que mudou:** no detalhe da moto em promoção, a sequência ficou igual à das motos normais (card do consórcio, cor, botões, planos). O bloco grande da Black Friday virou uma faixa compacta escura logo após os botões, mais um selo "BLACK FRIDAY" na foto; tocar na faixa abre o card da promoção (brindes, preço por região). A tabela "No cartão" saiu do detalhe e agora aparece no card da Black Friday (compra à vista); em motos sem promoção e com preço à vista, fica recolhida em "Pagar à vista no cartão". Só `vitrine.html`.
+- **Banco alterado:** não.
+- **Pendente:** conferir com um vendedor real do Acre (testado em emulação com o vendedor andre).
+
 ## 2026-11-27 — Painel do Diretor: barra de abas destacada
 - **O que mudou:** a barra de abas (Início, Star, Acre, Juruá, Vendedores, Relatórios) ganhou borda vermelha com brilho, para o diretor perceber que ali ficam as outras funções. Só CSS em `diretor.html`.
 - **Banco alterado:** não.
