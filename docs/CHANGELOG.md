@@ -1,5 +1,11 @@
 # Changelog (mais recente no topo)
 
+## 2026-11-27 — vitrine: instalação do app facilitada no iPhone
+- **O que mudou:** no iPhone (Safari ou outro navegador iOS) o botão do card "Instale o App do Vendedor" vira "Instalar no iPhone" e abre um guia em tela cheia com 4 passos grandes e ícones (Compartilhar → Adicionar à Tela de Início → Adicionar → abrir pelo ícone e ativar avisos). Se estiver em Chrome/Firefox/navegador interno, aparece antes o passo "Abrir no Safari" com botão copiar link. Passo 1 do card também ganhou o ícone de Compartilhar e botão "Ver passo a passo".
+- **Por quê:** o iPhone não tem o botão "Instalar app" nos 3 pontinhos/traços; a instalação só existe pelo Compartilhar do Safari.
+- **Banco:** não alterado.
+- **Pendente:** testar no iPhone real (emulado apenas); `appPassoInst`/`appReinstH` (tela de avisos do app) ainda com o texto antigo do iOS.
+
 ## 2026-11-27 — Admin Geral: Top vendedores abre relatório
 
 - **Pedido do dono:** ao tocar num vendedor do Top vendedores, mostrar só um relatório (visitas ao site, clientes cadastrados e loja), sem abrir o card de dados do vendedor.
